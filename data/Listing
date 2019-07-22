@@ -1,0 +1,90 @@
+<RestClientRequest>
+  <option name="biscuits">
+    <list />
+  </option>
+  <option name="httpMethod" value="POST" />
+  <option name="urlBase" value="http://local.tradelist.com" />
+  <option name="urlPath" value="/listing" />
+  <option name="headers">
+    <list>
+      <KeyValuePair>
+        <option name="key" value="Accept" />
+        <option name="value" value="*/*" />
+      </KeyValuePair>
+      <KeyValuePair>
+        <option name="key" value="Cache-Control" />
+        <option name="value" value="no-cache" />
+      </KeyValuePair>
+      <KeyValuePair>
+        <option name="key" value="Authorization" />
+        <option name="value" value="Bearer  dsfsd" />
+      </KeyValuePair>
+    </list>
+  </option>
+  <option name="parameters">
+    <list>
+      <KeyValuePair>
+        <option name="key" value="main_category" />
+        <option name="value" value="1" />
+      </KeyValuePair>
+      <KeyValuePair>
+        <option name="key" value="listing_type" />
+        <option name="value" value="3" />
+      </KeyValuePair>
+      <KeyValuePair>
+        <option name="key" value="title" />
+        <option name="value" value="titlu 1" />
+      </KeyValuePair>
+      <KeyValuePair>
+        <option name="key" value="description" />
+        <option name="value" value="desc dfssdfs" />
+      </KeyValuePair>
+      <KeyValuePair>
+        <option name="key" value="price" />
+        <option name="value" value="3232" />
+      </KeyValuePair>
+      <KeyValuePair>
+        <option name="key" value="qty" />
+        <option name="value" value="234" />
+      </KeyValuePair>
+      <KeyValuePair>
+        <option name="key" value="condition" />
+        <option name="value" value="1" />
+      </KeyValuePair>
+      <KeyValuePair>
+        <option name="key" value="trade_or_cash" />
+        <option name="value" value="1" />
+      </KeyValuePair>
+      <KeyValuePair>
+        <option name="key" value="shipping" />
+        <option name="value" value="0" />
+      </KeyValuePair>
+      <KeyValuePair>
+        <option name="key" value="location" />
+        <option name="value" value="fdsfds" />
+      </KeyValuePair>
+      <KeyValuePair>
+        <option name="key" value="listing_tags" />
+        <option name="value" value="dsds, dfs ds, 3232, , fdafa," />
+      </KeyValuePair>
+      <KeyValuePair>
+        <option name="key" value="brand" />
+        <option name="value" value="dsds" />
+      </KeyValuePair>
+      <KeyValuePair>
+        <option name="key" value="color" />
+        <option name="value" value="dsds" />
+      </KeyValuePair>
+      <KeyValuePair>
+        <option name="key" value="material" />
+        <option name="value" value="dsds" />
+      </KeyValuePair>
+    </list>
+  </option>
+  <option name="parametersEnabled" value="true" />
+  <option name="haveTextToSend" value="false" />
+  <option name="haveFileToSend" value="false" />
+  <option name="isFileUpload" value="false" />
+  <option name="textToSend" value="" />
+  <option name="filesToSend" value="" />
+</RestClientRequest>

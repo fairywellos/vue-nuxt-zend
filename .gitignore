@@ -1,0 +1,49 @@
+.vagrant/
+vendor/
+.idea
+config/development.config.php
+data/cache/*
+!data/cache/.gitkeep
+public/uploads
+tradelist-app/dist
+!public/uploads/.gitkeep
+phpunit.xml
+**/**/node_modules
+**/**/.DS_Store
+**/**/.idea
+**/**/.idea
+# User-specific stuff:
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/dictionaries
+
+# Sensitive or high-churn files:
+.idea/**/dataSources/
+.idea/**/dataSources.ids
+.idea/**/dataSources.xml
+.idea/**/dataSources.local.xml
+.idea/**/sqlDataSources.xml
+.idea/**/dynamic.xml
+.idea/**/uiDesigner.xml
+
+# Gradle:
+.idea/**/gradle.xml
+.idea/**/libraries
+
+# mpeltonen/sbt-idea plugin
+.idea_modules/
+
+# JIRA plugin
+atlassian-ide-plugin.xml
+
+# Cursive Clojure plugin
+.idea/replstate.xml
+/xdebug.log
+
+*.lock
+
+data/DoctrineORMModule/
+tradelist-app/.nuxt/
+
+.vscode/
+.htaccess

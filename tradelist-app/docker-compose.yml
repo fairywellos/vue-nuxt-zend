@@ -1,0 +1,16 @@
+version: '3.1'
+services:
+  tradelist.net:
+    build: .
+    image: node:10.15.1-alpine
+    ports:
+    - "3000:3000"
+    volumes:
+    - ./:/usr/src/app/
+    working_dir: /usr/src/app
+    environment:
+    - VIRTUAL_HOST=local.tradelist.net
+    - NODE_ENV=development
+    - HOST=0.0.0.0
+    external_links:
+    - proxy-server:jwilder/nginx-proxy

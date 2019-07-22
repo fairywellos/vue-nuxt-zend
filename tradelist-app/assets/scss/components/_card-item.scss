@@ -1,0 +1,381 @@
+.card_item {
+	@include open_sans(300);
+	border-radius: 5px;
+	margin-bottom: 14px;
+	background: $white;
+	position: relative;
+	display: block;
+	overflow: hidden;
+	transition: .2s $bezier_ease_in_out;
+	
+	&.sample_account {
+		border: 2px solid #48C0EB;
+	}
+	
+	.save_btn {
+		position: absolute;
+		top: 0;
+		right: 0;
+		background: transparent;
+		padding: 0;
+		z-index: 30;
+		
+		&.is_active {
+			color: $saffron;
+		}
+	}
+	
+	label {
+		display: block;
+		padding: 14px;
+		margin: 0;
+		cursor: pointer;
+		
+		.icon {
+			font-family: 'tradelist-font-icon' !important;
+			speak: none;
+			font-style: normal;
+			font-weight: normal;
+			font-variant: normal;
+			text-transform: none;
+			line-height: 1;
+			-webkit-font-smoothing: antialiased;
+			-moz-osx-font-smoothing: grayscale;
+			color: $mine_shaft;
+			font-size: 17px;
+			
+			&:before {
+				content: "\e913";
+			}
+		}
+	}
+	
+	input[type=checkbox] {
+		position: absolute;
+		visibility: hidden;
+		opacity: 0;
+		z-index: -99;
+		
+		&:checked {
+			& + .icon {
+				color: $saffron;
+				
+				&:before {
+					content: "\e908";
+				}
+			}
+		}
+	}
+	
+	
+	&:hover {
+		box-shadow: 0 3px 20px rgba(0, 0, 0, 0.20), 0 3px 20px rgba(0, 0, 0, 0.20);
+		
+		.card_item_thumbnail {
+			transform: scale(1.03);
+		}
+	}
+	
+	&.card_item__reduced {
+		background: transparent;
+		margin-bottom: 3px;
+		
+		&:hover {
+			box-shadow: none;
+		}
+	}
+	
+	.sample_tag {
+		position: absolute;
+		left: 15px;
+		top: 15px;
+		border-radius: 3px;
+		background: rgba($white, .6);
+		text-align: center;
+		padding: 2px 7px;
+		font-size: 10px;
+		line-height: 16px;
+		color: $gray_tuna;
+		text-transform: uppercase;
+	}
+}
+
+.card_item_thumbnail {
+	height: 193px;
+	background-color: $gray_alto;
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	text-decoration: none;
+	display: block;
+	transition: .2s $bezier_ease_in;
+	transform-origin: bottom center;
+}
+
+.card_item__reduced {
+	.card_item_thumbnail {
+		height: 125px;
+		border-radius: 3px;
+	}
+}
+
+.card_item__info {
+	display: block;
+	padding: 25px 30px;
+	
+	h3 {
+		font-size: 18px;
+		line-height: 24px;
+		font-weight: 400;
+		color: $gray_tuna;
+		max-height: 24px;
+		margin-bottom: 5px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		
+		a {
+			display: block;
+			color: inherit;
+			font-size: inherit;
+			text-decoration: none;
+		}
+	}
+}
+
+.card_item__reduced {
+	max-width: 200px;
+	
+	.card_item__info {
+		padding: 6px 0;
+		
+		h3 {
+			font-size: 12px;
+			line-height: 16px;
+			font-weight: 700;
+			max-height: 36px;
+			margin-bottom: 2px;
+		}
+	}
+}
+
+.card_item__cat {
+	font-size: 12px;
+	line-height: 16px;
+	font-weight: 400;
+	text-transform: uppercase;
+}
+
+.card_item__reduced {
+	.card_item__cat {
+		font-size: 10px;
+		line-height: 14px;
+	}
+}
+
+.card_item_price {
+	display: flex;
+	flex-wrap: wrap;
+	margin-bottom: 20px;
+	
+	.value,
+	.location {
+		@include open_sans(300);
+		font-size: 16px;
+		line-height: 21px;
+		color: $gray_aluminium;
+		//font-weight: 300;
+	}
+	
+	div + div {
+		padding-left: 12px;
+		margin-left: 6px;
+		position: relative;
+		
+		&:before {
+			content: '';
+			position: absolute;
+			left: 0;
+			top: 50%;
+			transform: translateY(-50%);
+			width: 5px;
+			height: 5px;
+			border-radius: 50%;
+			background: $gray_aluminium;
+		}
+	}
+}
+
+.card_item__reduced {
+	.card_item_price {
+		margin-bottom: 0;
+		
+		.value,
+		.location {
+			font-size: 10px;
+			line-height: 14px;
+			font-weight: 700;
+		}
+		
+		div + div {
+			&:before {
+				width: 3px;
+				height: 3px;
+			}
+		}
+	}
+}
+
+.color_household {
+	color: $shamrock_darker;
+}
+
+.color_electronics {
+	color: $valencia;
+}
+
+.color_experiences {
+	color: $blue_scooter;
+}
+
+.color_business_industrial {
+	color: $saffron;
+}
+
+.card_item_transaction_type {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 14px;
+	
+	.name {
+		@include open_sans(300);
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		font-size: 12px;
+		line-height: 16px;
+		color: $gray_aluminium;
+	}
+	
+	.user_image {
+		width: 28px;
+		height: 28px;
+		margin-right: 7px;
+		border-radius: 50%;
+		background-color: $gray_alto;
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-position: center;
+	}
+	
+	.transaction_type {
+		display: flex;
+		justify-content: center;
+		
+		li {
+			border-radius: 3px;
+			background: rgba($mine_shaft, .05);
+			text-align: center;
+			padding: 2px 7px;
+			font-size: 10px;
+			line-height: 13px;
+			color: $gray_aluminium;
+			text-transform: uppercase;
+			
+			& + li {
+				margin-left: 3px;
+			}
+		}
+	}
+}
+
+.looking_for {
+	width: calc(100% + 22px);
+	position: relative;
+	
+	h4 {
+		@include open_sans(300);
+		font-size: 10px;
+		line-height: 13px;
+		text-transform: uppercase;
+		letter-spacing: 2px;
+		color: $gray_aluminium;
+		margin-bottom: 7px;
+	}
+	
+	ul {
+		display: flex;
+		flex-wrap: wrap;
+	}
+	
+	.cat_bg {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: rgba($gray_aluminium, .21);
+		height: 24px;
+		padding: 0 3px;
+	}
+	
+	img {
+		width: 17px;
+		max-height: 17px;
+	}
+	
+	.sporting_goods img {
+		width: 17px;
+		max-height: 9px;
+	}
+	
+	.homes_housing img {
+		width: 16px;
+		max-height: 14px;
+	}
+	
+	.experiences img {
+		width: 16px;
+		max-height: 16px;
+	}
+	
+	.services img {
+		max-width: 15px;
+		max-height: 15px;
+	}
+	
+	li {
+		display: inline-flex;
+		opacity: 0.61;
+		background: rgba(255, 255, 255, 0.60);
+		border: 1px solid #979797;
+		margin: 0 6px 5px 0;
+		border-radius: 3px;
+		
+		p {
+			font-size: 10px;
+			line-height: normal;
+			color: $gray_tuna;
+			padding: 6px 5px 4px;
+			margin: 0;
+			
+			strong {
+				font-weight: 700;
+			}
+		}
+	}
+}
+
+.card_item_buttons {
+  display: flex;
+  align-items: center;
+
+  .btn {
+    margin-top: 10px;
+  }
+
+  .btn__primary {
+    margin-right: 11px;
+  }
+}

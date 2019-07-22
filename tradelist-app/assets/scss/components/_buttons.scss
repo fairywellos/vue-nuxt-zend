@@ -1,0 +1,255 @@
+button {
+	cursor: pointer;
+	outline: 0;
+	border: none;
+	background: none;
+}
+
+.btn {
+	@include sintony(400);
+	position: relative;
+	border: none;
+	text-decoration: none;
+	border-radius: 5px;
+	overflow: hidden;
+	transition: .3s ease;
+	display: inline-block;
+	text-align: center;
+	text-transform: uppercase;
+}
+
+.btn__primary {
+	background: $blue_picton;
+	color: $white;
+	letter-spacing: 1px;
+	font-size: 10px;
+	line-height: 13px;
+	padding: 17.5px 33px;
+
+	&:hover {
+		box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.1);
+	}
+
+	&[disabled], &:disabled {
+		background: transparent;
+		border: 1px solid $gray_ghost;
+		pointer-events: none;
+		color: $gray_aluminium;
+		opacity: .7;
+
+		&:hover {
+			box-shadow: none;
+		}
+	}
+	
+	@media only screen and (max-width: 1299px) {
+		padding: 15.5px 25px;
+	}
+}
+
+.btn__secondary {
+	border: 1px solid $gray_ghost;
+	font-size: 10px;
+	line-height: 13px;
+	color: $gray_aluminium;
+	padding: 17.5px 20px;
+
+	&:hover {
+		border-color: $gray_aluminium;
+		box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.1);
+	}
+	
+	@media only screen and (max-width: 1299px) {
+		padding: 15.5px 25px;
+	}
+}
+
+.btn__switch {
+	border-radius: 100px;
+	position: relative;
+	width: 69px;
+	height: 33px;
+	padding: 0;
+
+	input[type=checkbox] {
+		position: absolute;
+		visibility: hidden;
+		opacity: 0;
+		z-index: -10;
+
+		&:checked {
+			& ~ .toggle {
+				background: $shamrock_darker;
+				left: 38px;
+				transition: .2s $bezier_easeInQuad;
+			}
+
+			& + span:not(.toggle) + span:not(.toggle) {
+				opacity: 0;
+			}
+
+			& + span:not(.toggle) {
+				opacity: 1;
+			}
+		}
+
+		& + span:not(.toggle) {
+			opacity: 0;
+		}
+	}
+
+	label, .label {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		width: 100%;
+		height: 100%;
+		background: $gray_gallery;
+		border-radius: 100px;
+		margin: 0;
+		padding: 5px 9px;
+		top: 0;
+		cursor: pointer;
+
+		span {
+			font-size: 10px;
+			letter-spacing: 1px;
+			color: $gray_aluminium;
+			transition: .2s $bezier_easeInQuad;
+		}
+	}
+
+	.toggle {
+		display: inline-block;
+		width: 23px;
+		height: 23px;
+		border-radius: 50%;
+		background: $valencia;
+		position: absolute;
+		top: 50%;
+		left: 8px;
+		transform: translateY(-50%);
+		transition: .3s $bezier_ease_in_out;
+	}
+}
+
+.btn_dots {
+	height: 25px;
+	display: flex;
+	flex-direction: column;
+	background: transparent;
+	border: 0;
+	padding: 4px 5px;
+	position: relative;
+
+	&.btn_dots__horizontal--mod {
+		width: 25px;
+		height: auto;
+		flex-direction: row;
+		justify-content: space-between;
+	}
+
+	&:before {
+		content: '';
+		display: block;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%) scale(0.3);
+		width: 35px;
+		height: 35px;
+		position: absolute;
+		background: rgba($gray_aluminium2, .5);
+		opacity: 0;
+		border-radius: 50%;
+		z-index: -1;
+		transition: .2s $bezier_ease_in_out;
+	}
+
+	&:hover {
+		span {
+			background: darken($gray_alto, 12%);
+		}
+
+		&:before {
+			opacity: 1;
+			transform: translate(-50%, -50%) scale(1);
+		}
+	}
+
+	span {
+		display: block;
+		background: $gray_alto;
+		width: 4px;
+		height: 4px;
+		margin-bottom: 2px;
+		border-radius: 50%;
+		transition: .3s $bezier-1;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+}
+
+.btn__border {
+	@include open_sans(500);
+	font-size: 10px;
+	line-height: 14px;
+	letter-spacing: 1px;
+	border-radius: 5px;
+	padding: 8.5px 15px;
+	
+	&--blue {
+		color: $blue_picton;
+		border: 3px solid $blue_picton;
+		
+		&:hover {
+			box-shadow: 0 5px 10px 0 rgba($blue_picton, .25);
+		}
+	}
+}
+
+.btn__border--green, .btn__border--red {
+	background: rgba($white, .18);
+}
+
+.btn__border--green {
+	color: $shamrock_darker;
+	border: 1px solid $shamrock_darker;
+
+	&:hover {
+		box-shadow: 0 5px 10px 0 rgba($shamrock_darker, .15);
+	}
+}
+
+.btn__border--red {
+	color: $valencia;
+	border: 1px solid $valencia;
+
+	&:hover {
+		box-shadow: 0 5px 10px 0 rgba($valencia, .15);
+	}
+}
+
+.btn__icon {
+	font-size: 16px;
+	color: rgba($gray_tuna, .66);
+	padding: 5px;
+
+	i {
+		color: rgba($gray_tuna, .66);
+	}
+}
+
+.btn__back {
+	padding: 10px;
+	background: transparent;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	
+	i {
+		font-size: 15px;
+		color: $gray_tuna;
+	}
+}

@@ -1,0 +1,163 @@
+{
+	"type": "success",
+	"allListings": [
+		{
+			"id": 0,
+			"productThumbnail": "productImage",
+			"productName": "Apple MacBook Pro 13 (Mid 2012) - Core i5 2.5GHz, 4GB RAM, 500GB HDD\n",
+			"category": "technology",
+			"classColor": "color_blue",
+			"price": "550.45",
+			"location": "Ballard, WA",
+			"user": "Merle Jørgensen",
+			"userThumbnail": "ownerImage",
+			"about": "Powerful processors designed to reduce power consumption while maintaining high performance. High-performance graphics ntel Iris Pro Graphics for advanced integrated graphics performance. Up to 7 hours wireless web Quickly start up and launch apps.",
+			"lookingFor": [
+				{
+					"icon": "sporting-goods",
+					"name": "Slingshot Asylum Kiteboard 2018"
+				},
+				{
+					"icon": "homes-housing",
+					"name": "Vacation homes in Hood River, OR"
+				},
+				{
+					"icon": "service",
+					"name": "Landscaping services"
+				},
+				{
+					"icon": "experiences",
+					"name": "Tickets to Hamilton in Seattle, WA"
+				},
+				{
+					"icon": "sporting-goods",
+					"name": "Santa Cruz Mountain Bikes"
+				}
+			],
+			"recommended": [
+				{
+					"name": "Slingshot Asylum Kiteboard 2018",
+					"price": "399.00"
+				}
+			]
+		},
+		{
+			"id": 1,
+			"productThumbnail": "productImage",
+			"productName": "MacBook Pro 13 2012 *Grade A...",
+			"category": "electronics",
+			"classColor": "color_red",
+			"price": "517.75",
+			"location": "North Hempstead, NY",
+			"user": "Reta Taylor",
+			"userThumbnail": "ownerImage",
+			"about": "13.3 inch LED-backlit display, 1280-by-800 resolution",
+			"lookingFor": [
+				{
+					"icon": "homes-housing",
+					"name": "Slingshot Asylum Kiteboard 2018"
+				},
+				{
+					"icon": "sporting-goods",
+					"name": "Vacation"
+				},
+				{
+					"icon": "service",
+					"name": "Landscaping services"
+				},
+				{
+					"icon": "experiences",
+					"name": "Tickets to Hamilton"
+				},
+				{
+					"icon": "sporting-goods",
+					"name": "Santa Cruz Mountain Bikes"
+				}
+			]
+		},
+		{
+			"id": 2,
+			"productThumbnail": "productImage",
+			"productName": "1-week Surf lessons in Maui",
+			"category": "experiences",
+			"classColor": "color_red",
+			"price": "1,150",
+			"location": "Maui, HI",
+			"user": "Merle Jørgensen",
+			"userThumbnail": "ownerImage",
+			"about": "Intel Iris Pro Graphics for advanced integrated graphics performance..",
+			"lookingFor": [
+				{
+					"icon": "service",
+					"name": "Slingshot Asylum Kiteboard 2010"
+				},
+				{
+					"icon": "homes-housing",
+					"name": "Vacation homes in Hood River"
+				},
+				{
+					"icon": "sporting-goods",
+					"name": "Landscaping services"
+				},
+				{
+					"icon": "experiences",
+					"name": "Tickets to Hamilton in Seattle, WA"
+				},
+				{
+					"icon": "sporting-goods",
+					"name": "Santa Cruz Mountain"
+				}
+			],
+			"recommended": [
+				{
+					"name": "6 hours of landscaping ",
+					"price": "500.00"
+				}
+			]
+		},
+		{
+			"id": 3,
+			"productThumbnail": "productImage",
+			"productName": "One month co-working space ",
+			"category": "Business & Industrial",
+			"classColor": "color_yellow",
+			"price": "2,300",
+			"location": "Albuquerque, NM",
+			"user": "Darren Mouton",
+			"userThumbnail": "ownerImage",
+			"about": "Designed to reduce power consumption while maintaining high performance.",
+			"lookingFor": [
+				{
+					"icon": "sporting-goods",
+					"name": "Slingshot Asylum Kiteboard 2019"
+				},
+				{
+					"icon": "homes-housing",
+					"name": "Vacation homes in "
+				},
+				{
+					"icon": "service",
+					"name": "Landscaping"
+				},
+				{
+					"icon": "experiences",
+					"name": "Tickets to Hamilton in Seattle"
+				},
+				{
+					"icon": "sporting-goods",
+					"name": "Santa Cruz Mountain Bikes"
+				}
+			],
+			"recommended": [
+				{
+					"name": "Landscaping services",
+					"price": "300.00"
+				},
+				{
+					"name": "Santa Cruz Mountain Bikes",
+					"price": "1250.00"
+				}
+			]
+		}
+	]
+}

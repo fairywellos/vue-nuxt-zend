@@ -1,0 +1,78 @@
+.trade_items_list {
+	padding: 32px 0;
+
+	li {
+		display: inline-flex;
+		align-items: center;
+		opacity: 0.61;
+		background: rgba(255, 255, 255, 0.60);
+		border: 1px solid #979797;
+		margin: 0 10px 9px 0;
+
+		p {
+			font-size: 12px;
+			line-height: 16px;
+			color: $gray_tuna;
+			padding: 5px 14px;
+			margin: 0;
+
+			strong {
+				font-weight: 700;
+			}
+		}
+
+		.cat_bg	{
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			background: rgba($gray_aluminium, .21);
+			padding: 0 10px;
+			height: 45px;
+			margin: 0 5px 0 0;
+		}
+	}
+
+	img {
+		max-height: 31px;
+	}
+
+	.art_collectibles img {
+		width: 41px;
+	}
+
+	.arts_crafts img {
+		width: 39px;
+	}
+
+	.experiences img {
+		width: 24px;
+	}
+
+	.motors img {
+		width: 47px;
+	}
+
+	.clothing_accessories img {
+		width: 28px;
+	}
+
+	.homes_housing img {
+		width: 31px;
+	}
+
+	.electronics img {
+		width: 45px;
+	}
+
+	.services img {
+		width: 31px;
+	}
+
+	.sporting_goods img {
+		width: 39px;
+	}
+
+	.business_industrial img {
+		width: 31px;
+	}
+}

@@ -1,0 +1,46 @@
+{
+    "allListings": [
+        {
+            id: '1',
+            name: '6 hours of landscaping',
+            price: '$500',
+            thumbnail: landscaping
+        },
+        {
+            id: '2',
+            name: 'Private catering for 10',
+            price: '$620',
+            thumbnail: catering
+        },
+        {
+            id: '3',
+            name: 'The art of hatmaking w...',
+            price: '$110',
+            thumbnail: hat
+        },
+        {
+            id: '4',
+            name: 'Cluse Women\'s La Boh...',
+            price: '$49.45',
+            thumbnail: watch
+        },
+        {
+            id: '5',
+            name: '1 week sailing cruise in...',
+            price: '$2.356.23',
+            thumbnail: sail
+        },
+        {
+            id: '6',
+            name: 'Nikon Camera 345vii',
+            price: '$270',
+            thumbnail: catering
+        },
+        {
+            id: '7',
+            name: '2015 Santa Cruz Nom...',
+            price: '$3636.75',
+            thumbnail: watch
+        }
+    ]
+}

@@ -1,0 +1,94 @@
+.art_collectibles,
+.clothing_accessories,
+.sporting_goods {
+	color: $blue_scooter;
+}
+
+.arts_crafts,
+.homes_housing,
+.business_industrial {
+	color: $saffron;
+}
+
+.experiences,
+.electronics,
+.other {
+	color: $valencia;
+}
+
+.motors,
+.services {
+	color: $shamrock_darker;
+}
+
+.categories_list {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 36px;
+	
+	@media only screen and (max-width: 1599px) {
+		flex-wrap: wrap;
+		justify-content: flex-start;
+	}
+	
+	@media only screen and (max-width: 1260px) {
+		position: relative;
+		width: calc(100% + 15px);
+		flex-wrap: nowrap;
+		overflow-y: hidden;
+		overflow-x: auto;
+		padding-right: 15px;
+	}
+	
+	li {
+		text-align: center;
+		width: 128px;
+		height: 128px;
+		
+		@media only screen and (max-width: 1599px) {
+			margin-right: 10px;
+			margin-bottom: 10px;
+		}
+		
+		@media only screen and (max-width: 1260px) {
+			width: 98px;
+			height: 98px;
+			min-width: 98px;
+			min-height: 98px;
+			margin-right: 6px;
+			margin-bottom: 0;
+		}
+		
+		& > a {
+			border-radius: 2px;
+			border: 1px solid rgba($gray_aluminium, .72);
+			width: 100%;
+			background: rgba($white, .72);
+			height: 100%;
+			padding: 15px 17px;
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			justify-content: center;
+			text-decoration: none;
+			transition: .2s $bezier_ease_in_out;
+			
+			&:hover {
+				opacity: .85;
+				box-shadow: 0 5px 10px 0 rgba(0,0,0,0.1);
+			}
+		}
+	}
+	
+	p {
+		width: 100%;
+		font-size: 12px;
+		font-weight: 700;
+		color: inherit;
+		margin: 10px 0 15px;
+		
+		@media only screen and (max-width: 1260px) {
+			font-size: 9px;
+		}
+	}
+}

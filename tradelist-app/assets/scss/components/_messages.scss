@@ -1,0 +1,150 @@
+.list_body {
+	overflow: hidden;
+	padding: 0;
+	position: relative;
+
+	.message_preview,
+	a {
+		background: $white;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		text-decoration: none;
+		padding: 26px 21px;
+		border-bottom: 1px solid $gray_aluminium2;
+		cursor: pointer;
+	}
+
+	.date_time {
+		font-size: 10px;
+		line-height: 16px;
+		align-self: flex-start;
+		color: $gray_aluminium;
+		letter-spacing: .7px;
+		text-align: right;
+		margin-left: 10px;
+		padding-right: 10px;
+	}
+
+	.info {
+		width: 203px;
+		height: 48px;
+	}
+
+	h4,
+	p {
+		font-size: 12px;
+		line-height: 16px;
+	}
+
+	h4 {
+		color: $gray_aluminium;
+	}
+
+	p {
+		color: $gray_tuna;
+		margin: 0;
+		max-height: 33px;
+		overflow: hidden;
+		word-break: break-all;
+		text-overflow: ellipsis;
+	}
+	
+	.empty {
+		padding: 30px;
+		font-size: 12px;
+		line-height: 18px;
+		color: $gray_aluminium;
+	}
+
+	.user_image {
+		width: 50px;
+		min-width: 50px;
+		height: 50px;
+		min-height: 50px;
+		border-radius: 50%;
+		background-position: center;
+		background-size: cover;
+		background-repeat: no-repeat;
+		margin-right: 8px;
+		display: block;
+	}
+	
+	&_messages {
+		.message_preview {
+			& + .empty {
+				display: none;
+			}
+		}
+	}
+	
+	&_notifications {
+		a {
+			& + .empty {
+				display: none;
+			}
+		}
+	}
+}
+
+.hero_section {
+	h1 {
+		@include sintony(700);
+		font-size: 48px;
+		line-height: 60px;
+		color: $white;
+		width: 100%;
+		max-width: 585px;
+		margin-bottom: 42px;
+		
+		@media only screen and (max-width: 1260px) {
+			font-size: 38px;
+			line-height: 50px;
+		}
+		
+		@media only screen and (max-width: 576px) {
+			font-size: 32px;
+			line-height: 42px;
+		}
+	}
+}
+
+.dashboard_content {
+	.simplebar-track {
+		bottom: 2px;
+	}
+}
+
+.list_body_messages {
+	.message_preview {
+		&.unread {
+			position: relative;
+			background: rgba($gray_aluminium, .15);
+
+			&:hover {
+				background: rgba($gray_aluminium, .25);
+			}
+
+			&:before {
+				content: '';
+				display: block;
+				position: absolute;
+				width: 6px;
+				height: 6px;
+				border-radius: 50%;
+				background: $shamrock_darker;
+				left: 10px;
+				top: 50%;
+				transform: translateY(-50%);
+			}
+
+			p {
+				font-weight: 700;
+			}
+		}
+
+		&.active {
+			background: rgba($shamrock, .05);
+		}
+	}
+}

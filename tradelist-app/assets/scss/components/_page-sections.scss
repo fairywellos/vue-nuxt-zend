@@ -1,0 +1,77 @@
+.page_section {
+	
+	@media only screen and (max-width: 1260px) {
+		margin-bottom: 16px;
+	}
+	
+	h1, h2 {
+		@include clearfix;
+		margin-bottom: 20px;
+		
+		@media only screen and (max-width: 1260px) {
+			font-size: 14px;
+			line-height: 28px;
+			font-weight: 700;
+			letter-spacing: -0.13px;
+			margin-bottom: 10px;
+		}
+        
+        a:not(.float_right) {
+            font-size: 10px;
+            line-height: 13px;
+            vertical-align: middle;
+            letter-spacing: .7px;
+            color: $blue_scooter;
+            margin-left: 10px;
+        }
+        
+        .icon-save {
+            font-size: 20px;
+            vertical-align: top;
+        }
+		
+		.float_right {
+			@include nunito(300);
+			font-size: 18px;
+			line-height: 28px;
+			letter-spacing: -0.16px;
+			color: $gray_tuna;
+			float: right;
+			padding-right: 35px;
+			position: relative;
+
+			&:after {
+				content: '';
+				position: absolute;
+				top: 50%;
+				right: 0;
+				transform: translateY(-50%);
+				background: url('~@/assets/img/long-arrow-right.png') center no-repeat;
+				background-size: contain;
+				width: 25px;
+				height: 25px;
+			}
+		}
+	}
+	
+	.see_all {
+		font-size: 15px;
+		display: flex;
+		width: 100%;
+		color: $gray_tuna;
+		padding: 12.5px 15px;
+		margin-top: 22px;
+		text-transform: none;
+		align-items: center;
+		justify-content: center;
+		
+		img {
+			margin-left: 5px;
+			margin-top: -3px;
+		}
+	}
+}
+
+.page_section__last {
+	margin-bottom: 42px;
+}
