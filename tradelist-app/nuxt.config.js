@@ -121,7 +121,7 @@ module.exports = {
         presets: ['@nuxt/babel-preset-app'],
         postcss: [
             require('autoprefixer')({
-                browsers: ['> 5%']
+                overrideBrowserslist: ['> 5%']
             })
         ],
         extend(config, ctx) {
