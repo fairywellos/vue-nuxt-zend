@@ -1,5 +1,118 @@
 <template>
 	<header class="main_header" role="banner" id="mainHeader">
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-WDP5VK2');</script>
+	<!-- End Google Tag Manager -->
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-143236797-1"></script>
+	<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'UA-143236797-1');
+	gtag('config', 'AW-729655576');
+	</script>
+
+	<!-- Google Tag Manager (noscript) -->
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WDP5VK2"
+	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<!-- End Google Tag Manager (noscript) -->
+
+	<!-- Facebook Pixel Code -->
+	<script>
+	!function(f,b,e,v,n,t,s)
+	{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+	n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+	if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+	n.queue=[];t=b.createElement(e);t.async=!0;
+	t.src=v;s=b.getElementsByTagName(e)[0];
+	s.parentNode.insertBefore(t,s)}(window, document,'script',
+	'https://connect.facebook.net/en_US/fbevents.js');
+	fbq('init', '2362390287178459');
+	fbq('track', 'PageView');
+	</script>
+	<noscript><img height="1" width="1" style="display:none"
+	src="https://www.facebook.com/tr?id=2362390287178459&ev=PageView&noscript=1"
+	/></noscript>
+	<!-- End Facebook Pixel Code --></code></p>
+
+	<!-- Event snippet for SignUp conversion page -->
+	<script>
+	gtag('event', 'conversion', {'send_to': 'AW-729655576/DNu_COK64qYBEJjS9tsC'});
+	gtag('event', 'sign_up');
+	fbq('track', 'CompleteRegistration', { value: 10, currency: 'USD' });  
+	</script>
+
+	<!-- Event snippet for Login conversion page -->
+	<script>
+	gtag('event', 'conversion', {'send_to': 'AW-729655576/BnsPCNSv3qYBEJjS9tsC'});
+	gtag('event', 'login');
+	</script>
+
+	<!-- Event snippet for View Listing conversion page -->
+	<script>
+	gtag('event', 'conversion', {'send_to': 'AW-729655576/Am5fCI-N66YBEJjS9tsC'});
+	var listitem = [           
+	{
+		"id": "##ITEM_ID##",
+		"name": "##ITEM_NAME##",
+		"list": "##ITEM_TRADER##",
+		"category": "##ITEM_CATEGORY##",
+		"list_position": "1",
+		"price": "##ITEM_PRICE##",
+		"currency": "##ITEM_CURRENCY##",
+		"product_url": "##ITEM_URL##",
+	}
+	];
+	gtag('event', 'view_item', { items : listitem });
+	fbq('track', 'ViewContent', {
+	value: 1,
+	currency: 'USD',
+	content_ids: '"##ITEM_ID##',
+	content_type: 'product',
+	});  
+	</script>
+
+	<!-- Event snippet for Create Listing conversion page -->
+	<script>
+	gtag('event', 'conversion', {'send_to': 'AW-729655576/PKo5CMmt3qYBEJjS9tsC'});
+	gtag('event', 'generate_lead');  
+	fbq('track', 'Lead', { value: 10, currency: 'USD'   });
+	fbq('track', 'SubmitApplication');
+	</script>
+
+	<!-- Event snippet for Search conversion page -->
+	<script>
+	gtag('event', 'search', { search_term : '##SEARCH_STRING##' });
+	fbq('track', 'Search', { search_string: '##SEARCH_STRING##' });
+	</script>
+
+	<!-- Event snippet for View Search Results conversion page -->
+	<script>
+	gtag('event', 'conversion', {'send_to': 'AW-729655576/sm50CLWu3qYBEJjS9tsC'});
+	var listitems = [           
+	{
+		"id": "##ITEM_ID##",
+		"name": "##ITEM_NAME##",
+		"list": "##ITEM_TRADER##",
+		"category": "##ITEM_CATEGORY##",
+		"list_position": "1",
+		"price": "##ITEM_PRICE##",
+		"currency": "##ITEM_CURRENCY##",
+		"product_url": "##ITEM_URL##",
+	},
+	...,
+	...,
+	...
+	];
+	gtag('event', 'view_item_list', { items : listitems });  
+	</script>
+
 		<div class="main_header__main">
 			<div class="container">
 				<div class="main_header__main_inner">
