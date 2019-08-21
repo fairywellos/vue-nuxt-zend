@@ -58,7 +58,7 @@
 				
 				<ul class="categories_list" role="list">
 					<li>
-						<a href="#" class="art_collectibles">
+						<a href="/browse-local" class="art_collectibles">
 							<img src="~/assets/img/illustrations/art-collectibles.svg" alt="art & collectibles">
 							<p>
 								Art &amp; <br>
@@ -67,7 +67,7 @@
 						</a>
 					</li>
 					<li>
-						<a href="#" class="arts_crafts">
+						<a href="/browse-local" class="arts_crafts">
 							<img src="~/assets/img/illustrations/arts-crafts.svg" alt="arts crafts">
 							<p>
 								Arts &amp; Crafts
@@ -75,7 +75,7 @@
 						</a>
 					</li>
 					<li>
-						<a href="#" class="experiences">
+						<a href="/browse-local" class="experiences">
 							<img src="~/assets/img/illustrations/experiences.svg" alt="experiences">
 							<p>
 								Experiences
@@ -83,7 +83,7 @@
 						</a>
 					</li>
 					<li>
-						<a href="#" class="motors">
+						<a href="/browse-local" class="motors">
 							<img src="~/assets/img/illustrations/motors.svg" alt="motors">
 							<p>
 								Motors
@@ -91,7 +91,7 @@
 						</a>
 					</li>
 					<li>
-						<a href="#" class="clothing_accessories">
+						<a href="/browse-local" class="clothing_accessories">
 							<img src="~/assets/img/illustrations/clothing-accessories.svg" alt="clothing accessories">
 							<p>
 								Clothing &amp; <br> Accessories
@@ -99,7 +99,7 @@
 						</a>
 					</li>
 					<li>
-						<a href="#" class="homes_housing">
+						<a href="/browse-local" class="homes_housing">
 							<img src="~/assets/img/illustrations/homes-housing.svg" alt="homes housing">
 							<p>
 								Homes &amp; <br> Housing
@@ -107,7 +107,7 @@
 						</a>
 					</li>
 					<li>
-						<a href="#" class="electronics">
+						<a href="/browse-local" class="electronics">
 							<img src="~/assets/img/illustrations/electronics.svg" alt="electronincs">
 							<p>
 								Electronics
@@ -115,7 +115,7 @@
 						</a>
 					</li>
 					<li>
-						<a href="#" class="services">
+						<a href="/browse-local" class="services">
 							<img src="~/assets/img/illustrations/services.svg" alt="services">
 							<p>
 								Services
@@ -123,7 +123,7 @@
 						</a>
 					</li>
 					<li>
-						<a href="#" class="sporting_goods">
+						<a href="/browse-local" class="sporting_goods">
 							<img src="~/assets/img/illustrations/sporting-goods.svg" alt="sporting goods">
 							<p>
 								Sporting Goods
@@ -131,7 +131,7 @@
 						</a>
 					</li>
 					<li>
-						<a href="#" class="business_industrial">
+						<a href="/browse-local" class="business_industrial">
 							<img src="~/assets/img/illustrations/business-industrial.svg" alt="business industrial">
 							<p>
 								Business &amp; <br> Industrial
