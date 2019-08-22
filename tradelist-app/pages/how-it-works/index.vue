@@ -257,7 +257,7 @@
 				width: 829px;
 				height: 831px;
 				display: block;
-				background: url("~assets/img/informational-pages/trade-networks.png") no-repeat center left;
+				background: url("~assets/img/informational-pages/trade-networks1.png") no-repeat center left;
 				background-size: contain;
 				
 				@media only screen and (max-width: 968px) {
