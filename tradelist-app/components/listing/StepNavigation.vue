@@ -12,7 +12,7 @@
 				<fieldset v-show="activeStep === 0" transition="fade" mode="out-in">
 					<div class="fieldset_inner">
 						<header>
-							<h2>What is it you have to trade?</h2>
+							<h2>What would you like to list?</h2>
 						</header>
 						<CategoryStep v-if="$device.isDesktop" ref="CategoryStep" :listingData="mainListingData"
 						              @update="updateListing"/>
