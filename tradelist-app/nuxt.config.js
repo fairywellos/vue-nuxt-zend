@@ -59,7 +59,7 @@ module.exports = {
         '@nuxtjs/moment',
         'vue-geolocation-api/nuxt',
         'cookie-universal-nuxt',
-        'nuxt-facebook-pixel-module',
+        // 'nuxt-facebook-pixel-module',
 		'@nuxtjs/google-analytics',
 		['@nuxtjs/google-tag-manager', { id: 'GTM-WDP5VK2' }],
         ['nuxt-validate', {
@@ -73,12 +73,12 @@ module.exports = {
             ]
         ]
     ],
-    facebook: {
-        /* module options */
-        track: 'PageView',
-        pixelId: '2362390287178459',
-        disabled: false
-    },
+    // facebook: {
+    //     /* module options */
+    //     track: 'PageView',
+    //     pixelId: '2362390287178459',
+    //     disabled: false
+    // },
 	googleAnalytics: {
 		id: 'UA-136278496-1',
 		debug: {
