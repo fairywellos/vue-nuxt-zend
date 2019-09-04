@@ -132,7 +132,9 @@ const searchBarJs = {
 			this.searchToggleVisible = false;
 		},
 		returnKeySearch() {
-			this.$router.push({path: '/search', query: {...this.$route.query, q: this.term, location: this.location}})
+			this.$router.push({path: '/search', query: {...this.$route.query, q: this.term, location: this.location}});
+		    this.$gtag('event', 'search', { search_term : this.term });
+		    this.$fb('track', 'Search', { search_string: this.term });
 		}
 	},
 };

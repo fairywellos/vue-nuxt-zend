@@ -32,7 +32,9 @@ const headerJs = {
 					username: this.display_name,
 					password: this.password
 				});
-
+				this.$gtag('event', 'conversion', {'send_to': 'AW-729655576/DNu_COK64qYBEJjS9tsC'});
+				this.$gtag('event', 'sign_up');
+				this.$fb('track', 'CompleteRegistration', { value: 4, currency: 'USD' });  
 				this.showModalSignUp = false;
 				this.showModalEmailCode = true;
 			} catch (e) {
@@ -51,7 +53,9 @@ const headerJs = {
 						password: this.password
 					}
 				});
-
+				this.$gtag('event', 'conversion', {'send_to': 'AW-729655576/BnsPCNSv3qYBEJjS9tsC'});
+				this.$gtag('event', 'login');
+				this.$fb('track', 'login');
 				this.showModalLogin = false;
 				this.refreshPage();
 
