@@ -38,6 +38,10 @@ const stepNavigation = {
 					this.$store.dispatch('newListing/sendListing')
 						.then((response) => {
 							console.log('am trimis');
+							this.$gtag('event', 'conversion', {'send_to': 'AW-729655576/PKo5CMmt3qYBEJjS9tsC'});
+							this.$gtag('event', 'generate_lead');  
+							this.$fb('track', 'Lead', { value: 10, currency: 'USD'   });
+							this.$fb('track', 'SubmitApplication');							
 						})
 						.catch(serverError => {
 							serverError = serverError.response.data.result;

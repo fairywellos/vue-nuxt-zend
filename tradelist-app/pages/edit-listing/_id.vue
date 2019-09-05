@@ -98,6 +98,10 @@
 					.then(response => {
 						parent.$store.commit("editListing/resetStateData");
 						this.openModalListingSuccess();
+						this.$gtag('event', 'conversion', {'send_to': 'AW-729655576/PKo5CMmt3qYBEJjS9tsC'});
+						this.$gtag('event', 'generate_lead');  
+						this.$fb('track', 'Lead', { value: 10, currency: 'USD'   });
+						this.$fb('track', 'SubmitApplication');						
 						// parent.$router.push({ name: "index" });
 					})
 					.catch(serverError => {

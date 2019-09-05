@@ -16,7 +16,26 @@ const listingDetails = {
 	asyncData({params, error}) {
 		return axios
 			.get(process.env.API_URL + `/listing?id=${params.id}`)
-			.then(res => {
+			.then(res => {		
+				gtag('event', 'conversion', {'send_to': 'AW-729655576/Am5fCI-N66YBEJjS9tsC'});
+					var listitem = [           
+					{
+						"id": res.data.result.data.id,
+						"name": res.data.result.data.title,
+						"list": res.data.result.data.user.name,
+						"category": res.data.result.data.mainCategory.name,
+						"listing_type": res.data.result.data.listingType,
+						"price": res.data.result.data.price,
+						"location": res.data.result.data.location
+					}
+					];
+					gtag('event', 'view_item', { items : listitem });
+					fbq('track', 'ViewContent', {
+					value: 1,
+					currency: 'USD',
+					content_ids: res.data.result.data.id,
+					content_type: 'product',
+					});  
 				return {listing: res.data.result.data};
 			})
 			.catch(e => {
@@ -48,6 +67,9 @@ const listingDetails = {
 					this.checkedNames = [];
 					this.cashOffer = 0;
 					this.tradeValue = 0;
+					this.$gtag('event', 'conversion', {'send_to': 'AW-729655576/b2r6CMbM9qkBEJjS9tsC'});
+					this.$fb('track', 'Lead', { value: 20, currency: 'USD'   });
+					this.$fb('track', 'TradeOffer');					
 					this.openModalMakeOfferSuccess();
 				})
 				.catch(error => {
@@ -163,6 +185,9 @@ const listingDetails = {
 					message: this.textMessage,
 				}).then((response) => {
 					self.textMessage = "";
+					this.$gtag('event', 'conversion', {'send_to': 'AW-729655576/8cnPCJ_M9qkBEJjS9tsC'});
+					this.$fb('track', 'Lead', { value: 2, currency: 'USD' });
+					this.$fb('track', 'SendMessage');										
 					self.closeModalMessage();
 				});
 			} catch (e) {
