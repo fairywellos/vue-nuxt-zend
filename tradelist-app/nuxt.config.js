@@ -59,7 +59,7 @@ module.exports = {
         '@nuxtjs/moment',
         'vue-geolocation-api/nuxt',
         'cookie-universal-nuxt',
-        'nuxt-facebook-pixel-module',
+        // 'nuxt-facebook-pixel-module',
 		'@nuxtjs/google-analytics',
 		['@nuxtjs/google-tag-manager', { id: 'GTM-WDP5VK2' }],
         ['nuxt-validate', {
