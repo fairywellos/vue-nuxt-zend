@@ -7,7 +7,7 @@
 						<img class="img_fluid" src="~/assets/img/logo-svg.svg" alt="tradelist logo">
 						<i>Tradelist</i>
 					</div>
-					<p>&copy; Tradelist 2018</p>
+					<p>&copy; Tradelist 2019</p>
 				</div>
 				<!--<ul v-if="$device.isMobileOrTablet" class="social_media" role="menu">-->
 				<!--<li>-->
