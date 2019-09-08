@@ -6,9 +6,9 @@ module.exports = {
 	server:{
     	port: process.env.APP_PORT
 	},
-	router: {
-		middleware: 'betaAuth'
-	},
+	// router: {
+	// 	middleware: 'betaAuth'
+	// },
     /*
 	** Headers of the page
 	*/
