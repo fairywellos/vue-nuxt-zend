@@ -77,8 +77,6 @@
 						}).then(()=>{
 							this.$store.commit("auth/setLoggedIn");
 							this.$store.dispatch("auth/setBetaLoginCookie").then(()=>{
-								this.$gtag('event', 'conversion', {'send_to': 'AW-729655576/BnsPCNSv3qYBEJjS9tsC'});
-		    					this.$fb('track', 'login');
 								this.$router.push("/");
 
 							});
