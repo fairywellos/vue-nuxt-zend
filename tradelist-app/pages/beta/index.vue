@@ -40,6 +40,9 @@
 		components: {
 			HeaderSplash, HeaderMobile
 		},
+		created() {
+			return this.$nuxt.error({ statusCode: 404, message: err.message })
+		},
 		inject: ["$validator"],
 		head() {
 			return {
