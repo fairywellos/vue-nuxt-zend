@@ -41,7 +41,7 @@
 			HeaderSplash, HeaderMobile
 		},
 		created() {
-			return this.$nuxt.error({ statusCode: 404, message: err.message })
+			this.$route.push('/');
 		},
 		inject: ["$validator"],
 		head() {
