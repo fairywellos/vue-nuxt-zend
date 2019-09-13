@@ -25,7 +25,7 @@ module.exports = {
         ],
         script: [
             {
-                src: "js/main.js"
+                src: "main.js"
             }
         ]
     },

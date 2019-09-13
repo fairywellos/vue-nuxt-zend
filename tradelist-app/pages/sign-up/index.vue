@@ -1,15 +1,14 @@
 <template>
-  <!--==========================
-    Intro Section
-  ============================-->
-  <section id="intro" class="clearfix">
-    <div class="container">
-		<div class="banner_content text-center">
-		<h2>Turn what you have, into<br/> what you want.</h2>
-		<a href="https://tradelist.net/">Get started</a>
-		</div>
-    </div>
-  </section>
+    <Header v-if="$device.isDesktop"/>
+    <HeaderMobile v-if="$device.isMobileOrTablet"/>
+    <section id="intro" class="clearfix">
+        <div class="container">
+            <div class="banner_content text-center">
+                <h2>Turn what you have, into<br/> what you want.</h2>
+                <a href="https://tradelist.net/">Get started</a>
+            </div>
+        </div>
+    </section>
 
   
     <section id="why-us" class="wow fadeIn">
