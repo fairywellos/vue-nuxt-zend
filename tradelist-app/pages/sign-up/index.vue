@@ -9,13 +9,9 @@
 		<a href="https://tradelist.net/">Get started</a>
 		</div>
     </div>
-  </section><!-- #intro -->
+  </section>
 
-  <main id="main">
   
-  <!--==========================
-      Why Us Section
-    ============================-->
     <section id="why-us" class="wow fadeIn">
       <div class="container">
         <header class="section-header">
@@ -65,10 +61,6 @@
 
       </div>
     </section>
-
-    <!--==========================
-      About Us Section
-    ============================-->
     <section id="about">
       <div class="container">
 
@@ -114,9 +106,8 @@ a trade or cash offer.</p>
         
 
       </div>
-    </section><!-- #about -->
-
-  </main>
+    </section>
+    
   </template>
 
   <script>
@@ -152,7 +143,6 @@ a trade or cash offer.</p>
 	@import "~assets/scss/abstracts/_abstracts.scss";
 	@import "~assets/scss/components/_informational-pages.scss";
 </style>
-<!--
 <style>
     @import "https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700";
     @import "~assets/lib/bootstrap/css/bootstrap.min.css";
@@ -163,5 +153,3 @@ a trade or cash offer.</p>
     @import "~assets/lib/lightbox/css/lightbox.min.css";
     @import "~assets/css/style.css";
 </style>
-
--->
