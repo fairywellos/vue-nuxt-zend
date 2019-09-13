@@ -144,7 +144,7 @@ a trade or cash offer.</p>
 	@import "~assets/scss/components/_informational-pages.scss";
     
 </style>
-<style>
+<style scoped>
     @import "https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700";
     @import "~assets/lib/bootstrap/css/bootstrap.min.css";
     @import "~assets/lib/font-awesome/css/font-awesome.min.css";
