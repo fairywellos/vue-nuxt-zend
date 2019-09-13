@@ -1,17 +1,17 @@
 <template>
     <Header v-if="$device.isDesktop"/>
     <HeaderMobile v-if="$device.isMobileOrTablet"/>
-    <section id="intro" class="clearfix">
+    <div id="intro" class="clearfix">
         <div class="container">
             <div class="banner_content text-center">
                 <h2>Turn what you have, into<br/> what you want.</h2>
                 <a href="https://tradelist.net/">Get started</a>
             </div>
         </div>
-    </section>
+    </div>
 
   
-    <section id="why-us" class="wow fadeIn">
+    <div id="why-us" class="wow fadeIn">
       <div class="container">
         <header class="section-header">
           <h3>Why choose us?</h3>
@@ -59,8 +59,8 @@
         
 
       </div>
-    </section>
-    <section id="about">
+    </div>
+    <div id="about">
       <div class="container">
 
         <header class="section-header">
@@ -105,7 +105,7 @@ a trade or cash offer.</p>
         
 
       </div>
-    </section>
+    </div>
     
   </template>
 
