@@ -142,6 +142,42 @@ a trade or cash offer.</p>
 <style lang="scss" scoped>
 	@import "~assets/scss/abstracts/_abstracts.scss";
 	@import "~assets/scss/components/_informational-pages.scss";
+    .btn {
+        border: 1px solid #C6C9CF;
+        background: none;
+    }
+    .main_header__main_inner {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+    }
+    .main_header__top_inner, .main_header__main_inner {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+    }
+    .main_header__main_inner {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+    }
+    .main_header__main_inner, .main_header__top_inner {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+    }
 </style>
 <style>
     @import "https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700";
