@@ -152,6 +152,7 @@ a trade or cash offer.</p>
 	@import "~assets/scss/abstracts/_abstracts.scss";
 	@import "~assets/scss/components/_informational-pages.scss";
 </style>
+<!--
 <style>
     @import "https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700";
     @import "~assets/lib/bootstrap/css/bootstrap.min.css";
@@ -162,3 +163,5 @@ a trade or cash offer.</p>
     @import "~assets/lib/lightbox/css/lightbox.min.css";
     @import "~assets/css/style.css";
 </style>
+
+-->
