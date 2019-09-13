@@ -615,3 +615,6 @@ footer .quick_links ul li {
 .btn__primary {
   background: #48C0EB !important;
 }
+.modal {
+  display: block !important;
+}
