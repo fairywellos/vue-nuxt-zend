@@ -1,4 +1,5 @@
 <template>
+<div class="how-it-works informational_page">
     <Header v-if="$device.isDesktop"/>
     <HeaderMobile v-if="$device.isMobileOrTablet"/>
     <div id="intro" class="clearfix">
@@ -106,7 +107,7 @@ a trade or cash offer.</p>
 
       </div>
     </div>
-    
+    </div>
   </template>
 
   <script>
