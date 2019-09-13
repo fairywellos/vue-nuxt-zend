@@ -612,3 +612,6 @@ footer .quick_links ul li {
   -ms-flex-align: center;
   align-items: center;
 }
+.btn__primary {
+  background: #48C0EB !important;
+}
