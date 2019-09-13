@@ -29,11 +29,55 @@ module.exports = {
               type: "text/javascript"
             },
             {
+                src: "lib/jquery/jquery.min.js",
+                type: "text/javascript"
+            },
+            {
+                src: "lib/jquery/jquery-migrate.min.js",
+                type: "text/javascript"
+            },
+            {
+                src: "lib/bootstrap/js/bootstrap.bundle.min.js",
+                type: "text/javascript"
+            },
+            {
+                src: "lib/easing/easing.min.js",
+                type: "text/javascript"
+            },
+            {
+                src: "lib/mobile-nav/mobile-nav.js",
+                type: "text/javascript"
+            },
+            {
+                src: "lib/wow/wow.min.js",
+                type: "text/javascript"
+            },
+            {
+                src: "lib/waypoints/waypoints.min.js",
+                type: "text/javascript"
+            },
+            {
+                src: "lib/counterup/counterup.min.js",
+                type: "text/javascript"
+            },
+            {
+                src: "lib/owlcarousel/owl.carousel.min.js",
+                type: "text/javascript"
+            },
+            {
+                src: "lib/isotope/isotope.pkgd.min.js",
+                type: "text/javascript"
+            },
+            {
+                src: "lib/lightbox/js/lightbox.min.js",
+                type: "text/javascript"
+            },
+            {
                 src: "main.js"
             }
         ]
     },
-
+    
     /*
 	** Customize the progress-bar color
 	*/
