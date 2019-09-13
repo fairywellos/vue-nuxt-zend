@@ -618,3 +618,6 @@ footer .quick_links ul li {
 .modal {
   display: block !important;
 }
+.main_header__main .container {
+  max-width: 97% !important;
+}
