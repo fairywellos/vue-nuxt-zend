@@ -72,6 +72,7 @@ class ListingManager
      * @param array $data
      * @param User $currentUser
      * @param Listing|NULL $entity
+     * @return int
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
@@ -93,7 +94,7 @@ class ListingManager
             $availability = new \DateTime(date('Y-m-d H:i:s', strtotime('+1 month')));
             $entity->setDateAdded($currentDate);
             $entity->setDateModified($currentDate);
-            $entity->setAvailability($availability);
+            $entity->setAvailability($data['availability'] ?? $availability);
 
         }
 
@@ -170,8 +171,7 @@ class ListingManager
 
         }
 
-
-
+        return $entity->getId();
     }
 
     /**

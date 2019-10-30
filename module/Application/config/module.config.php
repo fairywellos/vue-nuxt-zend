@@ -13,7 +13,6 @@ use Application\Controller\Factory\ListingControllerFactory;
 use Application\Controller\Factory\PluginFactory;
 use Application\Controller\Factory\TradeControllerFactory;
 use Application\Controller\Factory\UserControllerFactory;
-use Application\Service\Factory\ControllerManagerFactory;
 use Application\Service\Factory\MailSmtpFactory;
 use Application\Service\Factory\ServiceFactory;
 use Application\Service\Factory\PusherManagerFactory;
@@ -1246,6 +1245,43 @@ return [
                     ]
                 ]
             ],
+            'etsy' => [
+                'type' => Literal::class,
+                'options' => [
+                    'route' => '/etsy',
+                    'defaults' => [
+                        'controller' => Controller\EtsyController::class,
+                        'action' => 'index',
+                    ],
+                ],
+                'may_terminate' => false,
+                'child_routes' => [
+                    'getActive' => [
+                        'type' => Segment::class,
+                        'options' => [
+                            'route' => '/get-active',
+                            'defaults' => [
+                                'controller' => Controller\EtsyController::class,
+                                'action' => 'get-active',
+                            ]
+                        ],
+                        'may_terminate' => false,
+                        'child_routes' =>[
+                            'get_route' => [
+                                'type' => Method::class,
+                                'options' => [
+                                    'verb' => 'get',
+                                    'defaults' => [
+                                        'controller' => Controller\EtsyController::class,
+                                        'action' => 'get-active',
+                                    ]
+                                ]
+                            ]
+                        ]
+
+                    ],
+                ]
+            ],
         ],
     ],
     'controllers' => [
@@ -1263,6 +1299,7 @@ return [
             Controller\TradeController::class => TradeControllerFactory::class,
             Controller\SavedSearchController::class => ControllerFactory::class,
             Controller\LocationController::class => ControllerFactory::class,
+            Controller\EtsyController::class => ControllerFactory::class,
         ],
     ],
     'controller_plugins' => [
@@ -1282,11 +1319,12 @@ return [
             Service\UploadManager::class => InvokableFactory::class,
             Service\MailSmtp::class => MailSmtpFactory::class,
             Service\TradeManager::class => TradeManagerFactory::class,
-            Service\ConversationManager::class => ControllerManagerFactory::class,
-            Service\NotificationManager::class => ControllerManagerFactory::class,
+            Service\ConversationManager::class => ServiceFactory::class,
+            Service\NotificationManager::class => ServiceFactory::class,
             Service\PusherManager::class => PusherManagerFactory::class,
             Service\RatingManager::class => RatingManagerFactory::class,
             Service\SavedSearchManager::class => ServiceFactory::class,
+            Service\EtsyManager::class => ServiceFactory::class,
         ]
     ],
     'view_manager' => [

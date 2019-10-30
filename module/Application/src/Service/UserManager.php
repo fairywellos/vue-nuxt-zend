@@ -65,6 +65,45 @@ class UserManager
     }
 
     /**
+     * @param $data
+     * @return User
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function addNewExternUser($data)
+    {
+        $user = new User();
+        $user->setFirstName($data["first_name"]);
+        $user->setName($data["name"]);
+        $user->setUsername($data["username"]);
+        $user->setEmail($data["email"]);
+        $user->setPassword($this->random_str(8));
+        $user->setLocation($data["location"]);
+        $user->setPhoto($data["photo"]["name"]);
+        $user->setPhotoUrl($data["photo"]["url"]);
+        $user->setPublic(User::PUBLIC);
+        $user->setDescription($data["description"]);
+        $user->setPrivacy(User::PRIVATE);
+        $user->setStatus(User::ACTIVE);
+        $user->setUserType(User::BASIC);
+        $currentDate =  new \DateTime(date('Y-m-d H:i:s'));
+        $membershipExpires = new \DateTime(date('Y-m-d H:i:s', strtotime('+1 month')));
+        $activationExpires = new \DateTime(date('Y-m-d H:i:s', strtotime('+24 hour')));
+        $activationCode = $this->random_str(6);
+        $user->setActivationCode($activationCode);
+        $user->setActivationExpires($activationExpires);
+        $user->setDateAdded($currentDate);
+        $user->setDateModified($currentDate);
+        $user->setMembershipExpires($membershipExpires);
+        $user->setCredits(3);
+
+        $this->entityManager->persist($user);
+        $this->entityManager->flush();
+
+        return $user;
+    }
+
+    /**
      * @param User $user
      * @param $data
      * @throws \Doctrine\ORM\ORMException

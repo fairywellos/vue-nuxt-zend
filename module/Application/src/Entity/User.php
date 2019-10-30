@@ -134,7 +134,7 @@ class User
     protected $photoUrl;
 
     /**
-     * @ORM\Column(type="string", name="description", nullable=true)
+     * @ORM\Column(type="text", name="description", nullable=true)
      */
     protected $description;
 

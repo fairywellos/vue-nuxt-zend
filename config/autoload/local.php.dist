@@ -61,5 +61,10 @@ return [
              "customer_service"  => "",
              "product_feedback"  => "",
              "partner_relations" => "",
-     ]
+     ],
+
+     "etsy_options" => [
+             "key_string" => '',
+             "shared_secret" => '',
+     ],
 ];
