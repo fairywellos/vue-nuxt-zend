@@ -58,13 +58,13 @@ class EtsyController extends ApiController
              ]
         ]);
 
-        $trackingRequestRepo->addRequest('etsy', 1);
-
         if (!is_array($response)){
             $this->httpStatusCode = 404;
             $this->apiResponse["message"] = "Bad params for this esty request!";
             return $this->createResponse();
         }
+
+        $trackingRequestRepo->addRequest('etsy', 1);
 
         foreach ($response["results"] as $key => $etsy_listing) {
             $start_time = microtime(true);

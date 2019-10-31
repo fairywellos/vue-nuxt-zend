@@ -10,7 +10,7 @@ use Doctrine\ORM\EntityRepository;
 
 class ListingRepository extends EntityRepository
 {
-    const MAX_LIMIT = 1000;
+    const MAX_LIMIT = 40;
     const FIRST_PAGE = 1;
     const MIN_TEXT_LENGTH_Q = 2;
 

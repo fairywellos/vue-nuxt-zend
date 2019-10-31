@@ -65,8 +65,8 @@ class EtsyManager
 
         $data = [
             "listingType" => 1,
-            "title" => $etsy_listing['title'],
-            "description" => $etsy_listing['description'],
+            "title" => html_entity_decode($etsy_listing['title']),
+            "description" => html_entity_decode($etsy_listing['description']),
             "price" => $etsy_listing['price'],
             "qty" => $etsy_listing['quantity'],
             "condition" => 2,
@@ -165,7 +165,7 @@ class EtsyManager
             "first_name" => $user_response['first_name'],
             "name" => $user_response['last_name'],
             "email" => $user_response['login_name'] . "@tradelist.net",
-            "description" => $user_response['bio'],
+            "description" => html_entity_decode ($user_response['bio']),
             "username" => $user_response['login_name']
         ];
 
