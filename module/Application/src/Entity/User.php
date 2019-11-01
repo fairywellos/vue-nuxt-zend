@@ -750,6 +750,7 @@ class User
             "name" => $this->getPublicName(),
             "photo" => $this->getPhotoUrl(),
             "description" => $this->getDescription(),
+            "username" => $this->getUsername()
         ];
         $location = $this->getLocation();
         if(!empty($location)){

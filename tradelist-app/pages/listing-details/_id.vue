@@ -81,7 +81,7 @@
 									<i class="icon-location"></i>
 									{{listing.locationText}}
 								</span>
-								
+
 								<!--<span class="views">-->
 									<!--<i class="icon-eye"></i>-->
 									<!--Viewed {{listing.views}} times-->
@@ -209,6 +209,7 @@
 									<p v-if="listing.year">Year: {{listing.year}}</p>
 									<p v-if="listing.qty">QTY: {{listing.qty}}</p>
 									<p v-if="listing.notes">Notes: {{listing.notes}}</p>
+									<p v-if="listing.affiliateLink">Affiliate Link: <a :href="listing.affiliateLink" target="_blank" rel="nofollow">{{listing.affiliateLink}}</a></p>
 								</div>
 							</div>
 						</div>
@@ -494,7 +495,7 @@
 	import ownerImage from "~/assets/img/card-item/user_image.png";
 	import axios from "axios";
 	import {mapGetters} from "vuex";
-	
+
 	const response = {
 		allProducts: [
 			{
@@ -859,7 +860,7 @@
 			}
 		]
 	};
-	
+
 	export default {
 		components: {
 			Header,
@@ -907,7 +908,7 @@
 
 <style lang="scss" scoped>
 	@import "~assets/scss/abstracts/_abstracts.scss";
-	
+
 	.sample_tag {
 		position: absolute;
 		left: 15px;
@@ -923,16 +924,16 @@
 		text-transform: uppercase;
 		z-index: 20;
 	}
-	
+
 	.listing_owner {
 		.rating {
 			text-align: center;
-			
+
 			span {
 				a {
 					display: none;
 				}
-				
+
 				& + span {
 					&:before {
 						display: none;
@@ -941,33 +942,33 @@
 			}
 		}
 	}
-	
+
 	.main_slider {
 		max-height: 700px;
 	}
-	
+
 	.trade_items_list {
 		padding: 0 0 19px;
 	}
-	
+
 	.watch_item {
 		@include clearfix;
 		width: 100%;
 		margin: 24px 0 0;
-		
+
 		input[type=checkbox] {
 			position: relative;
 			z-index: -9;
 			opacity: 0;
 			visibility: hidden;
-			
+
 			&:checked {
 				& + i {
 					color: $saffron;
 				}
 			}
 		}
-		
+
 		label {
 			border: 1px solid $gray_tuna;
 			background: rgba($white, .6);
@@ -979,7 +980,7 @@
 			position: relative;
 			cursor: pointer;
 			text-align: right;
-			
+
 			i {
 				position: absolute;
 				top: 50%;
@@ -991,32 +992,32 @@
 			}
 		}
 	}
-	
+
 	.product_gallery {
 		margin-bottom: 21px;
-		
+
 		button[data-controls="prev"],
 		button[data-controls="next"] {
 			opacity: 0.8;
 			border: none;
-			
+
 			&:hover {
 				opacity: 1;
 			}
 		}
-		
+
 		& + .product_details {
 			padding-top: 0;
 		}
 	}
-	
+
 	.product_offer {
 		border: 1px solid $gray_aluminium;
 		border-radius: 4px;
 		background: $white;
 		margin: 24px 0;
 		padding: 0 12px 25px 27px;
-		
+
 		header {
 			position: relative;
 			margin-left: -27px;
@@ -1025,13 +1026,13 @@
 			padding: 37px 31px 29px;
 			margin-bottom: 19px;
 		}
-		
+
 		h3 {
 			font-size: 18px;
 			line-height: 24px;
 			color: $gray_tuna;
 		}
-		
+
 		h4 {
 			@include clearfix;
 			font-size: 10px;
@@ -1040,7 +1041,7 @@
 			color: $gray_aluminium;
 			letter-spacing: 2px;
 			margin-bottom: 12px;
-			
+
 			.trade_val {
 				font-size: 18px;
 				line-height: 24px;
@@ -1048,7 +1049,7 @@
 				font-weight: 300;
 				padding-right: 20px;
 				position: relative;
-				
+
 				&:after {
 					content: "";
 					position: absolute;
@@ -1063,7 +1064,7 @@
 				}
 			}
 		}
-		
+
 		hr {
 			margin: 0 0 15.5px;
 			border: none;
@@ -1071,31 +1072,31 @@
 			width: 100%;
 			background: rgba($gray_aluminium, 0.23);
 		}
-		
+
 		.price {
 			font-size: 38px;
 			line-height: 50px;
 			color: $gray_tuna;
 			font-weight: 700;
-			
+
 			small {
 				font-size: 14px;
 				color: $gray_tuna;
 			}
 		}
-		
+
 		.trader_rating {
 			font-size: 10px;
 			line-height: 20px;
 			color: $gray_aluminium;
 			margin-bottom: 14.5px;
-			
+
 			i {
 				color: $saffron;
 				font-size: 12px;
 				display: none;
 			}
-			
+
 			&[data-rating="1"] {
 				i {
 					&:nth-child(-n + 1) {
@@ -1103,7 +1104,7 @@
 					}
 				}
 			}
-			
+
 			&[data-rating="2"] {
 				i {
 					&:nth-child(-n + 2) {
@@ -1111,7 +1112,7 @@
 					}
 				}
 			}
-			
+
 			&[data-rating="3"] {
 				i {
 					&:nth-child(-n + 3) {
@@ -1119,7 +1120,7 @@
 					}
 				}
 			}
-			
+
 			&[data-rating="4"] {
 				i {
 					&:nth-child(-n + 4) {
@@ -1127,7 +1128,7 @@
 					}
 				}
 			}
-			
+
 			&[data-rating="5"] {
 				i {
 					&:nth-child(-n + 5) {
@@ -1136,7 +1137,7 @@
 				}
 			}
 		}
-		
+
 		.btn_select {
 			width: 100%;
 			max-width: 228px;
@@ -1150,114 +1151,114 @@
 			justify-content: center;
 			margin-bottom: 17.5px;
 			transition: 0.2s $bezier_ease_in_out;
-			
+
 			&:hover {
 				box-shadow: 0 1px 7px 0 rgba(0, 0, 0, 0.3);
 			}
-			
+
 			i {
 				color: $blue_scooter;
 				font-size: 16px;
 			}
 		}
-		
+
 		.cash_offer {
 			margin-bottom: 44px;
-			
+
 			li {
 				margin-bottom: 3px;
 			}
-			
+
 			label {
 				display: flex;
-				
+
 				.checkbox {
 				}
 			}
-			
+
 			p {
 				font-size: 12px;
 				line-height: 28px;
 				color: $gray_aluminium;
 				margin: 0;
-				
+
 				strong {
 					color: #1b001c;
 				}
 			}
-			
+
 			input {
 				margin-top: 4px;
 				max-width: 146px;
 				height: 50px;
-				
+
 				&:disabled {
 					opacity: .4;
 				}
 			}
 		}
-		
+
 		.btn {
 			display: block;
 			width: 100%;
 		}
-		
+
 		.btn__primary {
 			margin: 25px 0 17px;
 		}
-		
+
 		.actions {
 			display: flex;
 			padding-top: 5px;
-			
+
 			.btn__secondary {
 				border: none;
 				color: $gray_tuna;
 				padding: 6px 20px;
 				text-transform: capitalize;
 				font-size: 12px;
-				
+
 				i {
 					color: $gray_tuna;
 					margin-right: 10px;
 					font-size: 16px;
 					vertical-align: middle;
 				}
-				
+
 				&:hover {
 					box-shadow: none;
 				}
 			}
 		}
 	}
-	
+
 	.product_page {
 		.page_section {
 			padding-top: 90px;
 		}
-		
+
 		.listing_list {
 			display: flex;
 			flex-wrap: wrap;
-			
+
 			input {
 				position: absolute;
 				opacity: 0;
 				visibility: hidden;
 				z-index: -9;
-				
+
 				&:checked {
 					& + label {
 						border: 2px solid $shamrock_darker;
 					}
 				}
 			}
-			
+
 			.item_wrapper {
 				& + .btn_select {
 					width: 121px;
 				}
-				
+
 				a {
 					text-decoration: none;
 					border: 1px solid $gray_ghost;
@@ -1273,7 +1274,7 @@
 					display: block;
 					border-radius: 5px;
 					margin-bottom: 6px;
-					
+
 					i {
 						margin-right: 10px;
 						font-size: 16px;
@@ -1281,7 +1282,7 @@
 					}
 				}
 			}
-			
+
 			.item {
 				display: flex;
 				align-items: center;
@@ -1293,12 +1294,12 @@
 				transition: 0.2s $bezier_ease_in_out;
 				margin-bottom: 6px;
 			}
-			
+
 			label.item {
 				cursor: pointer;
 				min-width: 304px;
 			}
-			
+
 			.listing_img {
 				width: 90px;
 				height: 90px;
@@ -1308,18 +1309,18 @@
 				background-size: cover;
 				background-repeat: no-repeat;
 			}
-			
+
 			.listing_info {
 				width: calc(100% - 109px);
 				padding-right: 15px;
-				
+
 				p {
 					font-size: 14px;
 					color: $gray_tuna;
 					line-height: 18px;
 					margin: 0 0 5px;
 				}
-				
+
 				span {
 					font-size: 12px;
 					line-height: 16px;
@@ -1330,65 +1331,65 @@
 			}
 		}
 	}
-	
+
 	.product_details {
 		padding-top: 25px;
-		
+
 		.details_section {
 			background: $white;
 			margin-bottom: 12px;
 			padding: 0 31px;
 		}
-		
+
 		.category {
 			text-transform: uppercase;
 			font-size: 18px;
 			letter-spacing: 0;
 		}
-		
+
 		.product_title_wrapper {
 			margin-bottom: 47px;
-			
+
 			h1 {
 				font-size: 38px;
 				line-height: 50px;
 				color: $black;
 				font-weight: 400;
 			}
-			
+
 			.product_title {
 				display: flex;
 				justify-content: space-between;
 				align-items: center;
 				margin-right: 20px;
 			}
-			
+
 			.owner_info {
 				text-align: center;
-				
+
 				h4 {
 					font-size: 14px;
 					line-height: 18px;
 					color: $gray_tuna;
 					margin-bottom: 6px;
 				}
-				
+
 				.rating {
 					font-size: 12px;
 					line-height: 16px;
-					
+
 					span {
 						color: $gray_aluminium;
-						
+
 						a {
 							color: $blue_picton;
 							text-decoration: none;
 						}
-						
+
 						& + span {
 							padding-left: 12px;
 							position: relative;
-							
+
 							&:before {
 								content: "";
 								position: absolute;
@@ -1402,13 +1403,13 @@
 							}
 						}
 					}
-					
+
 					i {
 						color: $saffron;
 					}
 				}
 			}
-			
+
 			.owner_thumbnail {
 				width: 109px;
 				height: 109px;
@@ -1416,48 +1417,48 @@
 				background-color: $gray_alto;
 				margin: 0 auto 13px;
 			}
-			
+
 			.location_views {
 				margin-bottom: 40px;
-				
+
 				span {
 					font-size: 18px;
 					line-height: 24px;
 					color: $gray_tuna;
 					margin-right: 13px;
 				}
-				
+
 				i {
 					color: $gray_tuna;
 					position: relative;
 					top: 1px;
 					margin-right: 8px;
 				}
-				
+
 				.icon-location {
 					font-size: 20px;
 				}
-				
+
 				.icon-eye {
 					font-size: 15px;
 				}
 			}
 		}
-		
+
 		.delivery_info {
 			display: flex;
 			justify-content: flex-start;
 			flex-wrap: wrap;
 			align-items: center;
 			margin-bottom: 44px;
-			
+
 			li {
 				display: flex;
 				align-items: center;
 				width: 355px;
 				margin-bottom: 15px;
 			}
-			
+
 			.rounded_icon {
 				display: block;
 				width: 110px;
@@ -1467,30 +1468,30 @@
 				margin-right: 14px;
 				position: relative;
 				font-size: 35px;
-				
+
 				i {
 					color: $shamrock;
 					position: absolute;
 					top: 50%;
 					left: 50%;
 					transform: translate(-50%, -50%);
-					
+
 					&:before {
 						color: $shamrock;
 					}
 				}
-				
+
 				.icon-tag {
 					font-size: 45px;
 				}
 			}
-			
+
 			p {
 				font-size: 22px;
 				line-height: 29px;
 				color: $black;
 				max-width: 210px;
-				
+
 				small {
 					display: block;
 					font-size: 16px;
@@ -1498,26 +1499,26 @@
 				}
 			}
 		}
-		
+
 		.title {
 			position: relative;
 			margin-left: -31px;
 			width: calc(100% + 62px);
 			padding: 38px 31px 30px;
 			border-bottom: 1px solid rgba($gray_iron, 0.17);
-			
+
 			h2 {
 				font-size: 18px;
 				line-height: 24px;
 				color: $gray_aluminium;
 			}
 		}
-		
+
 		.product_highlights {
 			ul {
 				padding: 27px 25px 29px;
 				list-style: disc;
-				
+
 				li {
 					font-size: 16px;
 					line-height: 21px;
@@ -1525,7 +1526,7 @@
 				}
 			}
 		}
-		
+
 		.trades_interests {
 			.categories {
 				position: relative;
@@ -1534,7 +1535,7 @@
 				padding: 25px 34px 29px;
 				display: flex;
 				border-bottom: 1px solid rgba($gray_iron, 0.17);
-				
+
 				li {
 					display: flex;
 					flex-wrap: wrap;
@@ -1543,7 +1544,7 @@
 					margin-right: 30px;
 					text-align: center;
 				}
-				
+
 				p {
 					width: 100%;
 					font-size: 14px;
@@ -1552,12 +1553,12 @@
 					margin-top: 8px;
 					margin: 0;
 				}
-				
+
 				img {
 					margin-bottom: 8px;
 				}
 			}
-			
+
 			h4 {
 				padding-top: 15px;
 				font-size: 10px;
@@ -1568,17 +1569,17 @@
 				text-transform: uppercase;
 			}
 		}
-		
+
 		.tab_content {
 			padding: 27px 0 33px;
-			
+
 			.tab_pane {
 				position: absolute;
 				opacity: 0;
 				transition: 0.2s $bezier_ease_in_out;
 				z-index: -9999;
 			}
-			
+
 			.tab_pane {
 				&.active {
 					position: static;
@@ -1587,7 +1588,7 @@
 				}
 			}
 		}
-		
+
 		.specs {
 			.product_nav_tab {
 				display: flex;
@@ -1596,7 +1597,7 @@
 				margin-left: -31px;
 				width: calc(100% + 62px);
 				border-bottom: 1px solid rgba($gray_iron, 0.17);
-				
+
 				li {
 					&.active {
 						a:after {
@@ -1604,7 +1605,7 @@
 						}
 					}
 				}
-				
+
 				a {
 					position: relative;
 					display: block;
@@ -1612,7 +1613,7 @@
 					line-height: 24px;
 					color: $gray_tuna;
 					padding: 40px 11px 28px;
-					
+
 					&:after {
 						content: "";
 						position: absolute;
@@ -1628,7 +1629,7 @@
 					}
 				}
 			}
-			
+
 			p {
 				font-size: 16px;
 				line-height: 21px;
@@ -1637,11 +1638,11 @@
 			}
 		}
 	}
-	
+
 	.similar_listing_slider {
 		white-space: nowrap;
 		transition: all 0s;
-		
+
 		> .tns-item {
 			display: inline-block;
 			vertical-align: top;

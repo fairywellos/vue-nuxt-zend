@@ -43,7 +43,7 @@
 									<div v-if="userProfile.photo" class="user_image"
 									     :style="{ backgroundImage: 'url('+ userProfile.photo + ')' }"></div>
 									<div v-else class="user_image"></div>
-									
+
 									<p>
 										{{ userProfile.name}}
 										<span class="location">
@@ -96,13 +96,24 @@
 					</div>
 					<div class="fieldset__container">
 						<div class="fieldset__col">
+							<div class="fieldset__box" v-if="userProfile.isEtsyUser">
+								<header>
+									<h4>
+										Affiliate Link
+									</h4>
+								</header>
+
+								<div class="box__inner">
+									<a :href="'https://www.etsy.com/people/' + userProfile.username" target="_blank" rel="nofollow">https://www.etsy.com/people/{{userProfile.username}}</a>
+								</div>
+							</div>
 							<div class="fieldset__box">
 								<header>
 									<h4>
 										Profile Description
 									</h4>
 								</header>
-								
+
 								<div class="box__inner">
 									<p>{{userProfile.description}}</p>
 								</div>
@@ -249,8 +260,8 @@
 		mapGetters
 	} from 'vuex'
 	import moment from "moment";
-	
-	
+
+
 	export default {
 		components: {
 			Header,
@@ -304,7 +315,7 @@
 				var hour = now.getHours();
 				var min = now.getMinutes();
 				var mid = 'pm';
-				
+
 				if (min < 10) {
 					min = "0" + min;
 				}
@@ -317,14 +328,14 @@
 				if (TwentyFourHour < 12) {
 					mid = 'am';
 				}
-				
+
 				document.getElementById('currentTime').innerHTML = hour + ':' + min + mid;
-				
+
 				setTimeout(this.currentTime, 1000);
 			},
 			formatDate: function (date, type) {
 				if (type === "listing") {
-					
+
 					return moment(date).format("MM/DD/YYYY");
 				} else {
 					return moment(date).format("MMMM'YY")
@@ -381,7 +392,7 @@
 
 <style lang="scss" scoped>
 	@import "~assets/scss/abstracts/_abstracts.scss";
-	
+
 	.sample_tag {
 		position: absolute;
 		left: 14px;
@@ -397,27 +408,27 @@
 		text-transform: uppercase;
 		z-index: 20;
 	}
-	
+
 	.dashboard_aside {
 		max-height: 150px;
 	}
-	
+
 	.fieldset__container {
 		justify-content: space-between;
 		padding-top: 0;
 	}
-	
+
 	.trade_listings_profile {
 		padding: 24px 34px;
-		
+
 		.status_success {
 			color: $shamrock_darker;
 		}
-		
+
 		.status_danger {
 			color: $valencia;
 		}
-		
+
 		li {
 			display: flex;
 			align-items: center;
@@ -427,11 +438,11 @@
 			position: relative;
 			padding-right: 310px;
 			margin-bottom: 9px;
-			
+
 			.details {
 				max-width: 390px;
 			}
-			
+
 			.product_image {
 				width: 134px;
 				height: 134px;
@@ -441,21 +452,21 @@
 				background-position: center;
 			}
 		}
-		
+
 		.price {
 			display: block;
 			width: 100%;
 			font-weight: 700;
 			margin-bottom: 7px;
 		}
-		
+
 		.title {
 			font-size: 14px;
 			margin-bottom: 0;
 			color: $black;
 			letter-spacing: 0;
 		}
-		
+
 		p {
 			font-size: 12px;
 			line-height: normal;
@@ -463,23 +474,23 @@
 			color: $gray_aluminium;
 			letter-spacing: 0.9px;
 		}
-		
+
 		.listing_actions {
 			position: absolute;
 			top: 17px;
 			right: 18px;
 			display: flex;
 			align-items: center;
-			
+
 			.btn + .btn {
 				margin-left: 25px;
 			}
 		}
 	}
-	
+
 	.fieldset__box {
 		position: relative;
-		
+
 		.btn_action {
 			position: absolute;
 			top: 17px;
@@ -487,37 +498,37 @@
 			padding: 12px 25px 10px;
 		}
 	}
-	
+
 	.box__inner {
 		@include clearfix;
 		padding: 30px 35px;
-		
+
 		.service {
 			padding-right: 20px;
 		}
-		
+
 		.products,
 		.service {
 			@include clearfix;
 			float: left;
 			width: 50%;
 			padding-top: 10px;
-			
+
 			img {
 				float: left;
 				margin-right: 10px;
 			}
-			
+
 			p,
 			ul {
 				float: left;
 				width: calc(100% - 55px);
 			}
-			
+
 			ul {
 				list-style: disc;
 				padding-left: 25px;
-				
+
 				li {
 					font-size: 12px;
 					line-height: normal;
@@ -527,30 +538,30 @@
 				}
 			}
 		}
-		
+
 		h4 {
 			margin-bottom: 18px;
 			clear: both;
 		}
-		
+
 		p {
 			font-size: 12px;
 			color: $gray_aluminium;
 			line-height: normal;
 		}
 	}
-	
+
 	.fieldset__col {
 		width: 80%;
 		width: 100%;
 		max-width: 943px;
 		margin: 0 auto;
 	}
-	
+
 	.fieldset__box {
 		width: 100%;
 		margin-bottom: 18px;
-		
+
 		header {
 			font-size: 18px;
 			line-height: 24px;
@@ -558,59 +569,59 @@
 			padding: 38px 30px 31px;
 			border-bottom: 1px solid rgba($gray_aluminium, 0.25);
 		}
-		
+
 		h4 {
 			font-size: 18px;
 			line-height: 24px;
 			color: $gray_aluminium;
 		}
 	}
-	
+
 	.fieldset__box_user {
 		background: $white;
 		margin-bottom: 14px;
 		margin-top: 25px;
-		
+
 		p {
 			small {
 				display: block;
 			}
 		}
-		
+
 		.user {
 			display: flex;
 			align-items: center;
 			padding: 24px 160px 30px 25px;
 			border-bottom: 1px solid rgba($gray_aluminium, 0.25);
 			position: relative;
-			
+
 			p {
 				font-size: 18px;
 				line-height: 20px;
 				color: $gray_tuna;
-				
+
 				small {
 					font-size: 12px;
 				}
-				
+
 				.location {
 					display: block;
 					font-size: 16px;
 					color: $gray_aluminium;
 					margin-top: 7px;
-					
+
 					i {
 						font-size: 16px;
 						color: $gray_tuna;
 					}
-					
+
 					small {
 						opacity: 0.48;
 						display: inline-block;
 					}
 				}
 			}
-			
+
 			.btn__primary {
 				position: absolute;
 				top: 13px;
@@ -619,49 +630,49 @@
 			}
 		}
 	}
-	
+
 	.extra {
 		display: flex;
 		padding: 30px 55px 25px;
 		background: $gray_albaster;
-		
+
 		li {
 			display: flex;
 			align-items: center;
 			margin-right: 20px;
 		}
-		
+
 		i {
 			font-size: 25px;
 			margin-right: 15px;
 		}
-		
+
 		.icon-location {
 			color: $blue_scooter;
 			font-size: 44px;
 		}
-		
+
 		.icon-eye {
 			font-size: 40px;
 			color: $shamrock_darker;
 		}
-		
+
 		.icon-save {
 			color: $saffron;
 			font-size: 42px;
 		}
-		
+
 		.icon-calendar {
 			font-size: 35px;
 			color: $valencia;
 		}
-		
+
 		p {
 			font-size: 26px;
 			line-height: normal;
 			color: $gray_tuna;
 			min-width: 100px;
-			
+
 			small {
 				font-size: 10px;
 				display: block;
@@ -671,7 +682,7 @@
 			}
 		}
 	}
-	
+
 	.user_image {
 		width: 102px;
 		height: 102px;
@@ -681,7 +692,7 @@
 		background-position: center;
 		margin-right: 24px;
 	}
-	
+
 	.trade_items_list {
 		padding: 32px 35px;
 	}

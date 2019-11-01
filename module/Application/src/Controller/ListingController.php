@@ -2,6 +2,7 @@
 
 namespace Application\Controller;
 
+use Application\Entity\EtsyTrackingListings;
 use Application\Entity\Listing;
 use Application\Entity\Location;
 use Application\Entity\Notification;
@@ -75,6 +76,12 @@ class ListingController extends ApiController
         }
 
         $response_data = $listing->toArray();
+
+        $etsy_listing = $this->entityManager->getRepository(EtsyTrackingListings::class)->findOneBy(["listing" => $listing]);
+
+        if ($etsy_listing) {
+            $response_data['affiliateLink'] = $etsy_listing->getUrl();
+        }
 
         $this->httpStatusCode = 200;
         $this->apiResponse['data'] = $response_data;

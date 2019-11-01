@@ -3,6 +3,7 @@
 namespace Application\Controller;
 
 
+use Application\Entity\EtsyTrackingUsers;
 use Application\Entity\Listing;
 use Application\Entity\Location;
 use Application\Entity\Trade;
@@ -252,6 +253,13 @@ class UserController extends ApiController
                 "fields" => "id,title,price,status,created,expires,main_photo"
             ]
         );
+
+        $etsyUserRepo = $this->entityManager->getRepository(EtsyTrackingUsers::class);
+        $userResponse['isEtsyUser'] = false;
+
+        if($etsyUserRepo->findOneBy(["user" => $user])) {
+            $userResponse['isEtsyUser'] = true;
+        }
 
         $this->httpStatusCode = 200;
         $this->apiResponse["user"] = $userResponse;
