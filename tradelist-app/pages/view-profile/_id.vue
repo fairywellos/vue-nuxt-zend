@@ -104,7 +104,7 @@
 								</header>
 
 								<div class="box__inner">
-									<a :href="'https://www.etsy.com/people/' + userProfile.username" target="_blank" rel="nofollow">https://www.etsy.com/people/{{userProfile.username}}</a>
+									<a :href="'https://www.etsy.com/people/' + userProfile.username + '?utm_source=tradelist&utm_medium=api&utm_campaign=api'" target="_blank" rel="nofollow">https://www.etsy.com/people/{{userProfile.username}}?utm_source=tradelist&utm_medium=api&utm_campaign=api</a>
 								</div>
 							</div>
 							<div class="fieldset__box">
