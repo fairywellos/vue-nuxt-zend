@@ -99,7 +99,7 @@
 							<div class="fieldset__box" v-if="userProfile.isEtsyUser">
 								<header>
 									<h4>
-										Affiliate Link
+										Store Link
 									</h4>
 								</header>
 
