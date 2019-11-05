@@ -119,7 +119,7 @@
 							<div class="title">
 								<h2>Highlights</h2>
 							</div>
-							<p v-if="listing.affiliateLink">Visit Store: <a :href="listing.affiliateLink" target="_blank" rel="nofollow">{{listing.affiliateLink}}</a></p>
+							<p v-if="listing.affiliateLink"><a class="btn" :href="listing.affiliateLink" target="_blank" rel="nofollow">Visit Store</a></p>
 							<ul>
 								<li>Category: {{listing.mainCategory.name}}</li>
 								<li v-for="tag in listing.tags">Tag: {{tag.name}}</li>
