@@ -25,7 +25,9 @@ class TrackingRequestsRepository extends EntityRepository
 
         $result = $query->getQuery()->execute();
 
-        if(($result[0]['date'])->format("Y-m-d") == date("Y-m-d") && $result[0]['request'] > 7000) {
+        $request_limit = 5000;
+
+        if(($result[0]['date'])->format("Y-m-d") == date("Y-m-d") && $result[0]['request'] > ($request_limit - 126)) {
             return true;
         } else {
             return false;
