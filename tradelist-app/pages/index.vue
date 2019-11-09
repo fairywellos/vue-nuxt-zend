@@ -295,7 +295,7 @@
 			<div class="page_section">
 				<div class="container">
 					<h1>
-						Featured trades
+						Featured Listings
 					</h1>
 					<div class="cards_grid">
 						<div class="card_item" v-for="product in allProducts.slice(0, 4)" :key="product.id">
