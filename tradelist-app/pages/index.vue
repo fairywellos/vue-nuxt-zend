@@ -75,7 +75,7 @@
 			<!--</div>-->
 			<div class="page_section" id="firstScroll">
 				<div class="container">
-					<h2>Trending trades
+					<h2>New Listings
 						<!--<nuxt-link class="float_right" to="/see-all" title="See all">See all</nuxt-link>-->
 					</h2>
 					<div class="main_slider">
@@ -163,7 +163,7 @@
 			<div class="page_section">
 				<div class="container">
 					<h1>
-						Explore trades by category
+						Explore Listings by Category
 					</h1>
 					<ul class="categories_list" role="list">
 						<li>
@@ -262,7 +262,7 @@
 			<div class="page_section">
 				<div class="container">
 					<h1>
-						Trending trades happening now
+						Trending Listings
 					</h1>
 					<div class="cards_grid">
 						<div class="card_item card_item__reduced " v-for="product in allProducts.slice(0, 4)" :key="product.id">
