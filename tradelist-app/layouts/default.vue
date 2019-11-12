@@ -1,5 +1,6 @@
 <template>
 <div :class="{'is_mobile' : $device.isMobileOrTablet}">
+	<script data-ad-client="ca-pub-1709497292936218" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 					<nuxt />
 					<Footer />
 				</div>

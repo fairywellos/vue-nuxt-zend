@@ -645,6 +645,22 @@
 		},
 		computed: {
 			...mapGetters("auth", ["isAuthenticated", "loggedInUser"])
+		},
+		mounted(){
+			var vm = this;
+			window.addEventListener('scroll', function(event)
+			{
+				if(window.isNewPageLoading == true) return;
+				var element = event.target.scrollingElement;
+				if (element.scrollHeight - element.scrollTop < element.clientHeight + 200)
+				{
+					window.isNewPageLoading = true;
+					let query = vm.$route.query;
+					let curPage = query.page || 1
+					query.page = curPage + 1;
+					vm.$store.dispatch('searchResults/updateSearchResultNewPageAsync', query);
+				}
+			});
 		}
 	};
 </script>

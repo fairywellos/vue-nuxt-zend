@@ -262,7 +262,8 @@ class ListingRepository extends EntityRepository
         $totalItems = $queryCounter
             ->getQuery()
             ->execute();
-        $this->setTotalItems($totalItems[0]['totalItems'] ?? 0);
+        // print_r($totalItems);
+        $this->setTotalItems(count($totalItems) ?? 0);
 
         /**
          * set max result and first result

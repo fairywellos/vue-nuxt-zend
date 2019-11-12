@@ -53,6 +53,26 @@ const mutations = {
 };
 
 const actions = {
+    updateSearchResultNewPageAsync(store, query){
+        let customQuery = query;
+        query = {...query, fields: 'id,title,description,main_photo,price,location,user_name,user_id,user_photo,sample_account,saved,trade_type,category_id'};
+        return this.$axios.get('listing/feed', {
+            params: query
+        })
+        .then((response) => {
+            console.log(response);
+            // store.state.searchResult.query = customQuery;
+            store.state.searchResult.totalResults += response.data.result.total_results;
+            response.data.result.data.map(item=>{
+                store.state.searchResult.listings.push(item);
+            });
+            window.isNewPageLoading = false
+            store.commit('addSearchResult', store.state.searchResult)
+        })
+        .catch(serverError => {
+            window.isNewPageLoading = false
+        });
+    },
     updateSearchResultAsync(store, query) {
         if(store.getters['getByQuery'](query) !== undefined){
             return false;
