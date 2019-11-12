@@ -10,7 +10,7 @@
 				<div class="results_hero__inner">
 					<p>
 						<strong>"{{ $route.query.q }}"</strong>
-						{{ totalResults }} results
+						results
 						<label class="save_search" v-if="isAuthenticated">
 							<input type="checkbox" name="save-search" v-model="search_saved">
 							<span class="icon-save"></span> <i>Save this search</i><i>Saved</i>

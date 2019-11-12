@@ -268,9 +268,9 @@
 						<div class="card_item card_item__reduced " v-for="product in allProducts.slice(0, 4)" :key="product.id">
 							<nuxt-link :to="'/listing-details/' + product.id"
 							           class="card_item_thumbnail"
-							           :style="{ backgroundImage: 'url('+ product.productImage + ')' }"
-							           :title="product.name">
-							
+							           :style="{ backgroundImage: 'url('+ product.mainPhotoUrl + ')' }"
+							           :title="product.title">
+
 							</nuxt-link>
 							<nuxt-link :to="'/listing-details/' + product.id" class="card_item__info"
 							           :title="product.name">
@@ -278,7 +278,7 @@
 									{{ product.category }}
 								</div>
 								<h3>
-									{{ product.name }}
+									{{ product.title }}
 								</h3>
 								<div class="card_item_price">
 									<div class="value">${{ product.price }}</div>
@@ -307,17 +307,17 @@
 							</div>
 							<nuxt-link :to="'/listing-details/' + product.id"
 							           class="card_item_thumbnail"
-							           :style="{ backgroundImage: 'url('+ product.productImage + ')' }"
-							           :title="product.name">
-							
+							           :style="{ backgroundImage: 'url('+ product.mainPhotoUrl + ')' }"
+							           :title="product.title">
+
 							</nuxt-link>
 							<nuxt-link :to="'/listing-details/' + product.id" class="card_item__info"
-							           :title="product.name">
+							           :title="product.title">
 								<div v-bind:class="[product.defaultClass, product.category_slug]">
 									{{ product.category }}
 								</div>
 								<h3>
-									{{ product.name }}
+									{{ product.title }}
 								</h3>
 								<div class="card_item_price">
 									<div class="value">${{ product.price }}</div>
@@ -327,7 +327,7 @@
 									<div class="name">
 										<div
 											class="user_image"
-											:style="{ backgroundImage: 'url('+ product.ownerThumbnail + ')' }"
+											:style="{ backgroundImage: 'url('+ product.user_photo + ')' }"
 										></div>
 										{{ product.owner }}
 									</div>
@@ -364,7 +364,7 @@
 	import image3 from "~/assets/img/card-item/Image3.png";
 	import image4 from "~/assets/img/card-item/Image4.png";
 	import ownerImage from "~/assets/img/card-item/user_image.png";
-	
+
 	const response = {
 		allProducts: [
 			{
@@ -609,7 +609,7 @@
 			}
 		]
 	};
-	
+
 	export default {
 		components: {
 			HeaderHomepage,
