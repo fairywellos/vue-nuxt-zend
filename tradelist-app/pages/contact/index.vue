@@ -50,9 +50,8 @@
 						<p>
 							<strong>Corporate Headquarters</strong>
 							Tradelist
-							<br>360 West Ewing Street Seattle, WA
+							<br>360 Ewing Street Seattle, WA
 							<br>98119
-							<br>(877) 755-3153
 						</p>
 						<p>
 							<strong>General Inquiries</strong>
