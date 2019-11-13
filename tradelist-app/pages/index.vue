@@ -1,8 +1,9 @@
 <template>
 	<div class="is_homepage">
 		<HeaderHomepage v-if="$device.isDesktop"/>
-		<HeroSearch v-if="!$device.isMobileOrTablet"/>
+		<!-- <HeroSearch v-if="!$device.isMobileOrTablet"/> -->
 		<div v-if="$device.isDesktop">
+			<ListingItems style="margin-top: 15px;" :is_home="true"></ListingItems>
 			<!--<div class="page_section" v-if="!isAuthenticated">-->
 				<!--<div class="container">-->
 					<!--<h2>Recently added-->
@@ -73,11 +74,11 @@
 					<!--</div>-->
 				<!--</div>-->
 			<!--</div>-->
-			<div class="page_section" id="firstScroll">
+			<!-- <div class="page_section" id="firstScroll">
 				<div class="container">
-					<h2>New Listings
+					<h2>New Listings -->
 						<!--<nuxt-link class="float_right" to="/see-all" title="See all">See all</nuxt-link>-->
-					</h2>
+					<!-- </h2>
 					<div class="main_slider">
 						<div class="card_item_slider">
 							<div v-for="product in allProducts" :key="product.id">
@@ -86,7 +87,7 @@
 						</div>
 					</div>
 				</div>
-			</div>
+			</div> -->
 			<!--<div class="page_section" v-if="isAuthenticated">-->
 				<!--<div class="container">-->
 					<!--<h2>Gear up for summer-->
@@ -364,6 +365,7 @@
 	import image3 from "~/assets/img/card-item/Image3.png";
 	import image4 from "~/assets/img/card-item/Image4.png";
 	import ownerImage from "~/assets/img/card-item/user_image.png";
+	import ListingItems from '~/pages/search/index.vue';
 
 	const response = {
 		allProducts: [
@@ -616,7 +618,8 @@
 			HeaderMobile,
 			HeroSearch,
 			SponsoredListing,
-			CardItem
+			CardItem,
+			ListingItems
 		},
 		head() {
 			return {
@@ -645,22 +648,6 @@
 		},
 		computed: {
 			...mapGetters("auth", ["isAuthenticated", "loggedInUser"])
-		},
-		mounted(){
-			var vm = this;
-			window.addEventListener('scroll', function(event)
-			{
-				if(window.isNewPageLoading == true) return;
-				var element = event.target.scrollingElement;
-				if (element.scrollHeight - element.scrollTop < element.clientHeight + 200)
-				{
-					window.isNewPageLoading = true;
-					let query = vm.$route.query;
-					let curPage = query.page || 1
-					query.page = curPage + 1;
-					vm.$store.dispatch('searchResults/updateSearchResultNewPageAsync', query);
-				}
-			});
 		}
 	};
 </script>

@@ -120,7 +120,7 @@
 						<nuxt-link to="/" class="main_header__logo main_logo" title="Homepage">
 							<img src="~/assets/img/logo-svg.svg" alt="main logo"><i>Tradelist</i>
 						</nuxt-link>
-						<SearchBar/>
+						<SearchBar :is_home="is_home"/>
 					</div>
 					<div class="main_header__right" v-if="isAuthenticated">
 						<nuxt-link to="/find-trade-partners" class="saved_products" title="Find trade partners">
@@ -380,6 +380,7 @@
 	} from "vuex";
 
 export default {
+	props: ["is_home"],
 	components: {
 		Modal,
 		SearchBar,

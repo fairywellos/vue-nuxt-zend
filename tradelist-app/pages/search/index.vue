@@ -1,11 +1,14 @@
 <template>
-	<div class="search_page">
-		<Header v-if="$device.isDesktop"/>
+	<div class="search_page">		
+		<Header :is_home="is_home && $device.isDesktop" v-if="$device.isDesktop"/>
 		<HeaderMobile v-if="$device.isMobileOrTablet"/>
+		<template v-if="!is_home">
 		<HeaderTags
 			path="search"
 		/>
+		</template>
 		<div class="container">
+			<template v-if="!is_home">
 			<div class="results_hero">
 				<div class="results_hero__inner">
 					<p>
@@ -18,6 +21,8 @@
 					</p>
 				</div>
 			</div>
+			</template>
+			<template v-if="listings">
 			<transition-group name="slide-fade" tag="div" class="cards_grid" v-if="listings.length > 0">
 				<CardItem
 					v-for="(listing, i) in listings"
@@ -26,9 +31,12 @@
 					:listing="listing"
 				/>
 			</transition-group>
-			<transition name="fade" v-else>
+			</template>
+			<template v-else-if="!is_home">
+			<transition name="fade">
 				<h3>No matching results for "{{ $route.query.q }}"</h3>
 			</transition>
+			</template>
 		</div>
 	</div>
 </template>
@@ -41,6 +49,7 @@
 	import { mapGetters } from "vuex";
 
 	export default {
+		props: ['is_home'],
 		components: {
 			Header,
 			HeaderMobile,
@@ -48,16 +57,19 @@
 			CardItem
 		},
 		async fetch({params, store, route}) {
+			console.log("Route Query", route.query)
 			if (route.query) {
 				await store.dispatch('searchResults/updateSearchResultAsync', route.query);
+			} else {
+				await store.dispatch('searchResults/updateSearchResultAsync', {q: "", location: ""});
 			}
-
 		},
 		watchQuery: true, //Refresh la pagina atunci cand modificam query stringul din url.
 		data() {
+			if (this.is_home == true) return {}
 			return {
-				...this.$store.getters['searchResults/getByQuery'](this.$route.query),
-				...{search_saved: this.$store.getters['searchQueriesSaved/getByQuery'](this.$route.query) !== undefined}
+				...this.$store.getters['searchResults/getByQuery'](this.localQuery),
+				...{search_saved: this.$store.getters['searchQueriesSaved/getByQuery'](this.localQuery) !== undefined}
 			};
 		},
 		async asyncData({store}) {
@@ -66,11 +78,42 @@
 		},
 		watch: {
 			search_saved: function (saved) {
-				this.$store.dispatch('searchQueriesSaved/setSaved', {query: this.$route.query, status: saved});
+				this.$store.dispatch('searchQueriesSaved/setSaved', {query: this.localQuery, status: saved});
 			},
 		},
 		computed: {
-			...mapGetters("auth", ["isAuthenticated", "loggedInUser"])
+			...mapGetters("auth", ["isAuthenticated", "loggedInUser"]),
+			...mapGetters({
+                listings : 'searchResults/listings',
+            }),
+			localQuery(){
+				if(this.is_home == true){
+					return { q: "", location: "" }
+				} else {
+					return this.$route.query
+				}
+			}
+		},
+		mounted(){
+			if(this.is_home == true){
+				this.$store.dispatch('searchResults/updateSearchResultAsync', {q: "", location: ""});
+			}
+			var vm = this;
+			console.log("Inspecting Search Component", this);
+			window.addEventListener('scroll', function(event)
+			{
+				if(window.isNewPageLoading == true) return;
+				var element = event.target.scrollingElement;
+				if (element.scrollHeight - element.scrollTop < element.clientHeight + 200)
+				{
+					console.log("next page");
+					window.isNewPageLoading = true;
+					let query = vm.$route.query;
+					let curPage = query.page || 1
+					query.page = curPage + 1;
+					vm.$store.dispatch('searchResults/updateSearchResultNewPageAsync', query);
+				}
+			});
 		}
 	};
 </script>

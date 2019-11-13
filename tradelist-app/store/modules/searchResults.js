@@ -35,6 +35,9 @@ const getters = {
             });
         };
     },
+    listings(state){
+        return state.searchResult.listings;
+    }
 };
 
 const mutations = {
