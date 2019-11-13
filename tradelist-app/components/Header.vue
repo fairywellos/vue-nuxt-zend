@@ -117,10 +117,23 @@
 			<div class="container">
 				<div class="main_header__main_inner">
 					<div class="main_header__left">
+						<div style="position: relative">
 						<nuxt-link to="/" class="main_header__logo main_logo" title="Homepage">
 							<img src="~/assets/img/logo-svg.svg" alt="main logo"><i>Tradelist</i>
 						</nuxt-link>
-						<SearchBar :is_home="is_home"/>
+						<div style="font-size: 12px;line-height: 20px;color: rgb(170, 174, 179);margin-bottom: 10px;position: absolute;left: 50px;top: 20px;">
+							<p>Buy, Sell, Trade</p>
+						</div>
+						</div>
+						<template v-if="!is_home">
+							<SearchBar/>
+						</template>
+					</div>
+					<div class="main_header__center" v-if="is_home">
+						<div style="display:flex; flex-direction: column; height: 50px;">
+							<SearchBar/>
+							<n-link style="text-align: center; padding-top: 5px;" to="/browse-local" title="Browse Local">Browse Local</n-link>
+						</div>
 					</div>
 					<div class="main_header__right" v-if="isAuthenticated">
 						<nuxt-link to="/find-trade-partners" class="saved_products" title="Find trade partners">

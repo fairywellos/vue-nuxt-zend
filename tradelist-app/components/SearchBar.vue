@@ -75,7 +75,6 @@
 				</div>
 			</div>
 		</div>
-		<template v-if="!is_home">
 			<nuxt-link
 					@click="validateSearch($event)"
 					:to="{path: '/search', query: {...this.$route.query, q: term,location:location}}"
@@ -83,19 +82,6 @@
 					title="Search"
 				>Search
 			</nuxt-link>
-		</template>
-		<template v-else>
-			<div style="display:flex; flex-direction: column; height: 50px;">
-				<nuxt-link style="padding-top: 10px; margin-bottom: 5px;"
-					@click="validateSearch($event)"
-					:to="{path: '/search', query: {...this.$route.query, q: term,location:location}}"
-					class="btn btn__primary btn__search"
-					title="Search"
-				>Search
-				</nuxt-link>
-				<n-link style="font-size: 12px; text-align: center;" to="/browse-local" title="Browse Local">Browse Local</n-link>
-			</div>
-		</template>
 	</div>
 </template>
 
