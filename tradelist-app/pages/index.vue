@@ -161,7 +161,8 @@
 		</div>
 		<HeaderMobile v-if="$device.isMobileOrTablet"/>
 		<div v-if="$device.isMobileOrTablet">
-			<div class="page_section">
+			<ListingItems style="margin-top: 15px;" :is_home="true"></ListingItems>
+			<!-- <div class="page_section">
 				<div class="container">
 					<h1>
 						Explore Listings by Category
@@ -259,8 +260,8 @@
 						</li>
 					</ul>
 				</div>
-			</div>
-			<div class="page_section">
+			</div> -->
+			<!-- <div class="page_section">
 				<div class="container">
 					<h1>
 						Trending Listings
@@ -288,9 +289,9 @@
 							</nuxt-link>
 						</div>
 					</div>
-<!--					<nuxt-link class="btn btn__secondary see_all" to="/see-all" title="See all">-->
-<!--						See all <img src="~assets/img/long-arrow-right.png" alt="arrow">-->
-<!--					</nuxt-link>-->
+					<nuxt-link class="btn btn__secondary see_all" to="/see-all" title="See all">
+						See all <img src="~assets/img/long-arrow-right.png" alt="arrow">
+					</nuxt-link>
 				</div>
 			</div>
 			<div class="page_section">
@@ -348,7 +349,7 @@
 						</div>
 					</div>
 				</div>
-			</div>
+			</div> -->
 		</div>
 	</div>
 </template>
