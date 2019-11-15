@@ -145,8 +145,7 @@
 				}
 			},
 			lastListings(){
-				console.log(this.listings.slice(this.listings.length - 13, 12).length)
-				return this.listings.slice(this.listings.length - 13, 12)
+				return this.listings.slice(this.listings.length - 13, this.listings.length - 1)
 			}
 		},
 		mounted(){
