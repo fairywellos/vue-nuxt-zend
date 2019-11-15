@@ -25,21 +25,10 @@
 				<ins class="adsbygoogle"
 				style="display:block"
 				data-ad-format="fluid"
+				data-ad-height="400"
 				data-ad-layout-key="-68+dk-2l-6f+ws"
 				data-ad-client="ca-pub-1709497292936218"
 				data-ad-slot="5223069572"></ins>
-				<script>
-				(adsbygoogle = window.adsbygoogle || []).push({});
-				</script>
-				
-				<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-				<ins class="adsbygoogle"
-				style="display:block"
-				data-ad-client="ca-pub-1709497292936218"
-				data-ad-slot="3534567470"
-				data-ad-format="auto"
-				data-full-width-responsive="true"></ins>
-
 				<script>
 				(adsbygoogle = window.adsbygoogle || []).push({});
 				</script>
@@ -59,7 +48,45 @@
 			</div>
 			</template>
 			<template v-if="listings">
-			<transition-group name="slide-fade" tag="div" class="cards_grid" v-if="listings.length > 0">
+			<transition-group name="slide-fade" tag="div" class="cards_grid" v-if="listings.length > 12">
+				<CardItem
+					v-for="(listing, i) in listings.slice(0, listings.lenngth - 12)"
+					:key="`${i}-${listing.id}`"
+					:id="listing.id"
+					:listing="listing"
+				/>
+				<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+				<ins class="adsbygoogle"
+				style="display:block"
+				data-ad-client="ca-pub-1709497292936218"
+				data-ad-slot="3534567470"
+				data-ad-format="auto"
+				data-full-width-responsive="true"></ins>
+
+				<script>
+				(adsbygoogle = window.adsbygoogle || []).push({});
+				</script>
+
+				<CardItem
+					v-for="(listing, i) in listings.slice(listings.length - 13, 12)"
+					:key="`${i}-${listing.id}`"
+					:id="listing.id"
+					:listing="listing"
+				/>
+			</transition-group>
+
+			<transition-group name="slide-fade" tag="div" class="cards_grid" v-if="listings.length < 12">
+				<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+				<ins class="adsbygoogle"
+				style="display:block"
+				data-ad-client="ca-pub-1709497292936218"
+				data-ad-slot="3534567470"
+				data-ad-format="auto"
+				data-full-width-responsive="true"></ins>
+
+				<script>
+				(adsbygoogle = window.adsbygoogle || []).push({});
+				</script>
 				<CardItem
 					v-for="(listing, i) in listings"
 					:key="`${i}-${listing.id}`"
