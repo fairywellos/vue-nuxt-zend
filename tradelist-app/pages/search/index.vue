@@ -28,7 +28,11 @@
 				data-ad-layout-key="-68+dk-2l-6f+ws"
 				data-ad-client="ca-pub-1709497292936218"
 				data-ad-slot="5223069572"></ins>
-
+				<script>
+				(adsbygoogle = window.adsbygoogle || []).push({});
+				</script>
+				
+				<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 				<ins class="adsbygoogle"
 				style="display:block"
 				data-ad-client="ca-pub-1709497292936218"
