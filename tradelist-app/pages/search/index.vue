@@ -48,33 +48,33 @@
 			</div>
 			</template>
 			<template v-if="listings">
-			<transition-group name="slide-fade" tag="div" class="cards_grid" v-if="listings.length > 12">
-				<CardItem
-					v-for="(listing, i) in listings.slice(0, listings.lenngth - 12)"
-					:key="`${i}-${listing.id}`"
-					:id="listing.id"
-					:listing="listing"
-				/>
-			</transition-group>
-			<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-				<ins class="adsbygoogle"
-				style="display:block"
-				data-ad-client="ca-pub-1709497292936218"
-				data-ad-slot="3534567470"
-				data-ad-format="auto"
-				data-full-width-responsive="true"></ins>
+				<transition-group name="slide-fade" tag="div" class="cards_grid" v-if="firstListings.length > 0">
+					<CardItem
+						v-for="(listing, i) in firstListings"
+						:key="`${i}-${listing.id}`"
+						:id="listing.id"
+						:listing="listing"
+					/>
+				</transition-group>
+				<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+					<ins class="adsbygoogle"
+					style="display:block"
+					data-ad-client="ca-pub-1709497292936218"
+					data-ad-slot="3534567470"
+					data-ad-format="auto"
+					data-full-width-responsive="true"></ins>
 
-				<script>
-				(adsbygoogle = window.adsbygoogle || []).push({});
-				</script>
-			<transition-group name="slide-fade" tag="div" class="cards_grid" v-if="listings.length <= 12">
-				<CardItem
-					v-for="(listing, i) in listings.slice(listings.length - 13, 12)"
-					:key="`${i}-${listing.id}`"
-					:id="listing.id"
-					:listing="listing"
-				/>
-			</transition-group>
+					<script>
+					(adsbygoogle = window.adsbygoogle || []).push({});
+					</script>
+				<transition-group name="slide-fade" tag="div" class="cards_grid" v-if="lastListings.length > 0">
+					<CardItem
+						v-for="(listing, i) in lastListings"
+						:key="`${i}-${listing.id}`"
+						:id="listing.id"
+						:listing="listing"
+					/>
+				</transition-group>
 			</template>
 			<template v-else-if="!is_home">
 			<transition name="fade">
@@ -136,6 +136,16 @@
 				} else {
 					return this.$route.query
 				}
+			},
+			firstListings(){
+				if(this.listings.length > 12 ) {
+					return this.listings.slice(0, this.listings.lenngth - 12)
+				} else {
+					return []
+				}
+			},
+			lastListings(){
+				return this.listings.slice(this.listings.length - 12, 12)
 			}
 		},
 		mounted(){
