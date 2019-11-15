@@ -8,6 +8,18 @@
 		/>
 		</template>
 		<div class="container">
+			<template v-if="$device.isMobileOrTablet">
+				<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+				<ins class="adsbygoogle"
+				style="display:block"
+				data-ad-format="fluid"
+				data-ad-layout-key="-68+dk-2l-6f+ws"
+				data-ad-client="ca-pub-1709497292936218"
+				data-ad-slot="8375491307"></ins>
+				<script>
+				(adsbygoogle = window.adsbygoogle || []).push({});
+				</script>
+			</template>
 			<template v-if="!is_home">
 			<div class="results_hero">
 				<div class="results_hero__inner">
@@ -31,6 +43,26 @@
 					:listing="listing"
 				/>
 			</transition-group>
+			</template>
+			<template v-if="$device.isDesktop">
+				<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+				<ins class="adsbygoogle"
+				style="display:block"
+				data-ad-format="fluid"
+				data-ad-layout-key="-68+dk-2l-6f+ws"
+				data-ad-client="ca-pub-1709497292936218"
+				data-ad-slot="5223069572"></ins>
+
+				<ins class="adsbygoogle"
+				style="display:block"
+				data-ad-client="ca-pub-1709497292936218"
+				data-ad-slot="3534567470"
+				data-ad-format="auto"
+				data-full-width-responsive="true"></ins>
+
+				<script>
+				(adsbygoogle = window.adsbygoogle || []).push({});
+				</script>
 			</template>
 			<template v-else-if="!is_home">
 			<transition name="fade">
