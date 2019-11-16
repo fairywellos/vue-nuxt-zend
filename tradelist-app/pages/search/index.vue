@@ -572,12 +572,9 @@
 		},
 		computed: {
 			...mapGetters("auth", ["isAuthenticated", "loggedInUser"]),
-			// ...mapGetters({
-            //     listings : 'searchResults/listings',
-			// }),
-			listings(){
-				return response.allProducts;
-			},
+			...mapGetters({
+                listings : 'searchResults/listings',
+			}),
 			localQuery(){
 				if(this.is_home == true){
 					return { q: "", location: "" }
