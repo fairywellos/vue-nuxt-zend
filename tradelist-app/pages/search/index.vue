@@ -588,7 +588,6 @@
 			middleListings(){
 				if(this.listings.length > 12 ) {
 					return this.listings.slice(8, this.listings.length - 12)
-					console.log(this.listings.slice(8, this.listings.length - 12))
 				} else {
 					return []
 				}
