@@ -4,7 +4,6 @@
 		class="product_page"
 	>
 		<div class="container">
-
 			<Header v-if="$device.isDesktop"/>
 			<HeaderMobile v-if="$device.isMobileOrTablet"/>
 			<no-ssr>
@@ -454,18 +453,20 @@
 					<!--</div>-->
 				<!--</div>-->
 			<!--</div>-->
-			<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-			<!-- Listing Detail -->
-			<ins class="adsbygoogle"
-				style="display:block"
-				data-ad-client="ca-pub-1709497292936218"
-				data-ad-slot="4464166452"
-				data-ad-format="auto"
-				data-full-width-responsive="true">
-			</ins>
-			<script>
-				(adsbygoogle = window.adsbygoogle || []).push({});
-			</script>
+			<template>
+				<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+				<!-- Listing Detail -->
+				<ins class="adsbygoogle"
+					style="display:block"
+					data-ad-client="ca-pub-1709497292936218"
+					data-ad-slot="4464166452"
+					data-ad-format="auto"
+					data-full-width-responsive="true">
+				</ins>
+				<script>
+					(adsbygoogle = window.adsbygoogle || []).push({});
+				</script>
+			</template>
 		</div>
 		<no-ssr>
 			<modal v-if="showModalMakeOfferSuccess" class="modal_offer_success success_modal"
