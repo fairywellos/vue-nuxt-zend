@@ -8,31 +8,6 @@
 		/>
 		</template>
 		<div class="container">
-			<template v-if="$device.isMobileOrTablet">
-				<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-				<ins class="adsbygoogle"
-				style="display:block"
-				data-ad-format="fluid"
-				data-ad-layout-key="-68+dk-2l-6f+ws"
-				data-ad-client="ca-pub-1709497292936218"
-				data-ad-slot="8375491307"></ins>
-				<script>
-				(adsbygoogle = window.adsbygoogle || []).push({});
-				</script>
-			</template>
-			<template v-if="$device.isDesktop">
-				<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-				<ins class="adsbygoogle"
-				style="display:block"
-				data-ad-format="fluid"
-				data-ad-height="400"
-				data-ad-layout-key="-68+dk-2l-6f+ws"
-				data-ad-client="ca-pub-1709497292936218"
-				data-ad-slot="5223069572"></ins>
-				<script>
-				(adsbygoogle = window.adsbygoogle || []).push({});
-				</script>
-			</template>
 			<template v-if="!is_home">
 			<div class="results_hero">
 				<div class="results_hero__inner">
@@ -48,32 +23,51 @@
 			</div>
 			</template>
 			<template v-if="listings">
-				<transition-group name="slide-fade" tag="div" class="cards_grid" v-if="firstListings.length > 0">
-					<CardItem
-						v-for="(listing, i) in firstListings"
-						:key="`${i}-${listing.id}`"
-						:id="listing.id"
-						:listing="listing"
-					/>
-				</transition-group>
-				<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-				<ins class="adsbygoogle"
-				style="display:block"
-				data-ad-client="ca-pub-1709497292936218"
-				data-ad-slot="3534567470"
-				data-ad-format="auto"
-				data-full-width-responsive="true"></ins>
+				<transition-group name="slide-fade" tag="div" class="cards_grid" v-if="listings.length > 0">
+					<template v-for="(listing, i) in listings">
+						<div :key="`${i}-infeed-mobile`" v-if="$device.isMobileOrTablet && i==4">
+							<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+							<ins class="adsbygoogle"
+							style="display:block"
+							data-ad-format="fluid"
+							data-ad-layout-key="-68+dk-2l-6f+ws"
+							data-ad-client="ca-pub-1709497292936218"
+							data-ad-slot="8375491307"></ins>
+							<script>
+							(adsbygoogle = window.adsbygoogle || []).push({});
+							</script>
+						</div>
+						<div :key="`${i}-infeed`" v-if="$device.isDesktop && i == 8">
+							<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+							<ins class="adsbygoogle"
+							style="display:block"
+							data-ad-format="fluid"
+							data-ad-layout-key="-68+dk-2l-6f+ws"
+							data-ad-client="ca-pub-1709497292936218"
+							data-ad-slot="5223069572"></ins>
+							<script>
+							(adsbygoogle = window.adsbygoogle || []).push({});
+							</script>
+						</div>
+						<div :key="`${i}-banner`" v-if="i==listings.length-8">
+							<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+							<ins class="adsbygoogle"
+							style="display:block"
+							data-ad-client="ca-pub-1709497292936218"
+							data-ad-slot="3534567470"
+							data-ad-format="auto"
+							data-full-width-responsive="true"></ins>
 
-				<script>
-				(adsbygoogle = window.adsbygoogle || []).push({});
-				</script>
-				<transition-group name="slide-fade" tag="div" class="cards_grid" v-if="lastListings.length > 0">
-					<CardItem
-						v-for="(listing, i) in lastListings"
-						:key="`${i}-${listing.id}`"
-						:id="listing.id"
-						:listing="listing"
-					/>
+							<script>
+							(adsbygoogle = window.adsbygoogle || []).push({});
+							</script>
+						</div>
+						<CardItem
+							:key="`${i}-${listing.id}`"
+							:id="listing.id"
+							:listing="listing"
+						/>
+					</template>
 				</transition-group>
 			</template>
 			<template v-else-if="!is_home">
@@ -91,7 +85,7 @@
 	import HeaderTags from "~/components/HeaderTags";
 	import CardItem from "~/components/CardItem";
 	import { mapGetters } from "vuex";
-
+	
 	export default {
 		props: ['is_home'],
 		components: {
@@ -129,7 +123,7 @@
 			...mapGetters("auth", ["isAuthenticated", "loggedInUser"]),
 			...mapGetters({
                 listings : 'searchResults/listings',
-            }),
+			}),
 			localQuery(){
 				if(this.is_home == true){
 					return { q: "", location: "" }

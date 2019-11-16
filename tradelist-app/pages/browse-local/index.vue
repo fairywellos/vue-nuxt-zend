@@ -3,14 +3,6 @@
 		<Header v-if="$device.isDesktop"/>
 		<HeaderMobile v-if="$device.isMobileOrTablet"/>
 		<HeaderTags path="browse-local"/>
-		<div class="hero_image" :style="{ backgroundImage: 'url('+ heroImg + ')' }">
-<!--			<img src="~/assets/img/browse-local/browse-local.jpg" alt="city image" class="img_fluid">-->
-			<div class="img_overlay">
-				<img src="~/assets/img/browse-local/local.png" alt="browse local logo">
-				<h1 v-if="location">{{ location.city + ", " + location.state }}</h1>
-				<i class="icon-red-line"></i>
-			</div>
-		</div>
 		
 		<div class="page_section">
 			<div class="container">
@@ -57,8 +49,52 @@
 					<!--								<nuxt-link class="float_right" to="" title="See all">See all</nuxt-link>-->
 				</h2>
 				<div class="cards_grid">
-					<CardItem v-for="(listing, i) in allProducts" :key="`${i}-${listing.id}`" :id="listing.id"
-					          :listing="listing"/>
+					<template v-for="(listing, i) in allProducts">
+						<div :key="`${i}-infeed-mobile`" v-if="$device.isMobileOrTablet && i==4">
+							<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+							<ins class="adsbygoogle"
+							style="display:block"
+							data-ad-format="fluid"
+							data-ad-layout-key="-68+dk-2l-6f+ws"
+							data-ad-client="ca-pub-1709497292936218"
+							data-ad-slot="8375491307"></ins>
+							<script>
+							(adsbygoogle = window.adsbygoogle || []).push({});
+							</script>
+						</div>
+						<div :key="`${i}-infeed`" v-if="$device.isDesktop && i == 8">
+							<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+							<ins class="adsbygoogle"
+							style="display:block"
+							data-ad-format="fluid"
+							data-ad-layout-key="-68+dk-2l-6f+ws"
+							data-ad-client="ca-pub-1709497292936218"
+							data-ad-slot="5223069572"></ins>
+							<script>
+							(adsbygoogle = window.adsbygoogle || []).push({});
+							</script>
+						</div>
+						<div :key="`${i}-banner`" v-if="i==allProducts.length-8">
+							<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+							<ins class="adsbygoogle"
+							style="display:block"
+							data-ad-client="ca-pub-1709497292936218"
+							data-ad-slot="3534567470"
+							data-ad-format="auto"
+							data-full-width-responsive="true"></ins>
+
+							<script>
+							(adsbygoogle = window.adsbygoogle || []).push({});
+							</script>
+						</div>
+						<CardItem
+							:key="`${i}-${listing.id}`"
+							:id="listing.id"
+							:listing="listing"
+						/>
+					</template>
+					<!-- <CardItem v-for="(listing, i) in allProducts" :key="`${i}-${listing.id}`" :id="listing.id"
+					          :listing="listing"/> -->
 				</div>
 			</div>
 		</div>
