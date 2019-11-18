@@ -818,12 +818,9 @@
 		},
 		computed: {
 			...mapGetters("auth", ["isAuthenticated", "loggedInUser"]),
-			// ...mapGetters({
-            //     listings : 'searchResults/listings',
-			// }),
-			listings(){
-				return response.allProducts.slice(0,5);
-			},
+			...mapGetters({
+                listings : 'searchResults/listings',
+			}),
 			alterListings(){
 				if(this.listings >= 40){
 					return this.listings.slice(0, this.listings.length -1)
