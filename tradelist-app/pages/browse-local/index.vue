@@ -49,9 +49,22 @@
 					<!--								<nuxt-link class="float_right" to="" title="See all">See all</nuxt-link>-->
 				</h2>
 					
-				<template v-if="allProducts">
-				<transition-group name="slide-fade" tag="div" class="cards_grid" v-if="allProducts.length > 0">
-					<template v-for="(listing, i) in allProducts">
+				<template v-if="alterListings">
+				<transition-group name="slide-fade" tag="div" class="cards_grid" v-if="alterListings.length > 0">
+					<template v-for="(listing, i) in alterListings">
+						<div class="banner-ads" :key="`${i}-banner`" v-if="i == allProducts.length - 8 - allProducts.length % 4 - (allProducts.length >= 20)">
+							<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+							<!-- Desktop Pagination -->
+							<ins class="adsbygoogle"
+							style="display:block"
+							data-ad-client="ca-pub-1709497292936218"
+							data-ad-slot="3534567470"
+							data-ad-format="auto"
+							data-full-width-responsive="true"></ins>
+							<script>
+							(adsbygoogle = window.adsbygoogle || []).push({});
+							</script>
+						</div>
 						<div class="card_item" :key="`${i}-infeed`" v-if="i == 8 && $device.isDesktop">
 							<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 							<ins class="adsbygoogle"
@@ -76,26 +89,14 @@
 							(adsbygoogle = window.adsbygoogle || []).push({});
 							</script>
 						</div>
-						<div class="banner-ads" :key="`${i}-banner`" v-if="i == allProducts.length - 8">
-							<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-							<!-- Desktop Pagination -->
-							<ins class="adsbygoogle"
-							style="display:block"
-							data-ad-client="ca-pub-1709497292936218"
-							data-ad-slot="3534567470"
-							data-ad-format="auto"
-							data-full-width-responsive="true"></ins>
-							<script>
-							(adsbygoogle = window.adsbygoogle || []).push({});
-							</script>
-						</div>
+						
 						<CardItem
 							:key="`${i}-${listing.id}`"
 							:id="listing.id"
 							:listing="listing"
 						/>
-					</template>	
-					<div class="card_item" :key="`${i}-infeed`" v-if="allProducts.length < 8 && $device.isDesktop">
+					</template>
+					<div class="card_item" :key="`infeed`" v-if="alterListings.length <= 8 && $device.isDesktop">
 						<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 						<ins class="adsbygoogle"
 						style="display:block"
@@ -107,7 +108,7 @@
 						(adsbygoogle = window.adsbygoogle || []).push({});
 						</script>
 					</div>
-					<div style="width:100%; magin-bottom:14px" :key="`${i}-banner`" v-if="allProducts.length < 8">
+					<div style="width:100%" :key="`banner`" v-if="alterListings.length <= 8">
 						<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 						<!-- Desktop Pagination -->
 						<ins class="adsbygoogle"
@@ -242,6 +243,12 @@
 		},
 		computed: {
 			...mapGetters('auth', ['isAuthenticated', 'loggedInUser']),
+			alterListings(){
+				if(this.allProducts >= 40){
+					return this.allProducts.slice(0, this.allProducts.length -1)
+				}
+				return this.allProducts
+			},
 		}
 	}
 </script>

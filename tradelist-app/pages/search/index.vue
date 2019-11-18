@@ -23,9 +23,22 @@
 				</div>
 			</div>
 			</template>
-			<template v-if="listings">
-				<transition-group name="slide-fade" tag="div" class="cards_grid" v-if="listings.length > 0">
-					<template v-for="(listing, i) in listings">
+			<template v-if="alterListings">
+				<transition-group name="slide-fade" tag="div" class="cards_grid" v-if="alterListings.length > 0">
+					<template v-for="(listing, i) in alterListings">
+						<div class="banner-ads" :key="`${i}-banner`" v-if="i == listings.length - 8 - listings.length % 4 - (listings.length >= 20)">
+							<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+							<!-- Desktop Pagination -->
+							<ins class="adsbygoogle"
+							style="display:block"
+							data-ad-client="ca-pub-1709497292936218"
+							data-ad-slot="3534567470"
+							data-ad-format="auto"
+							data-full-width-responsive="true"></ins>
+							<script>
+							(adsbygoogle = window.adsbygoogle || []).push({});
+							</script>
+						</div>
 						<div class="card_item" :key="`${i}-infeed`" v-if="i == 8 && $device.isDesktop">
 							<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 							<ins class="adsbygoogle"
@@ -50,26 +63,14 @@
 							(adsbygoogle = window.adsbygoogle || []).push({});
 							</script>
 						</div>
-						<div class="banner-ads" :key="`${i}-banner`" v-if="i == listings.length - 8">
-							<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-							<!-- Desktop Pagination -->
-							<ins class="adsbygoogle"
-							style="display:block"
-							data-ad-client="ca-pub-1709497292936218"
-							data-ad-slot="3534567470"
-							data-ad-format="auto"
-							data-full-width-responsive="true"></ins>
-							<script>
-							(adsbygoogle = window.adsbygoogle || []).push({});
-							</script>
-						</div>
+						
 						<CardItem
 							:key="`${i}-${listing.id}`"
 							:id="listing.id"
 							:listing="listing"
 						/>
-					</template>	
-					<div class="card_item" :key="`${i}-infeed`" v-if="listings.length < 8 && $device.isDesktop">
+					</template>
+					<div class="card_item" :key="`infeed`" v-if="alterListings.length <= 8 && $device.isDesktop">
 						<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 						<ins class="adsbygoogle"
 						style="display:block"
@@ -81,7 +82,7 @@
 						(adsbygoogle = window.adsbygoogle || []).push({});
 						</script>
 					</div>
-					<div style="width:100%" :key="`${i}-banner`" v-if="listings.length < 8">
+					<div style="width:100%" :key="`banner`" v-if="alterListings.length <= 8">
 						<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 						<!-- Desktop Pagination -->
 						<ins class="adsbygoogle"
@@ -539,7 +540,247 @@
 						service: "Tickets to Hamilton in Hood River, OR"
 					}
 				]
-			}
+			},{
+				id: "14",
+				name: "Hans J. Wegner Danish Teak Chil...",
+				productImage: image1,
+				category: "household",
+				owner: "Merle Jørgensen",
+				defaultClass: "card_item__cat",
+				category_slug: "homes_housing",
+				price: "1,465",
+				transaction: ["trade", "cash"],
+				location: "Albuquerque, NM",
+				ownerThumbnail: ownerImage,
+				lookingFor: [
+					{
+						icon: "sporting-goods",
+						class: "sporting_goods",
+						service: "Landscaping services"
+					},
+					{
+						icon: "homes-housing",
+						class: "homes_housing",
+						service: "Santa Cruz Mountain Bikes"
+					},
+					{
+						icon: "experiences",
+						class: "experiences",
+						service: "Tickets to Hamilton in Hood River, OR"
+					}
+				]
+			},
+			{
+				id: "15",
+				name: "MacBook Pro 13 2012 *Grade A...",
+				productImage: image2,
+				category: "electronics",
+				owner: "Merle Jørgensen",
+				defaultClass: "card_item__cat",
+				category_slug: "electronics",
+				price: "2,465",
+				transaction: ["trade", "cash"],
+				location: "Fremont, WA",
+				ownerThumbnail: ownerImage,
+				lookingFor: [
+					{
+						icon: "sporting-goods",
+						class: "sporting_goods",
+						service: "Landscaping services"
+					},
+					{
+						icon: "homes-housing",
+						class: "homes_housing",
+						service: "Santa Cruz Mountain Bikes"
+					},
+					{
+						icon: "experiences",
+						class: "experiences",
+						service: "Tickets to Hamilton in Hood River, OR"
+					}
+				]
+			},
+			{
+				id: "16",
+				name: "1-week Surf lessons in Maui",
+				productImage: image3,
+				category: "Experiences",
+				owner: "Merle Jørgensen",
+				defaultClass: "card_item__cat",
+				category_slug: "experiences",
+				price: "465",
+				transaction: ["cash"],
+				location: "Downtown Seattle, WA",
+				ownerThumbnail: ownerImage,
+				lookingFor: [
+					{
+						icon: "sporting-goods",
+						class: "sporting_goods",
+						service: "Landscaping services"
+					},
+					{
+						icon: "homes-housing",
+						class: "homes_housing",
+						service: "Santa Cruz Mountain Bikes"
+					},
+					{
+						icon: "experiences",
+						class: "experiences",
+						service: "Tickets to Hamilton in Hood River, OR"
+					}
+				]
+			},
+			{
+				id: "17",
+				name: "One month co-working space",
+				productImage: image4,
+				category: "Business & Industrial",
+				owner: "Merle Jørgensen",
+				defaultClass: "card_item__cat",
+				category_slug: "business_industrial",
+				price: "1,000",
+				transaction: ["cash", "trade"],
+				location: "Ballard, WA",
+				ownerThumbnail: ownerImage,
+				lookingFor: [
+					{
+						icon: "sporting-goods",
+						class: "sporting_goods",
+						service: "Landscaping services"
+					},
+					{
+						icon: "homes-housing",
+						class: "homes_housing",
+						service: "Santa Cruz Mountain Bikes"
+					},
+					{
+						icon: "experiences",
+						class: "experiences",
+						service: "Tickets to Hamilton in Hood River, OR"
+					}
+				]
+			},
+			{
+				id: "18",
+				name: "Hans J. Wegner Danish Teak Chil...",
+				productImage: image1,
+				category: "Household",
+				owner: "Merle Jørgensen",
+				defaultClass: "card_item__cat",
+				category_slug: "homes_housing",
+				price: "99",
+				transaction: ["trade"],
+				location: "Ballard, WA",
+				ownerThumbnail: ownerImage,
+				lookingFor: [
+					{
+						icon: "sporting-goods",
+						class: "sporting_goods",
+						service: "Landscaping services"
+					},
+					{
+						icon: "homes-housing",
+						class: "homes_housing",
+						service: "Santa Cruz Mountain Bikes"
+					},
+					{
+						icon: "experiences",
+						class: "experiences",
+						service: "Tickets to Hamilton in Hood River, OR"
+					}
+				]
+			},
+			{
+				id: "19",
+				name: "MacBook Pro 13 2012 *Grade A...",
+				productImage: image2,
+				category: "Electronics",
+				owner: "Merle Jørgensen",
+				defaultClass: "card_item__cat",
+				category_slug: "electronics",
+				price: "70",
+				transaction: ["trade", "cash"],
+				location: "Normandy Park, WA",
+				ownerThumbnail: ownerImage,
+				lookingFor: [
+					{
+						icon: "sporting-goods",
+						class: "sporting_goods",
+						service: "Landscaping services"
+					},
+					{
+						icon: "homes-housing",
+						class: "homes_housing",
+						service: "Santa Cruz Mountain Bikes"
+					},
+					{
+						icon: "experiences",
+						class: "experiences",
+						service: "Tickets to Hamilton in Hood River, OR"
+					}
+				]
+			},
+			{
+				id: "20",
+				name: "1-week Surf lessons in Maui",
+				productImage: image3,
+				category: "Experiences",
+				owner: "Merle Jørgensen",
+				defaultClass: "card_item__cat",
+				category_slug: "experiences",
+				price: "999",
+				transaction: ["trade", "cash"],
+				location: "Fremont, WA",
+				ownerThumbnail: ownerImage,
+				lookingFor: [
+					{
+						icon: "sporting-goods",
+						class: "sporting_goods",
+						service: "Landscaping services"
+					},
+					{
+						icon: "homes-housing",
+						class: "homes_housing",
+						service: "Santa Cruz Mountain Bikes"
+					},
+					{
+						icon: "experiences",
+						class: "experiences",
+						service: "Tickets to Hamilton in Hood River, OR"
+					}
+				]
+			},
+			{
+				id: "21",
+				name: "One month co-working space",
+				productImage: image4,
+				category: "Business & Industrial",
+				owner: "Merle Jørgensen",
+				defaultClass: "card_item__cat",
+				category_slug: "business_industrial",
+				price: "800",
+				transaction: ["trade", "cash"],
+				location: "Ballard, WA",
+				ownerThumbnail: ownerImage,
+				lookingFor: [
+					{
+						icon: "sporting-goods",
+						class: "sporting_goods",
+						service: "Landscaping services"
+					},
+					{
+						icon: "homes-housing",
+						class: "homes_housing",
+						service: "Santa Cruz Mountain Bikes"
+					},
+					{
+						icon: "experiences",
+						class: "experiences",
+						service: "Tickets to Hamilton in Hood River, OR"
+					}
+				]
+			},
+			
 		]
 	};
 	export default {
@@ -577,9 +818,18 @@
 		},
 		computed: {
 			...mapGetters("auth", ["isAuthenticated", "loggedInUser"]),
-			...mapGetters({
-                listings : 'searchResults/listings',
-			}),
+			// ...mapGetters({
+            //     listings : 'searchResults/listings',
+			// }),
+			listings(){
+				return response.allProducts.slice(0,5);
+			},
+			alterListings(){
+				if(this.listings >= 40){
+					return this.listings.slice(0, this.listings.length -1)
+				}
+				return this.listings
+			},
 			localQuery(){
 				if(this.is_home == true){
 					return { q: "", location: "" }
