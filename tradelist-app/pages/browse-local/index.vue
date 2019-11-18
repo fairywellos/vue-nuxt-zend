@@ -49,72 +49,79 @@
 					<!--								<nuxt-link class="float_right" to="" title="See all">See all</nuxt-link>-->
 				</h2>
 					
-				<transition-group name="slide-fade" tag="div" class="cards_grid" v-if="topListings.length > 0">
-					<CardItem
-						v-for="(listing, i) in topListings.slice(0, 4)"
-						:key="`${i}-${listing.id}`"
-						:id="listing.id"
-						:listing="listing"
-					/>					
+				<template v-if="allProducts">
+				<transition-group name="slide-fade" tag="div" class="cards_grid" v-if="allProducts.length > 0">
+					<template v-for="(listing, i) in allProducts">
+						<div class="card_item" :key="`${i}-infeed`" v-if="i == 8 && $device.isDesktop">
+							<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+							<ins class="adsbygoogle"
+							style="display:block"
+							data-ad-format="fluid"
+							data-ad-layout-key="-68+dk-2l-6f+ws"
+							data-ad-client="ca-pub-1709497292936218"
+							data-ad-slot="5223069572"></ins>
+							<script>
+							(adsbygoogle = window.adsbygoogle || []).push({});
+							</script>
+						</div>
+						<div class="card_item" :key="`${i}-infeed`" v-if="i == 4 && $device.isMobileOrTablet">
+							<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+							<ins class="adsbygoogle"
+							style="display:block"
+							data-ad-format="fluid"
+							data-ad-layout-key="-68+dk-2l-6f+ws"
+							data-ad-client="ca-pub-1709497292936218"
+							data-ad-slot="8375491307"></ins>
+							<script>
+							(adsbygoogle = window.adsbygoogle || []).push({});
+							</script>
+						</div>
+						<div class="banner-ads" :key="`${i}-banner`" v-if="i == allProducts.length - 8">
+							<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+							<!-- Desktop Pagination -->
+							<ins class="adsbygoogle"
+							style="display:block"
+							data-ad-client="ca-pub-1709497292936218"
+							data-ad-slot="3534567470"
+							data-ad-format="auto"
+							data-full-width-responsive="true"></ins>
+							<script>
+							(adsbygoogle = window.adsbygoogle || []).push({});
+							</script>
+						</div>
+						<CardItem
+							:key="`${i}-${listing.id}`"
+							:id="listing.id"
+							:listing="listing"
+						/>
+					</template>	
+					<div class="card_item" :key="`${i}-infeed`" v-if="allProducts.length < 8 && $device.isDesktop">
+						<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+						<ins class="adsbygoogle"
+						style="display:block"
+						data-ad-format="fluid"
+						data-ad-layout-key="-68+dk-2l-6f+ws"
+						data-ad-client="ca-pub-1709497292936218"
+						data-ad-slot="5223069572"></ins>
+						<script>
+						(adsbygoogle = window.adsbygoogle || []).push({});
+						</script>
+					</div>
+					<div style="width:100%; magin-bottom:14px" :key="`${i}-banner`" v-if="allProducts.length < 8">
+						<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+						<!-- Desktop Pagination -->
+						<ins class="adsbygoogle"
+						style="display:block"
+						data-ad-client="ca-pub-1709497292936218"
+						data-ad-slot="3534567470"
+						data-ad-format="auto"
+						data-full-width-responsive="true"></ins>
+						<script>
+						(adsbygoogle = window.adsbygoogle || []).push({});
+						</script>
+					</div>
 				</transition-group>
-				<template v-if="$device.isMobileOrTablet">
-					<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-					<ins class="adsbygoogle"
-					style="display:block"
-					data-ad-format="fluid"
-					data-ad-layout-key="-68+dk-2l-6f+ws"
-					data-ad-client="ca-pub-1709497292936218"
-					data-ad-slot="8375491307"></ins>
-					<script>
-					(adsbygoogle = window.adsbygoogle || []).push({});
-					</script>
-				</template>
-				<transition-group name="slide-fade" tag="div" class="cards_grid" v-if="topListings.length > 0">
-					<CardItem
-						v-for="(listing, i) in topListings.slice(4,8)"
-						:key="`${i}-${listing.id}`"
-						:id="listing.id"
-						:listing="listing"
-					/>					
-				</transition-group>
-
-				<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-				<ins class="adsbygoogle"
-				style="display:block"
-				data-ad-format="fluid"
-				data-ad-layout-key="-68+dk-2l-6f+ws"
-				data-ad-client="ca-pub-1709497292936218"
-				data-ad-slot="5223069572"></ins>
-				<script>
-				(adsbygoogle = window.adsbygoogle || []).push({});
-				</script>
-				<transition-group name="slide-fade" tag="div" class="cards_grid" v-if="middleListings.length > 0">
-					<CardItem
-						v-for="(listing, i) in middleListings"
-						:key="`${i}-${listing.id}`"
-						:id="listing.id"
-						:listing="listing"
-					/>
-				</transition-group>
-				<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-				<!-- Desktop Pagination -->
-				<ins class="adsbygoogle"
-				style="display:block"
-				data-ad-client="ca-pub-1709497292936218"
-				data-ad-slot="3534567470"
-				data-ad-format="auto"
-				data-full-width-responsive="true"></ins>
-				<script>
-				(adsbygoogle = window.adsbygoogle || []).push({});
-				</script>
-				<transition-group name="slide-fade" tag="div" class="cards_grid" v-if="bottomListings.length > 0">
-					<CardItem
-						v-for="(listing, i) in bottomListings"
-						:key="`${i}-${listing.id}`"
-						:id="listing.id"
-						:listing="listing"
-					/>
-				</transition-group>
+			</template>
 					<!-- <CardItem v-for="(listing, i) in allProducts" :key="`${i}-${listing.id}`" :id="listing.id"
 					          :listing="listing"/> -->
 			</div>
@@ -235,19 +242,6 @@
 		},
 		computed: {
 			...mapGetters('auth', ['isAuthenticated', 'loggedInUser']),
-			topListings(){
-				return this.allProducts.slice(0, 8);
-			},
-			middleListings(){
-				if(this.allProducts.length > 12 ) {
-					return this.allProducts.slice(8, this.allProducts.length - 12)
-				} else {
-					return []
-				}
-			},
-			bottomListings(){
-				return this.allProducts.slice(Math.max(this.allProducts.length - 12, 8), this.allProducts.length)
-			}
 		}
 	}
 </script>
@@ -272,7 +266,12 @@
 			}
 		}
 	}
-	
+
+	.banner-ads {
+		margin-bottom: 14px;
+		width:100%;
+	}
+
 	.browse_local_page {
 		padding-top: 51px;
 		

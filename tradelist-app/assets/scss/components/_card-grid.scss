@@ -12,9 +12,7 @@
 		width: 362px;
 		margin-right: 19px;
 		
-		&:nth-child(4n) {
-			margin-right: 0;
-			
+		&:nth-child(4n) {			
 			@media only screen and (max-width: 1599px) {
 				margin-right: 19px;
 			}
