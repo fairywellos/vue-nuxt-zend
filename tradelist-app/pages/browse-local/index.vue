@@ -108,7 +108,7 @@
 						(adsbygoogle = window.adsbygoogle || []).push({});
 						</script>
 					</div>
-					<div style="width:100%" :key="`banner`" v-if="alterListings.length <= 8">
+					<div style="width:100%" :key="`banner`" v-if="alterListings.length < 8">
 						<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 						<!-- Desktop Pagination -->
 						<ins class="adsbygoogle"
@@ -245,9 +245,11 @@
 			...mapGetters('auth', ['isAuthenticated', 'loggedInUser']),
 			alterListings(){
 				if(this.allProducts >= 40){
-					return this.allProducts.slice(0, this.allProducts.length -1)
+					return this.allProducts.slice(0, this.allProducts.length - 2)
+				} else{
+					return this.allProducts
 				}
-				return this.allProducts
+				
 			},
 		}
 	}

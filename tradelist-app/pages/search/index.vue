@@ -82,7 +82,7 @@
 						(adsbygoogle = window.adsbygoogle || []).push({});
 						</script>
 					</div>
-					<div style="width:100%" :key="`banner`" v-if="alterListings.length <= 8">
+					<div style="width:100%" :key="`banner`" v-if="alterListings.length < 8">
 						<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 						<!-- Desktop Pagination -->
 						<ins class="adsbygoogle"
@@ -823,9 +823,11 @@
 			}),
 			alterListings(){
 				if(this.listings >= 40){
-					return this.listings.slice(0, this.listings.length -1)
+					return this.listings.slice(0, this.listings.length - 2)
+				} else {
+					return this.listings
 				}
-				return this.listings
+				
 			},
 			localQuery(){
 				if(this.is_home == true){
