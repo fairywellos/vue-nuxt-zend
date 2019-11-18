@@ -249,7 +249,6 @@
 				} else{
 					return this.allProducts
 				}
-				
 			},
 		}
 	}
