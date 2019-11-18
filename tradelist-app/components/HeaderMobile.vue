@@ -146,8 +146,6 @@
 				<div class="user_image" v-else></div>
 				<p>
 					{{ loggedInUser.publicName}}
-					<br>
-					<span class="credits">{{ loggedInUser.credits}} credit left</span>
 				</p>
 				<ul>
 					<li>

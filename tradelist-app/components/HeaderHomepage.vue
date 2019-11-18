@@ -26,8 +26,6 @@
 								<div class="user_image" v-else ></div>
 								<p>
 									{{ loggedInUser.publicName}}
-									<br>
-									<span class="credits">{{ loggedInUser.credits}} credit left</span>
 								</p>
 								<ul class="dropdown_items">
 									<li>
@@ -561,6 +559,7 @@ export default {
 				position: absolute;
 				top: 100%;
 				width: 100%;
+				min-width: 100px;
 				background: $gray_albaster;
 				border-radius: 4px;
 				padding: 0 15px;
