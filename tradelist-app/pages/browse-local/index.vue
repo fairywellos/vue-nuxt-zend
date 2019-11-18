@@ -244,8 +244,8 @@
 		computed: {
 			...mapGetters('auth', ['isAuthenticated', 'loggedInUser']),
 			alterListings(){
-				if(this.allProducts >= 40){
-					return this.allProducts.slice(0, this.allProducts.length - 2)
+				if(this.allProducts.length >= 40){
+					return this.allProducts.slice(0, this.allProducts.length - 1)
 				} else{
 					return this.allProducts
 				}
