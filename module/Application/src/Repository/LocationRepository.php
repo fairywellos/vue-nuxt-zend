@@ -17,8 +17,9 @@ class LocationRepository extends EntityRepository
         $subSelect->columns(['location_id' => 'location_id']);
         $subSelect->order(new Expression("abs(zip_code.lat - (?)) + abs(zip_code.long - (?))", [$lat, $long]));
         $subSelect->limit(1);
-
+        
         $select = new Select("location");
+        // var_dump("+++++++++++getLocation by coordinates++++++++");
         $select->columns(['city' => 'city', 'state' => 'state', "id" => "id"]);
         $select->join(["order_zip_codes" => $subSelect],"location.id = order_zip_codes.location_id", array());
 

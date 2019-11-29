@@ -84,12 +84,14 @@ const actions = {
         let customQuery = query;
         query = {...query, fields: 'id,title,description,main_photo,price,location,user_name,user_id,user_photo,sample_account,saved,trade_type,category_id'};
 
+        
         return this.$axios.get('listing/feed', {
             params: query
         })
         .then((response) => {
             store.state.searchResult.query = customQuery;
             store.state.searchResult.totalResults = response.data.result.total_results;
+            console.log("++++++++++++++++searchResult.js+++++++++++++++", response.data.result.total_results);
             store.state.searchResult.listings = response.data.result.data;
 
             store.commit('addSearchResult', store.state.searchResult)

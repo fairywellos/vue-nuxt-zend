@@ -104,40 +104,66 @@ class ListingRepository extends EntityRepository
     {
         $params = $this->paramsFilter($params);
         $query = $this->createQueryBuilder('l');
-
+        
         /**
          * Set displayed fields
          */
         /*if($this->getCurrentUser()->getId()){
             $this->addAvailableField('saved', 'case when sb.id is not null then 1 else 0 end as saved');
         }*/
-
+        
         if(isset($params['fields']) and $fields = $this->fieldsFilter($params['fields'])){
             $this->setFields($fields);
         }else{
             $this->setFields($this->getAvailableFields());
         }
-
+        
         $query->select($this->getFields());
-
-        if(key_exists('main_photo', $this->getFields())){
-            $query->leftJoin('l.photos','p','WITH','p.main = 1');
-        }
-
-        if(key_exists('category_id', $this->getFields())){
-            $query->leftJoin('l.mainCategory','c');
-        }
-        if (key_exists('location', $this->getFields())) {
-            $query->leftJoin('l.location', 'loc');
-        }
-
+        #  when isset($params['fields']) == true)
+        // $this->getFields() =>
+        //  array(10) {
+            //     ["id"]=>
+            //     string(4) "l.id"
+            //     ["title"]=>
+            //     string(7) "l.title"
+            //     ["description"]=>
+            //     string(13) "l.description"
+            //     ["price"]=>
+            //     string(7) "l.price"
+            //     ["location"]=>
+            //     string(45) "concat(loc.city, ', ' ,loc.state) as location"
+            //     ["user_name"]=>
+            //     string(96) "CASE WHEN (u.privacy=1) THEN concat( u.firstName, ' ' , u.name) ELSE u.username END as user_name"
+            //     ["user_id"]=>
+            //     string(15) "u.id as user_id"
+            //     ["user_photo"]=>
+            //     string(24) "u.photoUrl as user_photo"
+            //     ["main_photo"]=>
+            //     string(19) "p.name as photoName"
+            //     ["trade_type"]=>
+            //     string(27) "l.tradeOrCash as trade_type"
+            //     }
+            
+            # when isset($params['fields']) == false)
+            
+            if(key_exists('main_photo', $this->getFields())){
+                $query->leftJoin('l.photos','p','WITH','p.main = 1');
+            }
+            
+            if(key_exists('category_id', $this->getFields())){
+                $query->leftJoin('l.mainCategory','c');
+            }
+            if (key_exists('location', $this->getFields())) {
+                $query->leftJoin('l.location', 'loc');
+            }
+            
         if(key_exists('user_name', $this->getFields()) || key_exists('user_id', $this->getFields()) || key_exists('user_photo', $this->getFields())){
             $query->leftJoin('l.user','u');
         }
-
+        
         //if(key_exists('saved', $this->getFields()) and $this->getCurrentUser()->getId()){
-        if(!empty($params['show_saved']) and $this->getCurrentUser()->getId()){
-            $query->leftJoin(
+            if(!empty($params['show_saved']) and $this->getCurrentUser()->getId()){
+                $query->leftJoin(
                 'l.savedBy',
                 'sb',
                 'WITH',
@@ -147,14 +173,14 @@ class ListingRepository extends EntityRepository
 
         if(key_exists('trade_offers_count', $this->getFields())){
             $query->leftJoin('l.trades','t', "WITH", 't.status = :tradeStatus')
-                ->setParameter('tradeStatus',Trade::PENDING);
+            ->setParameter('tradeStatus',Trade::PENDING);
 
         }
 
         if(!empty($params['q']) && strlen($params['q']) >= self::MIN_TEXT_LENGTH_Q){
             $query->leftJoin('l.tags','tags');
         }
-
+        
         $query->groupBy('l.id');
 
         /**
@@ -162,93 +188,96 @@ class ListingRepository extends EntityRepository
          */
         if(!empty($params['id'])){
             $query
-                ->andWhere('l.id = :id')
-                ->setParameter('id', (int)$params['id']);
+            ->andWhere('l.id = :id')
+            ->setParameter('id', (int)$params['id']);
         }
         if(empty($params['status'])){
             $query->andWhere('l.status = :status')
-                ->setParameter('status',Listing::ACTIVE);
+            ->setParameter('status',Listing::ACTIVE);
             $currentDate = new \DateTime();
             $query->andWhere('l.availability >= :availability')
-                ->setParameter("availability",$currentDate);
+            ->setParameter("availability",$currentDate);
 
         }elseif($params["status"] !== "all"){
             $query->andWhere('l.status = :status')
-                ->setParameter('status',$params["status"]);
+            ->setParameter('status',$params["status"]);
         }
         if(!empty($params['user'])){
             $query
-                ->andWhere('l.user = :userId')
-                ->setParameter('userId', (int)$params['user']);
+            ->andWhere('l.user = :userId')
+            ->setParameter('userId', (int)$params['user']);
         }
-
+        
         if(!empty($params['category'])){
             $getCategory = array_filter(array_map('trim', explode(',', $params['category'])));
-
+            
             $query
-                ->andWhere('l.mainCategory IN (:categoryIds)')
-                ->setParameter('categoryIds', $getCategory);
+            ->andWhere('l.mainCategory IN (:categoryIds)')
+            ->setParameter('categoryIds', $getCategory);
         }
-
+        
         if(!empty($params['trade_type'])){
+            
             $getTradeType = array_filter(array_map('trim', explode(',', $params['trade_type'])));
-
+            
             $getTradeType = (
                 in_array(Listing::CASH_OFFER, $getTradeType) &&
                 in_array(Listing::TRADE_OFFER, $getTradeType)
-            ) ? Listing::TRADE_AND_CASH_OFFER : (int) $getTradeType[0];
-
-            $query
+                ) ? Listing::TRADE_AND_CASH_OFFER : (int) $getTradeType[0];
+                
+                $query
                 ->andWhere('l.tradeOrCash = :tradeType')
                 ->setParameter('tradeType', $getTradeType);
-        }
-
-        if(!empty($params['price_min'])){
-            $query
+            }
+            
+            if(!empty($params['price_min'])){
+                $query
                 ->andWhere('l.price >= :priceMin')
                 ->setParameter('priceMin', (float)$params['price_min']);
-        }
-
-        if(!empty($params['price_max'])){
-            $query
+            }
+            
+            if(!empty($params['price_max'])){
+                $query
                 ->andWhere('l.price <= :priceMax')
                 ->setParameter('priceMax', (float)$params['price_max']);
-        }
+            }
 
-        if(!empty($params['q']) && strlen($params['q']) >= self::MIN_TEXT_LENGTH_Q){
-            $query
+            if(!empty($params['q']) && strlen($params['q']) >= self::MIN_TEXT_LENGTH_Q){
+                $query
                 ->andWhere('l.title LIKE :searchValue or l.description LIKE :searchValue or l.metaTags LIKE :searchValue')
                 ->setParameter('searchValue', '%'.$params['q'].'%');
         }
-
+        
         if(!empty($params['show_saved'])){
             $query
-                ->andWhere('sb.id = :savedBy')
-                ->setParameter('savedBy', $this->getCurrentUser()->getId());
+            ->andWhere('sb.id = :savedBy')
+            ->setParameter('savedBy', $this->getCurrentUser()->getId());
         }
-
+        
         if(!empty($params['location'])){
+            // var_dump("+++++++++++++setFileds+++++", $params['location']);
             $query
-                ->andWhere('l.location = :location')
-                ->setParameter('location', (int)$params['location']);
+            ->andWhere('l.location = 479 OR l.location = 1570');
+            // ->setParameter('location', 1);
+            // ->setParameter('location', (int)$params['location']);
         }
-
+            
         if(isset($params['order_by'])){
             if(is_array($params['order_by'])){
                 foreach ($params['order_by'] as $orderBy){
                     $orderByArr = $this->orderBy($orderBy);
-
+                    
                     $query
-                        ->addOrderBy($orderByArr['sort'], $orderByArr['order']);
+                    ->addOrderBy($orderByArr['sort'], $orderByArr['order']);
                 }
             }else{
                 $orderByArr = $this->orderBy($params['order_by']);
-
+                
                 $query
                     ->addOrderBy($orderByArr['sort'], $orderByArr['order']);
-            }
-        }else{
-            $query->orderBy("l.dateAdded","desc");
+                }
+            }else{
+                $query->orderBy("l.dateAdded","desc");
         }
 
         /**
@@ -256,12 +285,12 @@ class ListingRepository extends EntityRepository
          */
         $queryCounter = clone $query;
         $queryCounter
-            ->select('COUNT(l.id) as totalItems')
-            ->setMaxResults(1);
-
+        ->select('COUNT(l.id) as totalItems')
+        ->setMaxResults(1);
+        
         $totalItems = $queryCounter
-            ->getQuery()
-            ->execute();
+        ->getQuery()
+        ->execute();
         // print_r($totalItems);
         $this->setTotalItems(count($totalItems) ?? 0);
 
@@ -321,11 +350,9 @@ class ListingRepository extends EntityRepository
         if(empty($fields) or !is_string($fields)){
             return [];
         }
-
+        
         $fields = array_filter(array_map('trim', explode(',', $fields)));
-
         $availableFields = array_intersect_key($this->getAvailableFields(), array_flip($fields));
-
         return $availableFields;
     }
 

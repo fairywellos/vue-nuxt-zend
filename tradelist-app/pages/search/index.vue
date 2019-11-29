@@ -844,7 +844,6 @@
 				this.$store.dispatch('searchResults/updateSearchResultAsync', {q: "", location: ""});
 			}
 			var vm = this;
-			console.log("Inspecting Search Component", this);
 			window.addEventListener('scroll', function(event)
 			{
 				if(window.isNewPageLoading == true) return;

@@ -218,6 +218,7 @@
 							lat: data.coords.latitude,
 							long: data.coords.longitude,
 						}).then((result) => {
+
 							this.location = result.data.result;
 							
 							let query = {
@@ -228,6 +229,7 @@
 							this.$axios.get("/browse-local/all", {
 								params: query
 							}).then((result => {
+								console.log("++++++++++++++++browse-local", result);
 								this.allProducts = result.data.result;
 							}));
 						});

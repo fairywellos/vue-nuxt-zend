@@ -42,6 +42,9 @@ class AuthController extends ApiController
         $this->userManager = $userManager;
         $this->config = $config;
         $this->mailSmtp = $mailSmtp;
+        $str = "Hello\n";
+ 
+        printf($str);
     }
 
     public function loginAction()
@@ -87,16 +90,26 @@ class AuthController extends ApiController
     public function registerAction()
     {
         $this->httpStatusCode = 200;
-
-
+        
+        
         $form = new UserForm($this->config);
         $data = $this->params()->fromPost();
-
+        
+        
+        
         $form->setData($data);
+        // $str = "register --------------\n";
+
+        // try {
+        //     var_dump("++++++++++++++++++");
+        //     var_dump($form->isValid());
+        // } catch (\Exception $e) {
+        //     error_log("Caught ---------------- $e");
+        // }
         if($form->isValid()){
             $data = $form->getData();
             try{
-               $user =  $this->userManager->addNewUser($data);
+                $user =  $this->userManager->addNewUser($data);
             }catch (\Exception $exception){
                 $this->httpStatusCode = 500;
                 $this->apiResponse["message"] = "Something went wrong";
@@ -113,6 +126,7 @@ class AuthController extends ApiController
             $this->apiResponse["message"] = "Validation failed";
             $this->apiResponse["validation_messages"] = $form->getMessages();
         }
+
 
         return $this->createResponse();
     }

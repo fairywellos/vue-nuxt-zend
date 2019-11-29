@@ -58,6 +58,8 @@ class UserController extends ApiController
         $this->ratingManager = $ratingManager;
         $this->uploadManager = $uploadManager;
         $this->config = $config;
+
+        // var_dump("+++++++++++User Controller Constructor++++++++");
     }
 
     public function getUserAction()
@@ -65,6 +67,17 @@ class UserController extends ApiController
         /**
          * @var User $user ;
          */
+
+        // $str = "register --------------\n";
+
+        // try {
+        //     var_dump("++++++++++++++++++");
+        //     var_dump($form->isValid());
+        // } catch (\Exception $e) {
+        //     error_log("Caught ---------------- $e");
+        // }
+
+        var_dump("+++++++++++++++++++");
         $user = $this->entityManager->getRepository(User::class)->findOneBy(["id" => $this->tokenPayload->id]);
 
         $this->httpStatusCode = 200;

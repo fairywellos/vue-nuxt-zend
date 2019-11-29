@@ -70,19 +70,21 @@ class BrowseLocalController extends ApiController
     {
         $params = $this->params()->fromQuery();
 
+        
         //check if all parameters are given
         if(empty($params['location'])){
             $this->httpStatusCode = 400;
             $this->apiResponse["message"] = "Invalid parameters given";
             return $this->createResponse();
         }
-
+        
         $listingRepo = $this->entityManager->getRepository(Listing::class);
-
+        
         $params['fields'] = 'id,title,description,main_photo,price,location,user_name,user_id,user_photo,saved,trade_type';
-
+        
         $listings = $listingRepo->filterBy($params);
-
+        // var_dump("===========getAllAction=======", $listings);
+        
         $this->httpStatusCode = 200;
         $this->apiResponse = $listings;
         return $this->createResponse();
