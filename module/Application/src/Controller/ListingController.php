@@ -204,31 +204,32 @@ class ListingController extends ApiController
     {
         $params = $this->params()->fromQuery();
 
+        
         $routeMatch = $this->getEvent()->getRouteMatch();
         $routeName = $routeMatch->getMatchedRouteName();
-
+        
         if ($routeName === 'listing/feed/currentUser/getUserListings') {
             $params["user"] = $this->currentUser()->getId();
             if (!isset($params["status"])) {
-
+                
                 $params["status"] = "all";
             }
-
+            
         }
-
+        
         if ($routeName === 'listing/feed/saved/getSaved') {
             $params["show_saved"] = true;
         }
-
+        
         /**
          * @var $listingRepository ListingRepository
          */
         $listingRepository = $this->entityManager->getRepository(Listing::class);
-
+        
         $listingRepository->setCurrentUser($this->currentUser());
-
+        
         $listings = $listingRepository->filterBy($params);
-
+        
         $this->httpStatusCode = 200;
         $this->apiResponse['data'] = $listings;
 

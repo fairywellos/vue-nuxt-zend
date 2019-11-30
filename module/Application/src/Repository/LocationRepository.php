@@ -32,6 +32,27 @@ class LocationRepository extends EntityRepository
         return $resultSet->toArray();
     }
 
+    public function sortLocationsByCoordinates($lat, $long, $config)
+    {
+        $subSelect = new Select("zip_code");
+        $subSelect->columns(['location_id' => 'location_id']);
+        $subSelect->order(new Expression("(zip_code.lat - (?)) * (zip_code.lat - (?)) + (zip_code.long - (?)) * (zip_code.long - (?))", [$lat, $lat, $long, $long]));
+        $subSelect->limit(10);
+        
+        $select = new Select("location");
+        // var_dump("+++++++++++getLocation by coordinates++++++++");
+        $select->columns(['city' => 'city', 'state' => 'state', "id" => "id"]);
+        $select->join(["order_zip_codes" => $subSelect],"location.id = order_zip_codes.location_id", array());
+
+        $dbAdapter = new Adapter($config["db_settings"]);
+        $sql = new Sql($dbAdapter);
+
+        $result = $sql->prepareStatementForSqlObject($select)->execute();
+        $resultSet = new ResultSet();
+        $resultSet->initialize($result);
+        return $resultSet->toArray();
+    }
+
     public function findLocationByZipCode($zipCode,$maxResults = 5)
     {
         $query = $this->createQueryBuilder('l');

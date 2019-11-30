@@ -133,70 +133,45 @@ class ListingRepository extends EntityRepository
         }
         
         $query->select($this->getFields());
-        #  when isset($params['fields']) == true)
-        // $this->getFields() =>
-        //  array(10) {
-            //     ["id"]=>
-            //     string(4) "l.id"
-            //     ["title"]=>
-            //     string(7) "l.title"
-            //     ["description"]=>
-            //     string(13) "l.description"
-            //     ["price"]=>
-            //     string(7) "l.price"
-            //     ["location"]=>
-            //     string(45) "concat(loc.city, ', ' ,loc.state) as location"
-            //     ["user_name"]=>
-            //     string(96) "CASE WHEN (u.privacy=1) THEN concat( u.firstName, ' ' , u.name) ELSE u.username END as user_name"
-            //     ["user_id"]=>
-            //     string(15) "u.id as user_id"
-            //     ["user_photo"]=>
-            //     string(24) "u.photoUrl as user_photo"
-            //     ["main_photo"]=>
-            //     string(19) "p.name as photoName"
-            //     ["trade_type"]=>
-            //     string(27) "l.tradeOrCash as trade_type"
-            //     }
-            
-            # when isset($params['fields']) == false)
             
         if(key_exists('main_photo', $this->getFields())){
             $query->leftJoin('l.photos','p','WITH','p.main = 1');
         }
-        
+    
         if(key_exists('category_id', $this->getFields())){
             $query->leftJoin('l.mainCategory','c');
         }
         if (key_exists('location', $this->getFields())) {
             $query->leftJoin('l.location', 'loc');
         }
-            
+        
         if(key_exists('user_name', $this->getFields()) || key_exists('user_id', $this->getFields()) || key_exists('user_photo', $this->getFields())){
             $query->leftJoin('l.user','u');
         }
         
+        // var_dump("+++++++ params +++++++++++", $this->getFields());
         //if(key_exists('saved', $this->getFields()) and $this->getCurrentUser()->getId()){
-            if(!empty($params['show_saved']) and $this->getCurrentUser()->getId()){
-                $query->leftJoin(
+        if(!empty($params['show_saved']) and $this->getCurrentUser()->getId()){
+            $query->leftJoin(
                 'l.savedBy',
                 'sb',
                 'WITH',
                 sprintf('sb.id = %d', $this->getCurrentUser()->getId())
             );
         }
-
+        
         if(key_exists('trade_offers_count', $this->getFields())){
             $query->leftJoin('l.trades','t', "WITH", 't.status = :tradeStatus')
             ->setParameter('tradeStatus',Trade::PENDING);
-
+            
         }
-
+        
         if(!empty($params['q']) && strlen($params['q']) >= self::MIN_TEXT_LENGTH_Q){
             $query->leftJoin('l.tags','tags');
         }
         
         $query->groupBy('l.id');
-
+        
         /**
          * Filters
          */
@@ -211,7 +186,7 @@ class ListingRepository extends EntityRepository
             $currentDate = new \DateTime();
             $query->andWhere('l.availability >= :availability')
             ->setParameter("availability",$currentDate);
-
+            
         }elseif($params["status"] !== "all"){
             $query->andWhere('l.status = :status')
             ->setParameter('status',$params["status"]);
@@ -221,10 +196,10 @@ class ListingRepository extends EntityRepository
             ->andWhere('l.user = :userId')
             ->setParameter('userId', (int)$params['user']);
         }
-        
+                
         if(!empty($params['category'])){
             $getCategory = array_filter(array_map('trim', explode(',', $params['category'])));
-            
+        
             $query
             ->andWhere('l.mainCategory IN (:categoryIds)')
             ->setParameter('categoryIds', $getCategory);
@@ -268,7 +243,15 @@ class ListingRepository extends EntityRepository
             ->setParameter('savedBy', $this->getCurrentUser()->getId());
         }
         
+        // var_dump("+++++++++++++ location param exists", $params);
+
         if(!empty($params['location'])){
+            $query
+            ->andWhere('l.location = :location')
+            ->setParameter('location', (int)$params['location']);
+        }        
+
+        if(!empty($params['locations'])){
 
             /**
              * @var LocationRepository $locationRepo
@@ -276,14 +259,18 @@ class ListingRepository extends EntityRepository
             // $locationRepo = $this->entityManager->getRepository(Location::class);
 
             // $location = $locationRepo->getLocationByCoordinates(37.09024, -95.7128917, $this->getServiceManager()->get("config"));
-            $currentLocation = $params['location'];
-            $andWhereQueries = 'l.location = :location' . ' OR l.location = 1570';
-            
             // var_dump("+++++++++++++setFileds+++++", $location);
+            $locations = $params['locations'];
+            $andWhereQueries = '';
+            foreach ($locations as $index => $location) {
+                $andWhereQueries = $andWhereQueries . 'l.location = ' . $location['id'];
+                if ($index < sizeof($locations) - 1) {
+                    $andWhereQueries = $andWhereQueries . ' or ';
+                }
+            }
+            
             $query
-            ->andWhere($andWhereQueries)
-            ->setParameter('location', $currentLocation);
-            // ->setParameter('location', (int)$params['location']);
+            ->andWhere($andWhereQueries);
         }
             
         if(isset($params['order_by'])){
@@ -328,7 +315,7 @@ class ListingRepository extends EntityRepository
         if(isset($params['page'])){
             $this->setPage(abs($params['page']));
         }
-
+        
         $query->setMaxResults($this->getMaxResults());
         $query->setFirstResult(($this->getPage() - 1) * $this->getMaxResults());
         $result = $query->getQuery()->execute();
@@ -356,7 +343,6 @@ class ListingRepository extends EntityRepository
         }
 
         $removeParams = array_keys(array_diff_key($params, array_flip($this->filterParams)));
-
         foreach ($removeParams as $removeParam){
             unset($params[$removeParam]);
         }

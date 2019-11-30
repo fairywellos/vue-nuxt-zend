@@ -63,7 +63,6 @@ const actions = {
             params: query
         })
         .then((response) => {
-            console.log(response);
             // store.state.searchResult.query = customQuery;
             store.state.searchResult.totalResults += response.data.result.total_results;
             response.data.result.data.map(item=>{
@@ -91,7 +90,7 @@ const actions = {
         .then((response) => {
             store.state.searchResult.query = customQuery;
             store.state.searchResult.totalResults = response.data.result.total_results;
-            console.log("++++++++++++++++searchResult.js+++++++++++++++", response.data.result.total_results);
+            console.log("++++++++++++++++searchResult.js+++++++++++++++", response.data.result.data);
             store.state.searchResult.listings = response.data.result.data;
 
             store.commit('addSearchResult', store.state.searchResult)

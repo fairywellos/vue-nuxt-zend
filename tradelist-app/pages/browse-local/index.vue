@@ -214,24 +214,32 @@
 		mounted() {
 			if (navigator.geolocation) {
 				navigator.geolocation.getCurrentPosition((data) => {
-						this.$axios.post("/browse-local", {
+						// this.$axios.post("/browse-local", {
+						// 	lat: data.coords.latitude,
+						// 	long: data.coords.longitude,
+						// }).then((result) => {
+
+						// 	this.location = result.data.result;
+							
+						// 	let query = {
+						// 		...this.$route.query
+						// 	};
+						// 	query['location'] = result.data.result.id;
+							
+						// 	this.$axios.get("/browse-local/all", {
+						// 		params: query
+						// 	}).then((result => {
+						// 		console.log("++++++++++++++++browse-local", result);
+						// 		this.allProducts = result.data.result;
+						// 	}));
+						// });
+
+						this.$axios.post("/browse-local/all", {
 							lat: data.coords.latitude,
 							long: data.coords.longitude,
 						}).then((result) => {
 
-							this.location = result.data.result;
-							
-							let query = {
-								...this.$route.query
-							};
-							query['location'] = result.data.result.id;
-							
-							this.$axios.get("/browse-local/all", {
-								params: query
-							}).then((result => {
-								console.log("++++++++++++++++browse-local", result);
-								this.allProducts = result.data.result;
-							}));
+							console.log('Fetch result: ', result.data.result);							
 						});
 					},
 					(error) => {
