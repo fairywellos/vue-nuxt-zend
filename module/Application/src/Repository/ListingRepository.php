@@ -7,12 +7,26 @@ use Application\Entity\Trade;
 use Application\Entity\User;
 use Application\Service\UploadManager;
 use Doctrine\ORM\EntityRepository;
+use Application\Repository\LocationRepository;
+use Doctrine\ORM\EntityManager;
+use Zend\ServiceManager\ServiceManager;
 
 class ListingRepository extends EntityRepository
 {
     const MAX_LIMIT = 40;
     const FIRST_PAGE = 1;
     const MIN_TEXT_LENGTH_Q = 2;
+
+    /**
+     * Entity manager
+     * @var EntityManager
+     */
+    private $entityManager;
+
+    /**
+     * @var ServiceManager
+     */
+    protected $serviceManager;
 
     /**
      * Filter params
@@ -146,16 +160,16 @@ class ListingRepository extends EntityRepository
             
             # when isset($params['fields']) == false)
             
-            if(key_exists('main_photo', $this->getFields())){
-                $query->leftJoin('l.photos','p','WITH','p.main = 1');
-            }
-            
-            if(key_exists('category_id', $this->getFields())){
-                $query->leftJoin('l.mainCategory','c');
-            }
-            if (key_exists('location', $this->getFields())) {
-                $query->leftJoin('l.location', 'loc');
-            }
+        if(key_exists('main_photo', $this->getFields())){
+            $query->leftJoin('l.photos','p','WITH','p.main = 1');
+        }
+        
+        if(key_exists('category_id', $this->getFields())){
+            $query->leftJoin('l.mainCategory','c');
+        }
+        if (key_exists('location', $this->getFields())) {
+            $query->leftJoin('l.location', 'loc');
+        }
             
         if(key_exists('user_name', $this->getFields()) || key_exists('user_id', $this->getFields()) || key_exists('user_photo', $this->getFields())){
             $query->leftJoin('l.user','u');
@@ -255,10 +269,20 @@ class ListingRepository extends EntityRepository
         }
         
         if(!empty($params['location'])){
-            // var_dump("+++++++++++++setFileds+++++", $params['location']);
+
+            /**
+             * @var LocationRepository $locationRepo
+             */
+            // $locationRepo = $this->entityManager->getRepository(Location::class);
+
+            // $location = $locationRepo->getLocationByCoordinates(37.09024, -95.7128917, $this->getServiceManager()->get("config"));
+            $currentLocation = $params['location'];
+            $andWhereQueries = 'l.location = :location' . ' OR l.location = 1570';
+            
+            // var_dump("+++++++++++++setFileds+++++", $location);
             $query
-            ->andWhere('l.location = 479 OR l.location = 1570');
-            // ->setParameter('location', 1);
+            ->andWhere($andWhereQueries)
+            ->setParameter('location', $currentLocation);
             // ->setParameter('location', (int)$params['location']);
         }
             
@@ -460,6 +484,10 @@ class ListingRepository extends EntityRepository
         return $this->currentUser;
     }
 
+    public function getServiceManager()
+    {
+        return $this->serviceManager;
+    }
     /**
      * @param User $currentUser
      * @return ListingRepository

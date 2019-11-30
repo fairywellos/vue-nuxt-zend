@@ -55,21 +55,20 @@ class BrowseLocalController extends ApiController
             $locationRepo = $this->entityManager->getRepository(Location::class);
 
             $location = $locationRepo->getLocationByCoordinates((float)$data['lat'], (float)$data['long'], $this->getServiceManager()->get("config"));
-
             $this->httpStatusCode = 200;
             $this->apiResponse = $location[0];
             return $this->createResponse();
         }
-
+        
         $this->httpStatusCode = 404;
         $this->apiResponse['message'] = "error";
         return $this->createResponse();
     }
-
+    
     public function getAllAction()
     {
         $params = $this->params()->fromQuery();
-
+        
         
         //check if all parameters are given
         if(empty($params['location'])){
@@ -81,7 +80,6 @@ class BrowseLocalController extends ApiController
         $listingRepo = $this->entityManager->getRepository(Listing::class);
         
         $params['fields'] = 'id,title,description,main_photo,price,location,user_name,user_id,user_photo,saved,trade_type';
-        
         $listings = $listingRepo->filterBy($params);
         // var_dump("===========getAllAction=======", $listings);
         
