@@ -48,6 +48,7 @@ class ListingRepository extends EntityRepository
         'show_saved', //bool
         'status',
         'location',
+        'locations',
     ];
 
     /**
@@ -117,6 +118,7 @@ class ListingRepository extends EntityRepository
     public function filterBy($params)
     {
         $params = $this->paramsFilter($params);
+        
         $query = $this->createQueryBuilder('l');
         
         /**
@@ -133,17 +135,19 @@ class ListingRepository extends EntityRepository
         }
         
         $query->select($this->getFields());
-            
+        
         if(key_exists('main_photo', $this->getFields())){
             $query->leftJoin('l.photos','p','WITH','p.main = 1');
         }
-    
+        
         if(key_exists('category_id', $this->getFields())){
             $query->leftJoin('l.mainCategory','c');
         }
+        
         if (key_exists('location', $this->getFields())) {
             $query->leftJoin('l.location', 'loc');
         }
+        
         
         if(key_exists('user_name', $this->getFields()) || key_exists('user_id', $this->getFields()) || key_exists('user_photo', $this->getFields())){
             $query->leftJoin('l.user','u');
@@ -172,6 +176,7 @@ class ListingRepository extends EntityRepository
         
         $query->groupBy('l.id');
         
+
         /**
          * Filters
          */
@@ -217,24 +222,24 @@ class ListingRepository extends EntityRepository
                 $query
                 ->andWhere('l.tradeOrCash = :tradeType')
                 ->setParameter('tradeType', $getTradeType);
-            }
+        }
             
-            if(!empty($params['price_min'])){
-                $query
-                ->andWhere('l.price >= :priceMin')
-                ->setParameter('priceMin', (float)$params['price_min']);
-            }
-            
-            if(!empty($params['price_max'])){
-                $query
-                ->andWhere('l.price <= :priceMax')
-                ->setParameter('priceMax', (float)$params['price_max']);
-            }
+        if(!empty($params['price_min'])){
+            $query
+            ->andWhere('l.price >= :priceMin')
+            ->setParameter('priceMin', (float)$params['price_min']);
+        }
+        
+        if(!empty($params['price_max'])){
+            $query
+            ->andWhere('l.price <= :priceMax')
+            ->setParameter('priceMax', (float)$params['price_max']);
+        }
 
-            if(!empty($params['q']) && strlen($params['q']) >= self::MIN_TEXT_LENGTH_Q){
-                $query
-                ->andWhere('l.title LIKE :searchValue or l.description LIKE :searchValue or l.metaTags LIKE :searchValue')
-                ->setParameter('searchValue', '%'.$params['q'].'%');
+        if(!empty($params['q']) && strlen($params['q']) >= self::MIN_TEXT_LENGTH_Q){
+            $query
+            ->andWhere('l.title LIKE :searchValue or l.description LIKE :searchValue or l.metaTags LIKE :searchValue')
+            ->setParameter('searchValue', '%'.$params['q'].'%');
         }
         
         if(!empty($params['show_saved'])){
@@ -242,25 +247,30 @@ class ListingRepository extends EntityRepository
             ->andWhere('sb.id = :savedBy')
             ->setParameter('savedBy', $this->getCurrentUser()->getId());
         }
-        
-        // var_dump("+++++++++++++ location param exists", $params);
 
         if(!empty($params['location'])){
             $query
             ->andWhere('l.location = :location')
             ->setParameter('location', (int)$params['location']);
-        }        
-
+        }
+        
         if(!empty($params['locations'])){
-
+            
             /**
              * @var LocationRepository $locationRepo
              */
-            // $locationRepo = $this->entityManager->getRepository(Location::class);
-
-            // $location = $locationRepo->getLocationByCoordinates(37.09024, -95.7128917, $this->getServiceManager()->get("config"));
-            // var_dump("+++++++++++++setFileds+++++", $location);
             $locations = $params['locations'];
+            
+            
+
+            /**
+             *  select Listing where listing.location = locationArray[0][0] or listing.location = locationArray[0][1]
+             *  select Listing where listing.location = locationArray[1][0] or listing.location = locationArray[1][1]
+             *  select Listing where listing.location = locationArray[2][0] or listing.location = locationArray[2][1]
+             *  select Listing where listing.location = locationArray[3][0] or listing.location = locationArray[3][1]
+             */
+
+            // var_dump("++++++++++++++++", $locations);
             $andWhereQueries = '';
             foreach ($locations as $index => $location) {
                 $andWhereQueries = $andWhereQueries . 'l.location = ' . $location['id'];
@@ -271,9 +281,12 @@ class ListingRepository extends EntityRepository
             
             $query
             ->andWhere($andWhereQueries);
+            // $temp = $query->getQuery()->execute();
+            // var_dump("+++++++++++ temp +++++++", $temp);
         }
-            
+        
         if(isset($params['order_by'])){
+            
             if(is_array($params['order_by'])){
                 foreach ($params['order_by'] as $orderBy){
                     $orderByArr = $this->orderBy($orderBy);
@@ -285,33 +298,41 @@ class ListingRepository extends EntityRepository
                 $orderByArr = $this->orderBy($params['order_by']);
                 
                 $query
-                    ->addOrderBy($orderByArr['sort'], $orderByArr['order']);
-                }
-            }else{
-                $query->orderBy("l.dateAdded","desc");
+                ->addOrderBy($orderByArr['sort'], $orderByArr['order']);
+            }
+        } else {
+            
+            /**
+             * not ordered by dateAdded if browse-local
+             */
+            
+            if(!isset($params['locations'])){
+                $query->orderBy("l.dateAdded","desc");    
+            } else {
+            }
         }
 
+        
         /**
          * Get total items
          */
+        
         $queryCounter = clone $query;
         $queryCounter
-        ->select('COUNT(l.id) as totalItems')
-        ->setMaxResults(1);
+            ->select('COUNT(l.id) as totalItems')
+            ->setMaxResults(1);
         
-        $totalItems = $queryCounter
-        ->getQuery()
-        ->execute();
+        $totalItems = $queryCounter->getQuery()->execute();
         // print_r($totalItems);
         $this->setTotalItems(count($totalItems) ?? 0);
-
+        
         /**
          * set max result and first result
          */
         if(isset($params['limit'])){
             $this->setMaxResults(abs($params['limit']));
         }
-
+        
         if(isset($params['page'])){
             $this->setPage(abs($params['page']));
         }
@@ -319,7 +340,7 @@ class ListingRepository extends EntityRepository
         $query->setMaxResults($this->getMaxResults());
         $query->setFirstResult(($this->getPage() - 1) * $this->getMaxResults());
         $result = $query->getQuery()->execute();
-
+        
         if(key_exists('main_photo', $this->getFields())){
             $uploadManager = new UploadManager();
             foreach ($result as $key => $item){
@@ -330,7 +351,7 @@ class ListingRepository extends EntityRepository
         }
         return $result;
     }
-
+    
     /**
      * Params from query link
      *

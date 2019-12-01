@@ -234,12 +234,15 @@
 						// 	}));
 						// });
 
-						this.$axios.post("/browse-local/all", {
+						let params = {
 							lat: data.coords.latitude,
 							long: data.coords.longitude,
-						}).then((result) => {
-
-							console.log('Fetch result: ', result.data.result);							
+						}
+						this.$axios.get("/browse-local/all", {
+							params
+						}).then((data) => {
+							console.log("data +++++++++", data);
+							this.allProducts = data.data.result;			
 						});
 					},
 					(error) => {
