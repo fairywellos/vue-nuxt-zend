@@ -5,11 +5,16 @@ namespace Application\Repository;
 use Application\Entity\Listing;
 use Application\Entity\Trade;
 use Application\Entity\User;
+use Application\Entity\Photo;
+use Application\Entity\Location;
 use Application\Service\UploadManager;
 use Doctrine\ORM\EntityRepository;
 use Application\Repository\LocationRepository;
 use Doctrine\ORM\EntityManager;
 use Zend\ServiceManager\ServiceManager;
+
+use Doctrine\ORM\Query\ResultSetMapping;
+use Doctrine\ORM\QueryBuilder;
 
 class ListingRepository extends EntityRepository
 {
@@ -101,14 +106,14 @@ class ListingRepository extends EntityRepository
      * @var int
      */
     private $maxResults = self::MAX_LIMIT;
-
+    
     /**
      * Page
      *
      * @var int
      */
     private $page = self::FIRST_PAGE;
-
+    
     /**
      * Filter by params
      *
@@ -120,6 +125,7 @@ class ListingRepository extends EntityRepository
         $params = $this->paramsFilter($params);
         
         $query = $this->createQueryBuilder('l');
+        
         
         /**
          * Set displayed fields
@@ -133,8 +139,9 @@ class ListingRepository extends EntityRepository
         }else{
             $this->setFields($this->getAvailableFields());
         }
-        
+            
         $query->select($this->getFields());
+        
         
         if(key_exists('main_photo', $this->getFields())){
             $query->leftJoin('l.photos','p','WITH','p.main = 1');
@@ -148,13 +155,10 @@ class ListingRepository extends EntityRepository
             $query->leftJoin('l.location', 'loc');
         }
         
-        
         if(key_exists('user_name', $this->getFields()) || key_exists('user_id', $this->getFields()) || key_exists('user_photo', $this->getFields())){
             $query->leftJoin('l.user','u');
         }
         
-        // var_dump("+++++++ params +++++++++++", $this->getFields());
-        //if(key_exists('saved', $this->getFields()) and $this->getCurrentUser()->getId()){
         if(!empty($params['show_saved']) and $this->getCurrentUser()->getId()){
             $query->leftJoin(
                 'l.savedBy',
@@ -167,7 +171,6 @@ class ListingRepository extends EntityRepository
         if(key_exists('trade_offers_count', $this->getFields())){
             $query->leftJoin('l.trades','t', "WITH", 't.status = :tradeStatus')
             ->setParameter('tradeStatus',Trade::PENDING);
-            
         }
         
         if(!empty($params['q']) && strlen($params['q']) >= self::MIN_TEXT_LENGTH_Q){
@@ -260,29 +263,110 @@ class ListingRepository extends EntityRepository
              * @var LocationRepository $locationRepo
              */
             $locations = $params['locations'];
-            
-            
-
-            /**
-             *  select Listing where listing.location = locationArray[0][0] or listing.location = locationArray[0][1]
-             *  select Listing where listing.location = locationArray[1][0] or listing.location = locationArray[1][1]
-             *  select Listing where listing.location = locationArray[2][0] or listing.location = locationArray[2][1]
-             *  select Listing where listing.location = locationArray[3][0] or listing.location = locationArray[3][1]
-             */
-
-            // var_dump("++++++++++++++++", $locations);
-            $andWhereQueries = '';
-            foreach ($locations as $index => $location) {
-                $andWhereQueries = $andWhereQueries . 'l.location = ' . $location['id'];
-                if ($index < sizeof($locations) - 1) {
-                    $andWhereQueries = $andWhereQueries . ' or ';
-                }
+            $result = [];
+            foreach($locations as $index => $location) {
+                $temp = clone $query;
+                // var_dump("++++++++++");
+                $temp->andWhere('l.location = :location')
+                     ->setParameter('location', $location['id']);
+                $tempResults = $temp->getQuery()->execute();
+                if($tempResults == []) continue;
+                // var_dump("+++++++++++++++", $tempResult);
+                foreach($tempResults as $tempResult) {
+                    array_push($result, $tempResult);
+                }                
             }
             
-            $query
-            ->andWhere($andWhereQueries);
-            // $temp = $query->getQuery()->execute();
-            // var_dump("+++++++++++ temp +++++++", $temp);
+            if(isset($params['limit'])){
+                $this->setMaxResults(abs($params['limit']));
+            }
+            
+            if(isset($params['page'])){
+                $this->setPage(abs($params['page']));
+            }
+            
+            $query->setMaxResults($this->getMaxResults());
+            $query->setFirstResult(($this->getPage() - 1) * $this->getMaxResults());
+            $result = $query->getQuery()->execute();            
+            
+
+            if(key_exists('main_photo', $this->getFields())){
+                $uploadManager = new UploadManager();
+                foreach ($result as $key => $item){
+                    if(isset($item["photoName"])){
+                        $result[$key]["mainPhotoUrl"] =  $uploadManager->getFileUrl("listing", $item["photoName"]);
+                    }
+                }
+            }
+            return $result;
+            // $andWhereQueries = '';
+            // foreach ($locations as $index => $location) {
+            //     $andWhereQueries = $andWhereQueries . 'l.location = ' . $location['id'];
+            //     if ($index < sizeof($locations) - 1) {
+            //         $andWhereQueries = $andWhereQueries . ' or ';
+            //     }
+            // }
+            
+            // $query
+            // ->andWhere($andWhereQueries);
+
+            // $result = $query->getQuery()->execute();
+            // var_dump("+++++++++++++", $query->getQuery()->getSQL());
+            // var_dump("+++++++++++++", $query->getQuery()->getParameters());
+
+        
+            // $temp1 = clone $query;
+            // $temp2 = clone $query;
+            // $temp3 = clone $query;            
+            
+            // $qbs = [];
+            // $a = $temp1->where('l.location = ?1');
+            // $b = $temp2->where('l.location = ?2');
+            // $c = $temp3->where('l.location = ?3');
+            // array_push($qbs, $a, $b, $c);
+            
+
+            // var_dump("++++++++++", $this->getClassName());
+
+            // $rsm = new ResultSetMapping();
+            // $rsm
+            // ->addEntityResult($this->getClassName(), 'l')
+            // ->addFieldResult('l', 'id_0', 'id')
+            // ->addFieldResult('l', 'title_1', 'title')
+            // ->addFieldResult('l', 'description_2', 'description')
+            // ->addFieldResult('l', 'price_3', 'price');
+            // ->addJoinedEntityResult(Location::class, 'loc', 'l', 'location')
+            // ->addJoinedEntityResult(User::class, 'u', 'l', 'user_name')
+            // ->addJoinedEntityResult(User::class, 'u', 'l', 'user_id')
+            // ->addJoinedEntityResult(User::class, 'u', 'l', 'user_photo')
+            // ->addJoinedEntityResult(Photo::class, 'p', 'l', 'main_photo')
+            // ->addJoinedEntityResult(Trade::class, 't', 'l', 'trade_type');
+            
+            // ->addFieldResult('l', 'sclr_5', 'user_name');
+            // ->addFieldResult('l', 'id_6', 'user_id');
+            // ->addFieldResult('l', 'photo_url_7', 'user_photo')
+            // ->addFieldResult('l', 'photo_name_8', 'main_photo')
+            // ->addFieldResult('l', 'trade_or_cash_9', 'trade_type');
+            
+            // var_dump('query: ', $query->getQuery()->getSQL());
+            // var_dump('union query: ', $this->unionQueryBuilders($qbs));
+
+            // $query = $this->getEntityManager()->createNativeQuery($this->unionQueryBuilders($qbs), $rsm);
+            // $query
+            //     ->setParameter(1, "23069")
+            //     ->setParameter(2, "479")
+            //     ->setParameter(3, "29294");
+            
+            // var_dump("++++++++++++++++", $this->unionQueryBuilders($qbs));
+                        
+            // $result = $query->getResult();
+            /**
+             * set max result and first result
+             */
+
+        
+
+            return $result;
         }
         
         if(isset($params['order_by'])){
@@ -301,15 +385,7 @@ class ListingRepository extends EntityRepository
                 ->addOrderBy($orderByArr['sort'], $orderByArr['order']);
             }
         } else {
-            
-            /**
-             * not ordered by dateAdded if browse-local
-             */
-            
-            if(!isset($params['locations'])){
-                $query->orderBy("l.dateAdded","desc");    
-            } else {
-            }
+            $query->orderBy("l.dateAdded","desc");
         }
 
         
@@ -321,6 +397,9 @@ class ListingRepository extends EntityRepository
         $queryCounter
             ->select('COUNT(l.id) as totalItems')
             ->setMaxResults(1);
+        
+        $temp = $queryCounter->getQuery()->execute();
+
         
         $totalItems = $queryCounter->getQuery()->execute();
         // print_r($totalItems);
@@ -532,5 +611,18 @@ class ListingRepository extends EntityRepository
     {
         $this->availableFields[$key] = $select;
         return $this;
+    }
+
+    /**
+     * @param array $queryBuilders
+     *
+     * @return string
+     */
+    private function unionQueryBuilders(array $queryBuilders)
+    {   
+        $imploded = implode(') UNION (', array_map(function (QueryBuilder $q) {
+            return $q->getQuery()->getSQL();
+        }, $queryBuilders));
+        return '('.$imploded.')';
     }
 }
