@@ -263,52 +263,52 @@ class ListingRepository extends EntityRepository
              * @var LocationRepository $locationRepo
              */
             $locations = $params['locations'];
-            $result = [];
-            foreach($locations as $index => $location) {
-                $temp = clone $query;
-                // var_dump("++++++++++");
-                $temp->andWhere('l.location = :location')
-                     ->setParameter('location', $location['id']);
-                $tempResults = $temp->getQuery()->execute();
-                if($tempResults == []) continue;
-                // var_dump("+++++++++++++++", $tempResult);
-                foreach($tempResults as $tempResult) {
-                    array_push($result, $tempResult);
-                }                
-            }
-            
-            if(isset($params['limit'])){
-                $this->setMaxResults(abs($params['limit']));
-            }
-            
-            if(isset($params['page'])){
-                $this->setPage(abs($params['page']));
-            }
-            
-            $query->setMaxResults($this->getMaxResults());
-            $query->setFirstResult(($this->getPage() - 1) * $this->getMaxResults());
-            $result = $query->getQuery()->execute();            
-            
-
-            if(key_exists('main_photo', $this->getFields())){
-                $uploadManager = new UploadManager();
-                foreach ($result as $key => $item){
-                    if(isset($item["photoName"])){
-                        $result[$key]["mainPhotoUrl"] =  $uploadManager->getFileUrl("listing", $item["photoName"]);
-                    }
-                }
-            }
-            return $result;
-            // $andWhereQueries = '';
-            // foreach ($locations as $index => $location) {
-            //     $andWhereQueries = $andWhereQueries . 'l.location = ' . $location['id'];
-            //     if ($index < sizeof($locations) - 1) {
-            //         $andWhereQueries = $andWhereQueries . ' or ';
-            //     }
+            // $result = [];
+            // foreach($locations as $index => $location) {
+            //     $temp = clone $query;
+            //     // var_dump("++++++++++");
+            //     $temp->andWhere('l.location = :location')
+            //          ->setParameter('location', $location['id']);
+            //     $tempResults = $temp->getQuery()->execute();
+            //     if($tempResults == []) continue;
+            //     // var_dump("+++++++++++++++", $tempResult);
+            //     foreach($tempResults as $tempResult) {
+            //         array_push($result, $tempResult);
+            //     }                
             // }
             
-            // $query
-            // ->andWhere($andWhereQueries);
+            // if(isset($params['limit'])){
+            //     $this->setMaxResults(abs($params['limit']));
+            // }
+            
+            // if(isset($params['page'])){
+            //     $this->setPage(abs($params['page']));
+            // }
+            
+            // $query->setMaxResults($this->getMaxResults());
+            // $query->setFirstResult(($this->getPage() - 1) * $this->getMaxResults());
+            // $result = $query->getQuery()->execute();            
+            
+
+            // if(key_exists('main_photo', $this->getFields())){
+            //     $uploadManager = new UploadManager();
+            //     foreach ($result as $key => $item){
+            //         if(isset($item["photoName"])){
+            //             $result[$key]["mainPhotoUrl"] =  $uploadManager->getFileUrl("listing", $item["photoName"]);
+            //         }
+            //     }
+            // }
+            // return $result;
+            $andWhereQueries = '';
+            foreach ($locations as $index => $location) {
+                $andWhereQueries = $andWhereQueries . 'l.location = ' . $location['id'];
+                if ($index < sizeof($locations) - 1) {
+                    $andWhereQueries = $andWhereQueries . ' or ';
+                }
+            }
+            
+            $query
+            ->andWhere($andWhereQueries);
 
             // $result = $query->getQuery()->execute();
             // var_dump("+++++++++++++", $query->getQuery()->getSQL());
@@ -364,7 +364,27 @@ class ListingRepository extends EntityRepository
              * set max result and first result
              */
 
-        
+            if(isset($params['limit'])){
+                $this->setMaxResults(abs($params['limit']));
+            }
+            
+            if(isset($params['page'])){
+                $this->setPage(abs($params['page']));
+            }
+            
+            $query->setMaxResults($this->getMaxResults());
+            $query->setFirstResult(($this->getPage() - 1) * $this->getMaxResults());
+            $result = $query->getQuery()->execute();            
+            
+
+            if(key_exists('main_photo', $this->getFields())){
+                $uploadManager = new UploadManager();
+                foreach ($result as $key => $item){
+                    if(isset($item["photoName"])){
+                        $result[$key]["mainPhotoUrl"] =  $uploadManager->getFileUrl("listing", $item["photoName"]);
+                    }
+                }
+            }
 
             return $result;
         }

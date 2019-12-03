@@ -135,7 +135,7 @@
 					<div class="main_header__center" v-if="is_home">
 						<div style="display:flex; flex-direction: column; height: 50px;">
 							<SearchBar/>
-							<n-link style="text-align: center; padding-top: 5px;font-size: 14px;color: #48C0EB;-webkit-transition: 0.2s cubic-bezier(0.42, 0, 1, 1);transition: 0.2s cubic-bezier(0.42, 0, 1, 1);" to="/browse-local" title="Browse Local">Browse Local</n-link>
+							<nuxt-link style="text-align: center; padding-top: 5px;font-size: 14px;color: #48C0EB;-webkit-transition: 0.2s cubic-bezier(0.42, 0, 1, 1);transition: 0.2s cubic-bezier(0.42, 0, 1, 1);" to="/browse-local" title="Browse Local">Browse Local</nuxt-link>
 						</div>
 					</div>
 					<div class="main_header__right" v-if="isAuthenticated">

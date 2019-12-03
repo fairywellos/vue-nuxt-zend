@@ -68,13 +68,19 @@ const actions = {
 					long: this.$geolocation.coords.longitude,
 				}).then((result) => {
 					let location = result.data.result;
-
+					
 					let query_browse_local = {...query};
+					
 					query_browse_local['location'] = result.data.result.id;
-
+					let params = {
+						lat: this.$geolocation.coords.latitude,
+						long: this.$geolocation.coords.longitude,
+					}
 					return this.$axios.get("/browse-local/all", {
-						params: query_browse_local
+						params
 					}).then((result => {
+						
+						console.log("_+++++++++++++++++++++++++-", query_browse_local);
 						return {
 							location: location,
 							allProducts: result.data.result
