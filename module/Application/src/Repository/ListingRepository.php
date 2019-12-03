@@ -263,19 +263,40 @@ class ListingRepository extends EntityRepository
              * @var LocationRepository $locationRepo
              */
             $locations = $params['locations'];
-            // $result = [];
-            // foreach($locations as $index => $location) {
-            //     $temp = clone $query;
-            //     // var_dump("++++++++++");
-            //     $temp->andWhere('l.location = :location')
-            //          ->setParameter('location', $location['id']);
-            //     $tempResults = $temp->getQuery()->execute();
-            //     if($tempResults == []) continue;
-            //     // var_dump("+++++++++++++++", $tempResult);
-            //     foreach($tempResults as $tempResult) {
-            //         array_push($result, $tempResult);
-            //     }                
-            // }
+
+
+            /**
+             *  using array push 
+             */
+
+
+            $result = [];
+            foreach($locations as $index => $location) {
+                $temp = clone $query;
+                $temp->andWhere('l.location = :location')
+                ->setParameter('location', $location['id']);
+                
+                $tempResults = $temp->getQuery()->execute();
+                
+                if($tempResults == []) continue;
+                foreach($tempResults as $tempResult) {
+                    array_push($result, $tempResult);
+                }                
+            }
+            
+            // var_dump("+++++++++++ here ++++++", $result);
+
+            if(key_exists('main_photo', $this->getFields())){
+                $uploadManager = new UploadManager();
+                foreach ($result as $key => $item){
+                    if(isset($item["photoName"])){
+                        $result[$key]["mainPhotoUrl"] =  $uploadManager->getFileUrl("listing", $item["photoName"]);
+                    }
+                }
+            }
+            return $result;
+
+            
             
             // if(isset($params['limit'])){
             //     $this->setMaxResults(abs($params['limit']));
@@ -290,31 +311,26 @@ class ListingRepository extends EntityRepository
             // $result = $query->getQuery()->execute();            
             
 
-            // if(key_exists('main_photo', $this->getFields())){
-            //     $uploadManager = new UploadManager();
-            //     foreach ($result as $key => $item){
-            //         if(isset($item["photoName"])){
-            //             $result[$key]["mainPhotoUrl"] =  $uploadManager->getFileUrl("listing", $item["photoName"]);
-            //         }
+            /**
+             * using andWhere array
+             */
+            // $andWhereQueries = '';
+            // foreach ($locations as $index => $location) {
+            //     $andWhereQueries = $andWhereQueries . 'l.location = ' . $location['id'];
+            //     if ($index < sizeof($locations) - 1) {
+            //         $andWhereQueries = $andWhereQueries . ' or ';
             //     }
             // }
-            // return $result;
-            $andWhereQueries = '';
-            foreach ($locations as $index => $location) {
-                $andWhereQueries = $andWhereQueries . 'l.location = ' . $location['id'];
-                if ($index < sizeof($locations) - 1) {
-                    $andWhereQueries = $andWhereQueries . ' or ';
-                }
-            }
             
-            $query
-            ->andWhere($andWhereQueries);
-
-            // $result = $query->getQuery()->execute();
-            // var_dump("+++++++++++++", $query->getQuery()->getSQL());
-            // var_dump("+++++++++++++", $query->getQuery()->getParameters());
-
+            // $query
+            // ->andWhere($andWhereQueries);
         
+
+            /**
+             * using Result Mapping Union 
+             */
+
+
             // $temp1 = clone $query;
             // $temp2 = clone $query;
             // $temp3 = clone $query;            
@@ -360,33 +376,34 @@ class ListingRepository extends EntityRepository
             // var_dump("++++++++++++++++", $this->unionQueryBuilders($qbs));
                         
             // $result = $query->getResult();
+            
             /**
              * set max result and first result
              */
 
-            if(isset($params['limit'])){
-                $this->setMaxResults(abs($params['limit']));
-            }
+            // if(isset($params['limit'])){
+            //     $this->setMaxResults(abs($params['limit']));
+            // }
             
-            if(isset($params['page'])){
-                $this->setPage(abs($params['page']));
-            }
+            // if(isset($params['page'])){
+            //     $this->setPage(abs($params['page']));
+            // }
             
-            $query->setMaxResults($this->getMaxResults());
-            $query->setFirstResult(($this->getPage() - 1) * $this->getMaxResults());
-            $result = $query->getQuery()->execute();            
+            // $query->setMaxResults($this->getMaxResults());
+            // $query->setFirstResult(($this->getPage() - 1) * $this->getMaxResults());
+            // $result = $query->getQuery()->execute();            
             
 
-            if(key_exists('main_photo', $this->getFields())){
-                $uploadManager = new UploadManager();
-                foreach ($result as $key => $item){
-                    if(isset($item["photoName"])){
-                        $result[$key]["mainPhotoUrl"] =  $uploadManager->getFileUrl("listing", $item["photoName"]);
-                    }
-                }
-            }
+            // if(key_exists('main_photo', $this->getFields())){
+            //     $uploadManager = new UploadManager();
+            //     foreach ($result as $key => $item){
+            //         if(isset($item["photoName"])){
+            //             $result[$key]["mainPhotoUrl"] =  $uploadManager->getFileUrl("listing", $item["photoName"]);
+            //         }
+            //     }
+            // }
 
-            return $result;
+            // return $result;
         }
         
         if(isset($params['order_by'])){
