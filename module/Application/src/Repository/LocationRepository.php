@@ -7,7 +7,9 @@ use Zend\Db\Adapter\Adapter;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\Sql\Expression;
 use Zend\Db\Sql\Select;
+use Zend\Db\Sql\Where;
 use Zend\Db\Sql\Sql;
+
 
 class LocationRepository extends EntityRepository
 {
@@ -15,6 +17,7 @@ class LocationRepository extends EntityRepository
     {
         $subSelect = new Select("zip_code");
         $subSelect->columns(['location_id' => 'location_id']);
+        $subSelect->where('zip_code');
         $subSelect->order(new Expression("abs(zip_code.lat - (?)) + abs(zip_code.long - (?))", [$lat, $long]));
         $subSelect->limit(1);
         
@@ -35,21 +38,26 @@ class LocationRepository extends EntityRepository
     public function sortLocationsByCoordinates($lat, $long, $config)
     {
         $subSelect = new Select("zip_code");
-        $subSelect->columns(['location_id' => 'location_id']);
+        $subSelect->columns(array(new Expression('DISTINCT(location_id) as location_id')));
+        $subSelect->where(array('type = ?' => "STANDARD"));
         $subSelect->order(new Expression("(zip_code.lat - (?)) * (zip_code.lat - (?)) + (zip_code.long - (?)) * (zip_code.long - (?))", [$lat, $lat, $long, $long]));
-        $subSelect->limit(200);
+        $subSelect->limit(300);
         
+        $dbAdapter = new Adapter($config["db_settings"]);
+        $sql = new Sql($dbAdapter);
+
         $select = new Select("location");
         // var_dump("+++++++++++getLocation by coordinates++++++++");
         $select->columns(['city' => 'city', 'state' => 'state', "id" => "id"]);
         $select->join(["order_zip_codes" => $subSelect],"location.id = order_zip_codes.location_id", array());
 
-        $dbAdapter = new Adapter($config["db_settings"]);
-        $sql = new Sql($dbAdapter);
+        // $dbAdapter = new Adapter($config["db_settings"]);
+        // $sql = new Sql($dbAdapter);
 
         $result = $sql->prepareStatementForSqlObject($select)->execute();
         $resultSet = new ResultSet();
         $resultSet->initialize($result);
+        // var_dump("++++++++++", $resultSet->toArray());
         return $resultSet->toArray();
     }
 

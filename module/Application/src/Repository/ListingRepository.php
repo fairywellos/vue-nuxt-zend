@@ -264,26 +264,33 @@ class ListingRepository extends EntityRepository
              */
             $locations = $params['locations'];
 
-
             /**
              *  using array push 
              */
 
 
             $result = [];
+            $count = 0;
+
             foreach($locations as $index => $location) {
+                $temp = array();
+                $tempResults = array();
                 $temp = clone $query;
                 $temp->andWhere('l.location = :location')
-                ->setParameter('location', $location['id']);
-                
+                     ->setParameter('location', (int)$location['id']);
+                     
                 $tempResults = $temp->getQuery()->execute();
                 
-                if($tempResults == []) continue;
+                if($tempResults == []) {
+                    continue;
+                }
                 foreach($tempResults as $tempResult) {
+                    $count += 1;
                     array_push($result, $tempResult);
                 }                
             }
             
+            // var_dump("___*****___*****", count($result));
             // var_dump("+++++++++++ here ++++++", $result);
 
             if(key_exists('main_photo', $this->getFields())){
