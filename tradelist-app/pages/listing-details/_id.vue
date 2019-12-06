@@ -124,8 +124,8 @@
 							<p v-if="listing.affiliateLink"><a class="btn" :href="listing.affiliateLink" target="_blank" rel="nofollow">Visit Store</a></p>
 							<ul>
 								<li>Category: {{listing.mainCategory.name}}</li>
-								<li v-for="tag in listing.tags">Tag: {{tag.name}}</li>
-								<li v-if="listing.metaTags">Meta tags: {{listing.metaTags}}</li>
+								<li v-for="tag in listing.tags">{{tag.name}}</li>
+								<li v-if="listing.metaTags">{{listing.metaTags}}</li>
 							</ul>
 						</div>
 						<!--<div class="trades_interests details_section">-->
